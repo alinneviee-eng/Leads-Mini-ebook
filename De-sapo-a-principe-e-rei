@@ -1,0 +1,1443 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>De Sapo a Príncipe e Rei</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa: #F2A4A4;
+    --vinho: #7B2D3E;
+    --vinho-light: #C4566A;
+    --creme: #FFF8F5;
+    --coral: #F28B82;
+    --dourado: #D4956A;
+    --texto: #3A1A20;
+    --texto-suave: #7A4A52;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    max-width: 430px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--vinho), var(--rosa));
+    z-index: 999;
+    transition: width 0.1s;
+  }
+
+  /* BACK TO TOP */
+  .back-top {
+    position: fixed;
+    bottom: 24px; right: 20px;
+    width: 44px; height: 44px;
+    background: var(--vinho);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(123,45,62,0.3);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 998;
+    transition: transform 0.2s;
+  }
+  .back-top.visible { display: flex; }
+  .back-top:active { transform: scale(0.9); }
+
+  /* CAPA */
+  .capa {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #3A0A18 0%, #7B2D3E 50%, #C4566A 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 28px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .capa::before {
+    content: '♛';
+    position: absolute;
+    font-size: 320px;
+    color: rgba(255,255,255,0.04);
+    top: -60px; right: -60px;
+    pointer-events: none;
+  }
+
+  .capa::after {
+    content: '✦';
+    position: absolute;
+    font-size: 180px;
+    color: rgba(255,255,255,0.04);
+    bottom: -30px; left: -20px;
+    pointer-events: none;
+  }
+
+  .capa-badge {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px;
+    padding: 6px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #F0BFBC;
+    margin-bottom: 28px;
+  }
+
+  .capa h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .capa h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: white;
+    line-height: 1.05;
+    margin-bottom: 8px;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  .capa h2 em {
+    font-style: italic;
+    color: #F0BFBC;
+    display: block;
+  }
+
+  .capa-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    margin: 16px 0 32px;
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  .capa-autor {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-top: 24px;
+  }
+
+  .capa-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.3);
+    margin: 20px auto;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    text-align: center;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ÍNDICE */
+  .indice {
+    background: white;
+    padding: 28px 20px;
+    border-bottom: 2px solid #FDE8EC;
+  }
+
+  .indice-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--vinho);
+    margin-bottom: 16px;
+  }
+
+  .indice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .indice-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: var(--creme);
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.2s;
+    border: 1.5px solid transparent;
+  }
+  .indice-item:active { background: #FDDDE6; border-color: var(--rosa); }
+  .indice-num {
+    background: #FDE8EC;
+    color: var(--vinho-light);
+    font-size: 10px;
+    font-weight: 800;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* SEÇÃO */
+  .secao { padding: 0 0 40px; }
+
+  .secao-header {
+    padding: 40px 24px 24px;
+    text-align: center;
+    background: linear-gradient(180deg, #FDDDE6 0%, var(--creme) 100%);
+  }
+
+  .secao-badge {
+    display: inline-block;
+    background: #FDE8EC;
+    color: var(--vinho-light);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+  }
+
+  .secao-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--vinho);
+    line-height: 1.2;
+  }
+  .secao-titulo em { font-style: italic; color: var(--vinho-light); }
+
+  .secao-sub {
+    font-size: 12px;
+    color: var(--texto-suave);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  /* TEXTO NARRATIVO */
+  .narrativa {
+    padding: 0 20px;
+    margin: 16px 0;
+  }
+  .narrativa p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--texto);
+    margin-bottom: 14px;
+    text-align: left;
+  }
+
+  /* VERSÍCULO */
+  .versiculo {
+    margin: 16px 16px;
+    background: linear-gradient(135deg, #3A0A18, #7B2D3E);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .versiculo::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 100px;
+    color: rgba(255,255,255,0.06);
+    position: absolute;
+    top: -20px; left: 10px;
+    line-height: 1;
+  }
+  .versiculo-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #F0BFBC;
+    line-height: 1.7;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .versiculo-ref {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(240,191,188,0.6);
+  }
+
+  /* HIGHLIGHT */
+  .highlight {
+    margin: 16px 16px;
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    border-left: 4px solid var(--rosa);
+    box-shadow: 0 2px 12px rgba(123,45,62,0.06);
+  }
+  .highlight p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--texto-suave);
+    font-style: italic;
+    margin: 0;
+  }
+
+  /* CARDS ACCORDION */
+  .cards-stack {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-acc {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+    border: 1.5px solid #FDE8EC;
+  }
+  .card-acc-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .card-acc-header:active { background: #FDE8EC; }
+  .card-acc-icon { font-size: 22px; min-width: 36px; text-align: center; }
+  .card-acc-title { font-size: 15px; font-weight: 700; color: var(--texto); flex: 1; }
+  .card-acc-arrow { font-size: 12px; color: var(--rosa); transition: transform 0.3s; }
+  .card-acc.open .card-acc-arrow { transform: rotate(180deg); }
+  .card-acc-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .card-acc.open .card-acc-body { max-height: 800px; }
+  .card-acc-content {
+    padding: 14px 18px 16px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--texto-suave);
+    border-top: 1px solid #FDE8EC;
+  }
+
+  /* LISTA CHECK */
+  .lista-check {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .check-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: white;
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: 0 1px 8px rgba(123,45,62,0.06);
+  }
+  .check-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .check-item p { font-size: 14px; line-height: 1.6; color: var(--texto); margin: 0; }
+
+  /* CRENÇAS (lista especial) */
+  .crencas {
+    padding: 0 16px;
+    margin: 12px 0;
+  }
+  .crenca-item {
+    background: linear-gradient(135deg, #FDE8EC, white);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    border-left: 3px solid var(--vinho-light);
+    font-size: 14px;
+    font-style: italic;
+    color: var(--texto);
+    line-height: 1.5;
+  }
+
+  /* PERGUNTA REFLEXÃO */
+  .reflexao {
+    margin: 16px 16px;
+    background: linear-gradient(135deg, #FDE8EC, #F7D0D8);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+  }
+  .reflexao-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+  .reflexao p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--vinho);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* SINAIS NUMERADOS */
+  .sinais {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 12px 0;
+  }
+  .sinal-item {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .sinal-num {
+    background: linear-gradient(135deg, var(--vinho), var(--vinho-light));
+    color: white;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .sinal-content { flex: 1; }
+  .sinal-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--vinho);
+    margin-bottom: 4px;
+  }
+  .sinal-desc {
+    font-size: 13px;
+    color: var(--texto-suave);
+    line-height: 1.6;
+  }
+
+  /* SEPARADOR DE SEÇÃO */
+  .divisor { height: 8px; background: #FDE8EC; }
+
+  /* SEÇÃO COVER */
+  .sec-cover {
+    background: linear-gradient(160deg, #FDDDE6 0%, #F8D0D6 50%, #F0BFBC 100%);
+    padding: 48px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .sec-cover::before {
+    content: '✦';
+    position: absolute;
+    font-size: 160px;
+    color: rgba(255,255,255,0.2);
+    top: -20px; right: -20px;
+  }
+  .sec-cover-num {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--vinho-light);
+    margin-bottom: 12px;
+  }
+  .sec-cover h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--vinho);
+    line-height: 1.2;
+    position: relative;
+  }
+  .sec-cover h2 em { font-style: italic; color: var(--vinho-light); }
+  .sec-cover-sub {
+    font-size: 13px;
+    font-style: italic;
+    color: var(--texto-suave);
+    margin-top: 12px;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  /* TÍTULO SEÇÃO */
+  .titulo-sec {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+    padding: 20px 20px 8px;
+    opacity: 0.6;
+  }
+
+  /* CONCLUSÃO */
+  .conclusao {
+    background: linear-gradient(160deg, #3A0A18 0%, #7B2D3E 60%, #C4566A 100%);
+    padding: 60px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .conclusao::before {
+    content: '♛';
+    position: absolute;
+    font-size: 200px;
+    color: rgba(255,255,255,0.04);
+    top: -30px; right: -20px;
+  }
+  .conclusao h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .conclusao h2 em { font-style: italic; color: #F0BFBC; }
+  .conclusao p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .conclusao-verse {
+    background: rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 18px;
+    margin: 20px 0;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .conclusao-verse p { font-style: italic; color: #F0BFBC; font-size: 14px; }
+  .conclusao-assinatura {
+    font-size: 16px;
+    color: white;
+    font-style: italic;
+    margin-top: 24px;
+  }
+
+  /* FADE IN */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* SOBRE A AUTORA */
+  .autora {
+    background: white;
+    margin: 0 16px 24px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(123,45,62,0.1);
+    border: 2px solid #FDE8EC;
+  }
+  .autora-header {
+    background: linear-gradient(135deg, var(--vinho), var(--vinho-light));
+    padding: 20px;
+    text-align: center;
+  }
+  .autora-header h3 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+  }
+  .autora-body { padding: 20px; }
+  .autora-body p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--texto-suave);
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- CAPA -->
+<section class="capa">
+  <div class="capa-badge">✨ E-book exclusivo</div>
+  <h1>De Sapo a</h1>
+  <h2>Príncipe<br><em>e Rei</em></h2>
+  <div class="capa-divider"></div>
+  <p class="capa-sub">A construção real de um homem de valor<br>dentro do casamento</p>
+  <span class="capa-autor">Por Alinne Vieira · @alinnevie</span>
+  <div class="scroll-hint">▼<br>comece a leitura</div>
+</section>
+
+<!-- SOBRE A AUTORA -->
+<section style="padding: 32px 0 0; background: white;">
+  <p class="titulo-sec">Sobre a autora</p>
+  <div class="autora fade-in">
+    <div class="autora-header">
+      <h3>Alinne Vieira</h3>
+    </div>
+    <div class="autora-body">
+      <p>Alinne Vieira é esposa, mãe, empreendedora e uma mulher que acredita profundamente na família. Ao longo de sua caminhada, construiu não apenas uma família, mas também uma história marcada por crescimento pessoal, amadurecimento emocional e restauração do seu casamento.</p>
+      <p>Sua trajetória é real, imperfeita e profundamente humana — e é exatamente por isso que é tão inspiradora. Neste ebook, Alinne abre o coração para compartilhar como, com sabedoria, paciência e posicionamento correto, foi instrumento de transformação dentro do seu casamento.</p>
+      <p>Sua mensagem é um convite para mulheres que desejam viver relacionamentos mais saudáveis, maduros e cheios de propósito — começando pela própria transformação.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ÍNDICE -->
+<div class="indice fade-in">
+  <div class="indice-title">📖 Sumário</div>
+  <div class="indice-list">
+    <a href="#cap1" class="indice-item"><span class="indice-num">1</span> Nossa História</a>
+    <a href="#cap2" class="indice-item"><span class="indice-num">2</span> O Pecado que Rouba a Intimidade</a>
+    <a href="#cap3" class="indice-item"><span class="indice-num">3</span> As Raízes Invisíveis da Dor</a>
+    <a href="#cap4" class="indice-item"><span class="indice-num">4</span> O Processo de Restauração</a>
+    <a href="#cap5" class="indice-item"><span class="indice-num">5</span> Restaurando a Intimidade Perdida</a>
+    <a href="#cap6" class="indice-item"><span class="indice-num">6</span> Ferramentas Necessárias</a>
+    <a href="#cap7" class="indice-item"><span class="indice-num">7</span> Auto-responsabilidade</a>
+    <a href="#cap8" class="indice-item"><span class="indice-num">8</span> Estabelecendo Limites Saudáveis</a>
+    <a href="#cap9" class="indice-item"><span class="indice-num">9</span> O Poder do Perdão</a>
+    <a href="#cap10" class="indice-item"><span class="indice-num">10</span> Como Lutar Espiritualmente</a>
+    <a href="#cap11" class="indice-item"><span class="indice-num">11</span> Como se Posicionar Corretamente</a>
+    <a href="#cap12" class="indice-item"><span class="indice-num">12</span> Sinais de Restauração</a>
+    <a href="#cap13" class="indice-item"><span class="indice-num">13</span> Como Construir um Novo Começo</a>
+  </div>
+</div>
+
+<div class="divisor"></div>
+
+<!-- INTRODUÇÃO -->
+<section style="padding: 32px 0 40px; background: white;">
+  <div style="padding: 0 20px 20px; text-align: center;">
+    <div class="secao-badge">Introdução</div>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 28px; color: var(--vinho); line-height: 1.2;">Querida<br><em style="font-style:italic; color: var(--vinho-light);">leitora</em></h2>
+  </div>
+  <div class="narrativa fade-in">
+    <p>É com uma alegria que não cabe em mim que venho até aqui compartilhar coisas do mais profundo do meu coração. Vou dividir com você coisas que não compartilhei nem com pessoas da minha família.</p>
+    <p>Sinta-se como se estivesse sentada ao meu lado para uma daquelas conversas que aquecem o coração. Sabe, aquelas em que a gente se sente à vontade para falar sobre tudo, sem máscaras, sem medos? É exatamente isso que quero que você sinta ao longo deste livro.</p>
+  </div>
+  <div class="highlight fade-in">
+    <p>"De Sapo a Príncipe e Rei" não é apenas um título chamativo. É um convite para a transformação dentro da sua casa.</p>
+  </div>
+  <div class="narrativa fade-in">
+    <p>Prepare-se, porque embarcaremos juntas em um processo onde a transformação é a estrela principal. Vou compartilhar com você as ferramentas que usei para que meu marido — que era um homem ríspido, explosivo e infiel — fosse transformado com amor, paciência e muita determinação. Vi o "sapo" que existia ao meu lado se tornar um príncipe digno de um reino de felicidade.</p>
+    <p>Vamos desmistificar a ideia de que relacionamentos perfeitos existem. Acredite: eles não existem! O que existe são pessoas que, com coragem, escolhem lutar diariamente por alguém que vale a pena. E essa é a essência deste livro: a celebração da imperfeição, a valorização das pequenas conquistas e a crença inabalável de que todo mundo merece ser feliz.</p>
+    <p>Prepare-se para se emocionar, rir, refletir e, quem sabe, se inspirar a fazer algumas mudanças em sua vida e no seu casamento.</p>
+  </div>
+  <div class="reflexao fade-in">
+    <span class="reflexao-icon">🌸</span>
+    <p>A transformação é possível, o amor pode superar qualquer barreira, e você é capaz de construir um relacionamento pleno e feliz.</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 1 -->
+<section id="cap1" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 01</div>
+    <h2>Nossa<br><em>História</em></h2>
+    <p class="sec-cover-sub">O começo de tudo — festas, descobertas e o primeiro encontro com Deus</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Prepare-se para uma viagem emocionante, uma jornada que mudou minha vida e meu casamento e que, espero do fundo do meu coração, possa tocar a sua também.</p>
+    <p>Nos conhecemos em um período de muita farra e curtição. Eu sabia que ele gostava de festa, bebida e agito, mas naquele momento era o que eu também buscava, então me deixei levar.</p>
+    <p>Eram muitas festas, bebedeiras — a vida era só curtição. Tudo era muito leve, pois se algo acontecia, amanhã já havia uma farra para que a gente bebesse e esquecesse.</p>
+    <p>Isso durou uns cinco anos ou mais. Logo depois, decidi engravidar, pois desde novinha falava que queria ser mãe aos vinte e cinco anos. Na minha cabeça, não importava se depois a gente não ficasse junto, pois se minha mãe havia passado por isso, eu também me sairia bem.</p>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Com a minha primeira gestação, comecei a ser visitada pelo Espírito Santo de uma forma tremenda. Sabia que precisava me tornar alguém melhor por aquela criança que estava gerando.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Com a gestação, comecei a ir mais à igreja e a ler mais a Bíblia. Com isso, comecei a ter discernimento do reino espiritual e da necessidade de proteger aquela criança também das coisas espirituais.</p>
+    <p>Decidi que iríamos casar. Após a gestação, nosso relacionamento começou a entrar em crise, pois eu já não podia estar em festas e bebedeiras. Mas mesmo assim decidi casar pelo meu filho.</p>
+    <p>Foi uma gestação inteira de descobertas. Mergulhei nas coisas do Senhor e tive a minha verdadeira identidade revelada em Deus. Me senti livre, podendo ser eu de verdade. Foi nesse mesmo período que comecei a ser mais ativa na internet, mostrando realmente quem eu era.</p>
+    <p>Emocionalmente, sentia que estava sozinha. Ele saía antes de eu acordar e voltava após eu dormir. Mal nos víamos. Era como se eu fosse evitada.</p>
+    <p>Nesse mesmo período comecei a orar e a fazer propósitos pela vida do meu esposo. Acordava pelas madrugadas para orar, fazia jejum e campanhas de oração sem cessar.</p>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Mal sabia que, ao me afastar da intimidade com ele, estava abrindo uma enorme brecha para que meu esposo ficasse vulnerável a tentações. Mas isso é uma conversa para o próximo capítulo...</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 2 -->
+<section id="cap2" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 02</div>
+    <h2>O Pecado que<br><em>Rouba a Intimidade</em></h2>
+    <p class="sec-cover-sub">Quando o inimigo encontra uma brecha — e como Deus intervém</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Nesse período eu sentia algo nos distanciando, mas não sabia exatamente o que seria. A cada dia, o Espírito Santo me incomodava a respeito de algo. Comecei a ter visões: sempre que deitava na nossa cama, via uma fumaça preta e sentia muito cheiro de cigarro dentro de casa — mas nem por perto havia um fumante.</p>
+    <p>Nosso filho nasceu, e ainda no primeiro mês, descobri que meu marido estava vendo pornografia. Aquilo me devastou de uma forma absurda. Chamei para conversar, falei como me sentia e surtei. Ele prometeu parar, e eu entrei em um estado de alerta e cobrança.</p>
+    <p>Nossa intimidade piorou drasticamente. Eu vigiava o celular, acusava — mas não ofereci ajuda. Só fui perceber isso muito tempo depois.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Quando nosso filho estava com dois anos, fomos ao casamento da minha irmã. Ao chegar lá, encontrei uma amiga do meu interior que eu não via há muitos anos. Assim que entrei na festa, ela me chamou e disse: "Alinezinha, o Senhor manda te dizer que está preparando o teu coração."</p>
+    <p>Nessa noite, o Senhor me acordou pela madrugada e algo me levou a pegar o celular do meu marido. Entrei no banheiro e o peguei — algo que sempre fazia e nunca havia visto nada. Só que nesse dia, o pior aconteceu. O dia mau chegou.</p>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Naquele momento, não sei explicar a calma e a paz que me invadiram. Eu parei, orei e pedi que o Senhor me ajudasse.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Acordei o Jefferson com muita calma e paciência, avisei que estava sabendo e fiz uma pergunta: "Até quando você iria me enganar?"</p>
+    <p>Ele respondeu que estava muito aliviado de eu ter descoberto e que entendia qualquer que fosse a minha decisão.</p>
+    <p>Nessa noite, nos sentamos no chão e passamos a noite inteira conversando. Naquele momento, eu não conseguia ver um homem — o Senhor me mostrava apenas uma criança assustada e falava ao meu ouvido: "Olhe para ele como Cristo olharia."</p>
+    <p>Hoje entendo que a graça que Deus me deu naquele dia era fruto do Espírito Santo. Somente Ele poderia fazer aquilo: eu anulei a minha dor e passei a sentir a dor dele.</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 3 -->
+<section id="cap3" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 03</div>
+    <h2>As Raízes<br><em>Invisíveis da Dor</em></h2>
+    <p class="sec-cover-sub">Como traumas da infância moldam comportamentos que precisam ser curados</p>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Antes de existir o homem que hoje eu conheço, existiu um menino. Um menino que aprendeu cedo demais a se defender, a se calar, a endurecer.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>A infância do meu esposo não foi um lugar seguro e saudável. Naquele dia, ele me confessou que havia sido abusado na infância. Meu coração travou de tanta dor e compaixão por aquela criança ferida e indefesa.</p>
+    <p>Por conta do divórcio de seus pais — causado pela infidelidade e violência do pai —, sua mãe precisou se virar para criar e sustentar ele e a irmã. Com isso, eles ficavam aos cuidados de terceiros, o que tornou a infância dele sem a proteção que deveria ter dos responsáveis.</p>
+    <p>Ele também me confessou que seu pai o levava a prostíbulos — e isso é mais comum do que imaginamos. Ele havia aprendido com a maior figura de autoridade que aquela era a forma de viver. Como questionar? Essa foi a forma que ele aprendeu, e é muito difícil mudar um conceito estabelecido na infância por uma figura de autoridade.</p>
+  </div>
+
+  <div class="reflexao fade-in">
+    <span class="reflexao-icon">💡</span>
+    <p>Ele me falou o quanto aquilo fazia mal, o quanto se sentia indigno do amor de Deus e o quanto se culpava por fazer aquilo com sua família.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Naquele momento, diferente da primeira vez, tive o auxílio do Espírito Santo. Disse o quanto estava me sentindo traída e o quanto estava sofrendo — mas eu já o havia perdoado e ainda iria ajudá-lo a vencer nessa área de luta.</p>
+    <p>Pedi alguns dias para processar tudo aquilo. Tive dois dias de comunhão intensa com o Espírito Santo e pedi encarecidamente que Ele me mostrasse o caminho.</p>
+    <p>Fomos até a igreja buscar aconselhamento e tivemos a ajuda de um casal que nos acompanhou por alguns meses.</p>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">Ninguém vence nada sozinho. Nem tente!</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 4 -->
+<section id="cap4" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 04</div>
+    <h2>O Processo de<br><em>Restauração</em></h2>
+    <p class="sec-cover-sub">Dias de tristeza intensa — e a voz do Espírito Santo que sustentava</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Não posso negar o quanto foram dias de tristeza intensa. Era uma dor tão grande que chegava a ser física. Confesso que me vi em um turbilhão de emoções. O inimigo tentava me falar que minha expectativa de ter uma família havia sido frustrada.</p>
+    <p>Por outro lado, meu amigo Espírito Santo me consolava e ministrava palavras de esperança ao meu coração. Ele me dizia que aquela dor fazia parte do processo, que em cada ferida o Senhor derramaria o seu bálsamo e que onde houve vergonha, o Senhor recompensaria com dupla honra.</p>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Eu apenas confiei no processo. Me vi como uma criança nos braços do seu pai — entreguei tudo a Ele!</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Em todo o processo, tive o apoio do meu marido me auxiliando a lidar com a desconfiança que, não há como negar, passou a existir. Ele não deixava de atender nenhuma ligação minha, sempre fazíamos chamada de vídeo e a sua localização era compartilhada comigo.</p>
+    <p>O casal que nos acompanhava nos alertou sobre a vigilância quanto a recaídas. Então nos aconselhou a instalar um aplicativo para mapear e proibir a visita a sites inadequados. Eu também me dispus a ajudar e pedi para ele me ligar sempre que se sentisse fraco, para que eu orasse por ele.</p>
+    <p>Depois de algum tempo, o inimigo começou a me atacar fortemente e plantou no meu coração a semente da vingança.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Certa tarde decidi que iria dar o troco e me vingar. Saí de casa com um sentimento péssimo — posso dizer que estava cega, e uma força maligna ia me guiando.</p>
+    <p>Cheguei até o local. Entrei até a sala, me despi e deitei. Quando deitei, comecei a ouvir uma música que sabia que não fazia parte daquele tipo de ambiente. Tentei fugir do que estava ouvindo e continuar — foi impossível, pois o som inundou meus ouvidos.</p>
+    <p>A música invadiu a sala e naquele momento meu Pai chegou para me resgatar. Eu só conseguia ouvir: "Eu sinto o teu vento soprar, a tua glória se manifestar, eu posso ver o teu poder tomando conta do lugar..."</p>
+    <p>Ele ordenou: "Vista-se e vá embora, pois o seu corpo é templo e morada do Espírito Santo!" Obedeci e fui o caminho inteiro de volta para casa chorando e pedindo perdão ao Senhor.</p>
+    <p>À noite, chamei o meu marido para conversar e contar o que tinha acontecido. Ele entendeu, oramos e confessamos ao Senhor.</p>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">Acredito que o período mais difícil foram os seis meses que se seguiram após a descoberta. Mas ainda tenho muito a compartilhar sobre esse processo.</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 5 -->
+<section id="cap5" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 05</div>
+    <h2>Restaurando a<br><em>Intimidade Perdida</em></h2>
+    <p class="sec-cover-sub">A faísca de esperança que não se apagou — e como ela reavivou tudo</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Uma das áreas mais afetadas foi a nossa intimidade. Eu não conseguia ter relações com meu marido, pois me vinham na cabeça os momentos dele com outra pessoa. Eu chorava e tentava anular aqueles pensamentos — e assim foi por algum tempo.</p>
+    <p>Havia algo dentro de mim que se recusava a aceitar aquela situação como definitiva. O Espírito Santo me dava força e me dizia que era possível mudar, que o amor, mesmo adormecido, ainda poderia ser reavivado. Acredito que essa foi a minha maior vitória: acreditar, mesmo quando tudo parecia perdido.</p>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Eu seguia o comando do Espírito Santo me pedindo para olhar para o meu marido como Cristo olharia. Juntei forças de onde só Cristo me daria e me levantei como uma leoa disposta a tomar a minha família das mãos do maligno.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Comecei a trazer à memória tudo que me trazia esperança: meu filho crescendo com o pai, quebrar ciclos de divórcios que vinham de gerações...</p>
+    <p>Li livros sobre relacionamentos, participei de workshops e conversei com amigas e familiares. O que descobri foi que eu precisava mudar também a minha abordagem, as minhas expectativas. Não era apenas sobre querer que ele mudasse, mas sobre criar um ambiente onde essa mudança fosse possível.</p>
+    <p>Comecei a praticar a escuta ativa, a expressar minhas necessidades de forma clara e honesta, e a celebrar cada pequena vitória. Era como se estivéssemos construindo um novo relacionamento, tijolo por tijolo.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>A forma como eu enxergava meu marido mudou radicalmente. Deixei de lado as expectativas irreais e passei a ver o homem por trás dos comportamentos — com seus medos e inseguranças, suas qualidades e defeitos.</p>
+    <p>Acreditar no potencial do outro é algo que impulsiona e faz a pessoa continuar no processo. É enxergar o que ele pode ser, e não apenas o que ele é no momento presente. É dar espaço para que ele se descubra, se desenvolva e se torne a melhor versão de si mesmo.</p>
+  </div>
+
+  <div class="reflexao fade-in">
+    <span class="reflexao-icon">❤️</span>
+    <p>Pequenas ações — expressar gratidão pelas coisas simples, ouvir atentamente mesmo sobre assuntos que não me interessavam tanto — começaram a gerar uma resposta diferente.</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 6 -->
+<section id="cap6" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 06</div>
+    <h2>Ferramentas<br><em>Necessárias</em></h2>
+    <p class="sec-cover-sub">Consciência, liderança espiritual e quebrando crenças que sabotavam tudo</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>As ferramentas que encontrei foram variadas — desde livros e artigos sobre relacionamentos até terapias de casal. Mas o mais essencial foi a prática diária. Comecei também a olhar para os meus defeitos, percebendo que eu precisava mudar muitas coisas em mim.</p>
+    <p>Meu marido, antes distante, grosseiro e de poucas palavras, começou a se abrir, a compartilhar seus medos e anseios. Pequenos gestos de carinho, antes raros, tornaram-se mais frequentes.</p>
+  </div>
+
+  <p class="titulo-sec">O que o processo me ensinou</p>
+  <div class="cards-stack fade-in">
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">🧠</span>
+        <span class="card-acc-title">Consciência emocional</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Nesse processo passei a entender os padrões emocionais que eu repetia sem perceber, minhas reações e gatilhos, a me comunicar sem atacar ou me anular, e a separar feridas antigas de problemas atuais. Foi ali que percebi que muitas das minhas dores não começaram no casamento — eram reativadas dentro dele.
+        </div>
+      </div>
+    </div>
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">⛪</span>
+        <span class="card-acc-title">Liderança espiritual</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Ter líderes espirituais me trouxe entendimento sobre como discernir quando minhas emoções estavam confusas, o que era luta espiritual e o que era imaturidade emocional, e como não tomar decisões baseadas apenas na dor do momento. Aprendi que Deus usa pessoas para nos alinhar, confrontar e proteger.
+        </div>
+      </div>
+    </div>
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">💭</span>
+        <span class="card-acc-title">Crenças que precisei quebrar</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Uma das maiores viradas aconteceu quando entendi que muitas das minhas crenças estavam erradas — não eram bíblicas, eram emocionais, culturais ou herdadas. Essas crenças me tornavam dura, controladora ou excessivamente seca e ferida.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="titulo-sec">Crenças que precisei abandonar</p>
+  <div class="crencas fade-in">
+    <div class="crenca-item">❌ "Homem não muda"</div>
+    <div class="crenca-item">❌ "Nenhum homem presta"</div>
+    <div class="crenca-item">❌ "Eu preciso ser forte o tempo todo"</div>
+    <div class="crenca-item">❌ "Amar é suportar tudo em silêncio"</div>
+    <div class="crenca-item">❌ "Preciso ser independente, pois um dia ele vai me abandonar"</div>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Ao substituir essas crenças pela verdade de Deus, passei a agir com mais sabedoria e menos reação.</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 7 -->
+<section id="cap7" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 07</div>
+    <h2>Auto-<br><em>responsabilidade</em></h2>
+    <p class="sec-cover-sub">O espelho que ninguém quer olhar — mas que liberta quem tem coragem</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Um dia, enquanto lavava a louça, pensei em como muitos dos nossos desentendimentos persistiam. Era fácil culpar o outro, olhar para fora e apontar dedos. Mas nesse momento de trivialidade, as realizações começaram a aflorar. Percebi que, para cada vez que eu me sentia insatisfeita, havia uma parte de mim que também não estava sendo verdadeira.</p>
+  </div>
+
+  <div class="reflexao fade-in">
+    <span class="reflexao-icon">🪞</span>
+    <p>Quando comecei a me perguntar "O que estou trazendo para esta relação?", a transformação começou.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Confesso que vim de um contexto familiar onde tudo era resolvido no grito e na má educação. Cresci prometendo que não teria esses hábitos, então sempre buscava me calar. Só que o silêncio também é tortura. Não se trata de se calar — é sobre falar a coisa certa no momento certo.</p>
+    <p>Comecei a pedir ajuda ao Senhor para que me mostrasse os momentos em que eu deveria falar, e que quando eu falasse, aquelas palavras entrassem como flechas ao coração do meu marido.</p>
+    <p>Meu marido nunca foi de muita conversa, então precisei elaborar estratégias que me permitissem falar pouco, mas falar coisas certeiras.</p>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Comecei a perceber que muitas coisas que me irritavam tinham mais a ver com dores e gatilhos meus do que com ele. Isso mudou tudo na forma como eu reagia.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Me perguntei: "Será que eu realmente sou uma mulher que merece um bom esposo?" Essa jornada de introspecção foi cheia de descobertas. As conversas se tornaram mais autênticas à medida que eu entendia as minhas próprias emoções.</p>
+    <p>Ao abrir meu coração, eu não apenas me expus — também criei um espaço onde ele se sentiu confortável para compartilhar suas inquietações. A clareza começou a surgir nas frases que trocávamos.</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 8 -->
+<section id="cap8" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 08</div>
+    <h2>Estabelecendo<br><em>Limites Saudáveis</em></h2>
+    <p class="sec-cover-sub">Limites não são muros — são manifestações de amor e respeito</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Você já parou para pensar sobre o que realmente significa estabelecer limites em um relacionamento? A verdade é que, muitas vezes, essa palavra pode soar estranha ou até mesmo cansativa. Mas e se eu te disser que limites, na verdade, são manifestações de amor e respeito? São ferramentas fundamentais para o fortalecimento da relação.</p>
+    <p>Comecei a ver que ele estava vendo conteúdos nas redes sociais que mexiam com feridas do passado. Quis tentar relevar, mas aquilo me causava um desconforto profundo. A situação se prolongou até o dia em que, sentindo o peso da minha hesitação, tive uma conversa sincera.</p>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Tudo é a forma como você fala. Nesse dia, falei de forma sábia, sem acusar ou apontar. Disse que aquilo me trazia desconforto, mas falei que, se aquilo realmente fosse mais importante do que a forma como eu me sentia, ele poderia continuar.</p>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Foi impressionante descobrir que, quando finalmente expressei o que estava acontecendo, meu marido não apenas compreendeu como ficou grato pelo meu diálogo honesto.</p>
+  </div>
+
+  <p class="titulo-sec">Como estabelecer limites na prática</p>
+  <div class="cards-stack fade-in">
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">🎯</span>
+        <span class="card-acc-title">Conheça suas necessidades</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Pergunte-se: o que realmente importa para mim? Quais são as situações que me causam desconforto? Antes de colocar um limite, é fundamental se conhecer melhor.
+        </div>
+      </div>
+    </div>
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">💬</span>
+        <span class="card-acc-title">Comunique sem atacar</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Em vez de "Você sempre faz isso", prefira "Eu gostaria que conversássemos sobre como organizamos o nosso tempo juntos." Um detalhe que parece sutil, mas faz toda a diferença.
+        </div>
+      </div>
+    </div>
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">🕊️</span>
+        <span class="card-acc-title">Crie espaços regulares de diálogo</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Não espere um grande desentendimento para conversar. Que tal criar um espaço seguro semanalmente para falar sobre as pequenas coisas? Isso evita que tensões se acumulem.
+        </div>
+      </div>
+    </div>
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">💪</span>
+        <span class="card-acc-title">Pratique a autoafirmação</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Durante momentos de insegurança, diga a si mesma: "Meu limite é válido. Eu mereço ser respeitada." Essa prática interna tem um impacto profundo na sua postura externa.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">Quando estabelecemos limites, estamos, em essência, dizendo: "Eu valorizo nossa relação e a mim mesma, e quero que estejamos bem juntos."</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 9 -->
+<section id="cap9" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 09</div>
+    <h2>O Poder do<br><em>Perdão</em></h2>
+    <p class="sec-cover-sub">Perdoar não é esquecer — é se libertar</p>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"Antes, sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros, como também Deus vos perdoou em Cristo."</p>
+    <span class="versiculo-ref">Efésios 4:32</span>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Seja qual for o motivo da sua ferida — traição, abandono, palavras duras, frieza — o perdão será necessário para a sua cura. Perdoar não é ignorar o que aconteceu, fingir que a dor não existe ou justificar o erro do outro. Perdoar é se libertar da prisão da mágoa para seguir em frente com um coração curado.</p>
+  </div>
+
+  <p class="titulo-sec">O que o perdão é e o que não é</p>
+  <div class="lista-check fade-in">
+    <div class="check-item">
+      <span class="check-icon">✅</span>
+      <p>Perdoar <strong>não</strong> é aceitar a injustiça. Você pode perdoar e, ao mesmo tempo, não aceitar um relacionamento tóxico.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">✅</span>
+      <p>O perdão <strong>não</strong> depende do arrependimento do outro. Você precisa se libertar dessa dor para ser livre.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">✅</span>
+      <p>Guardar rancor só mantém a ferida aberta. O perdão fecha o ciclo da dor e abre espaço para a restauração.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">✅</span>
+      <p>Perdoar <strong>não</strong> significa reatar o casamento imediatamente. Significa que você está escolhendo a paz em vez da amargura.</p>
+    </div>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"Se perdoardes aos homens as suas ofensas, também vosso Pai celestial vos perdoará a vós."</p>
+    <span class="versiculo-ref">Mateus 6:14</span>
+  </div>
+
+  <p class="titulo-sec">Perdoando a si mesma</p>
+  <div class="narrativa fade-in">
+    <p>Muitas mulheres se culpam pela separação ou traição: "Se eu tivesse sido mais paciente, ele não teria ido embora." "Se eu tivesse feito diferente, ele não teria me traído." "Eu falhei como esposa, como mulher..."</p>
+    <p>Mas a verdade é que nenhum casamento acaba por culpa de uma única pessoa. O outro também fez as suas escolhas.</p>
+  </div>
+
+  <div class="lista-check fade-in">
+    <div class="check-item">
+      <span class="check-icon">🙏</span>
+      <p>Aceite que você não pode mudar o passado — mas pode aprender e crescer com ele.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">🙏</span>
+      <p>Peça perdão a Deus e a você mesma. Deus não quer que você viva se punindo.</p>
+    </div>
+  </div>
+
+  <p class="titulo-sec">Como saber se você realmente perdoou?</p>
+  <div class="lista-check fade-in">
+    <div class="check-item">
+      <span class="check-icon">💚</span>
+      <p>Você não sente mais raiva sempre que pensa no que aconteceu.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">💚</span>
+      <p>Você não deseja vingança ou que o outro "pague" pelo que fez.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">💚</span>
+      <p>Você consegue orar por essa pessoa sem ressentimento.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">💚</span>
+      <p>Você sente paz ao lembrar do passado, porque sabe que Deus está cuidando do seu futuro.</p>
+    </div>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Se ainda não sente isso, não se culpe. O perdão é um processo. Entregue a Deus e peça que Ele te ajude a liberar essa dor.</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 10 -->
+<section id="cap10" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 10</div>
+    <h2>Como Lutar<br><em>Espiritualmente</em></h2>
+    <p class="sec-cover-sub">A batalha que acontece nos bastidores — e como você deve se posicionar</p>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"Porque a nossa luta não é contra carne e sangue, mas contra os principados e potestades, contra os dominadores deste mundo tenebroso, contra as forças espirituais do mal."</p>
+    <span class="versiculo-ref">Efésios 6:12</span>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>A crise no casamento não é apenas uma questão humana. Há uma batalha espiritual acontecendo. O inimigo tenta destruir famílias porque sabe que o casamento é um plano de Deus. Mas você não está sozinha nessa luta — Deus luta ao seu lado.</p>
+    <p>Lutar espiritualmente não significa apenas orar e esperar. Significa se posicionar em Deus, resistir ao desânimo e confiar que Ele está trabalhando, mesmo quando não vemos sinais visíveis.</p>
+  </div>
+
+  <p class="titulo-sec">Oração estratégica pela restauração</p>
+  <div class="lista-check fade-in">
+    <div class="check-item">
+      <span class="check-icon">🙏</span>
+      <p>Ore pela <strong>transformação do seu coração</strong>. Peça a Deus para te fortalecer e moldar seu caráter.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">🙏</span>
+      <p>Ore pela <strong>libertação do seu cônjuge</strong>. Se ele está distante ou envolvido em pecado, interceda para que Deus traga arrependimento.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">🙏</span>
+      <p>Ore pela <strong>restauração do casamento</strong>. Declare que Deus pode reconstruir o que foi quebrado.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">🙏</span>
+      <p>Ore para que a <strong>vontade de Deus prevaleça</strong>, no tempo certo e da forma certa.</p>
+    </div>
+  </div>
+
+  <p class="titulo-sec">Jejum: uma arma poderosa</p>
+  <div class="cards-stack fade-in">
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">⚡</span>
+        <span class="card-acc-title">Jejum parcial</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Abrir mão de doces, redes sociais ou outras coisas. Serve para busca diária de direção e fortalecimento espiritual.
+        </div>
+      </div>
+    </div>
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">⚡⚡</span>
+        <span class="card-acc-title">Jejum total</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Abstinência de alimentos, apenas água. Serve para milagres urgentes e intervenção divina imediata.
+        </div>
+      </div>
+    </div>
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">⚡⚡⚡</span>
+        <span class="card-acc-title">Jejum de 21 dias</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Comer apenas coisas naturais como legumes e vegetais, sem carne, ovos e derivados, nada industrializado. Serve para revelação, entendimento e receber respostas de Deus.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"Não andeis ansiosos por coisa alguma, mas em tudo apresentem seus pedidos a Deus."</p>
+    <span class="versiculo-ref">Filipenses 4:6</span>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 11 -->
+<section id="cap11" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 11</div>
+    <h2>Como se Posicionar<br><em>Corretamente</em></h2>
+    <p class="sec-cover-sub">Durante o processo de restauração — com dignidade e sabedoria</p>
+  </div>
+
+  <p class="titulo-sec">Seu posicionamento durante o processo</p>
+  <div class="lista-check fade-in">
+    <div class="check-item">
+      <span class="check-icon">👑</span>
+      <p><strong>Deixe claro que você não aceita um casamento com traição.</strong> Seu cônjuge precisa entender que você se ama e se valoriza. A decisão de ser fiel precisa ser dele.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">💎</span>
+      <p><strong>Fortaleça sua autoestima e sua identidade.</strong> Se ele escolheu outra pessoa, isso não define seu valor. Continue cuidando de si mesma e não perca sua dignidade no processo.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">🙏</span>
+      <p><strong>Lute espiritualmente, mas sem obsessão.</strong> Ore para que Deus quebre as amarras espirituais. Apresente seu casamento a Deus sem tentar "forçar" um retorno.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">🚫</span>
+      <p><strong>Não aceite ser a "segunda opção".</strong> Se ele quiser manter contato, imponha limites. Deixe claro que você ama, mas não aceita desrespeito.</p>
+    </div>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"O que Deus uniu, ninguém separe."</p>
+    <span class="versiculo-ref">Marcos 10:9</span>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 12 -->
+<section id="cap12" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 12</div>
+    <h2>Sinais de<br><em>Restauração</em></h2>
+    <p class="sec-cover-sub">Como saber se Deus está trabalhando — mesmo quando não vemos</p>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"O que eu faço agora, você não entende, mas depois entenderá."</p>
+    <span class="versiculo-ref">João 13:7</span>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Muitas vezes, quando estamos orando pela restauração do casamento, esperamos ver mudanças imediatas e visíveis. Mas Deus trabalha de formas que nem sempre conseguimos perceber no momento. A restauração pode acontecer de maneira gradual e silenciosa.</p>
+  </div>
+
+  <p class="titulo-sec">Primeiros sinais de que Deus está agindo</p>
+  <div class="sinais fade-in">
+    <div class="sinal-item">
+      <div class="sinal-num">1</div>
+      <div class="sinal-content">
+        <div class="sinal-title">Seu cônjuge muda o comportamento</div>
+        <div class="sinal-desc">Está menos resistente ao contato, demonstra um tom mais amigável, começa a perguntar sobre você ou sua vida.</div>
+      </div>
+    </div>
+    <div class="sinal-item">
+      <div class="sinal-num">2</div>
+      <div class="sinal-content">
+        <div class="sinal-title">Você percebe mudanças em si mesma</div>
+        <div class="sinal-desc">Seu coração está mais em paz, você já não sente a mesma ansiedade de antes, consegue orar pelo cônjuge sem ressentimento.</div>
+      </div>
+    </div>
+    <div class="sinal-item">
+      <div class="sinal-num">3</div>
+      <div class="sinal-content">
+        <div class="sinal-title">Ele sente o peso das próprias decisões</div>
+        <div class="sinal-desc">Algo em sua vida começa a dar errado. Ele começa a questionar as próprias decisões. Pessoas próximas o aconselham a repensar.</div>
+      </div>
+    </div>
+    <div class="sinal-item">
+      <div class="sinal-num">4</div>
+      <div class="sinal-content">
+        <div class="sinal-title">Sinais inesperados aparecem</div>
+        <div class="sinal-desc">Você recebe palavras proféticas ou confirmações pela Bíblia. Sonhos ou situações inesperadas trazem direção. Pessoas ao redor falam sobre reconciliação sem nem saber da sua luta.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Se você ainda não vê sinais visíveis, isso não significa que Deus não está agindo. O tempo de Deus não é o nosso tempo. "Porque andamos por fé, e não pelo que vemos." (2 Coríntios 5:7)</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CAP 13 -->
+<section id="cap13" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-cover-num">Capítulo 13</div>
+    <h2>Como Construir um<br><em>Novo Começo</em></h2>
+    <p class="sec-cover-sub">A restauração não é o fim — é o início de algo muito melhor</p>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"Eis que faço nova todas as coisas."</p>
+    <span class="versiculo-ref">Apocalipse 21:5</span>
+  </div>
+
+  <div class="narrativa fade-in">
+    <p>Se a restauração aconteceu, esse não é o fim da jornada — é um novo começo. Agora, o desafio é diferente: construir um casamento saudável, livre dos erros do passado e baseado em princípios sólidos.</p>
+  </div>
+
+  <p class="titulo-sec">O que evitar após a reconciliação</p>
+  <div class="lista-check fade-in">
+    <div class="check-item">
+      <span class="check-icon">⚠️</span>
+      <p>Não transforme o casamento em um tribunal do passado. Se decidiram recomeçar, não fique trazendo os erros antigos à tona.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">⚠️</span>
+      <p>Não volte aos mesmos comportamentos que causaram o afastamento. Se algo precisou mudar para a restauração acontecer, mantenha essa mudança.</p>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">⚠️</span>
+      <p>Não ignore os sinais de alerta. Se houver atitudes que possam levar a um novo desgaste, conversem com maturidade antes que o problema cresça.</p>
+    </div>
+  </div>
+
+  <p class="titulo-sec">Como reconstruir um casamento novo e forte</p>
+  <div class="cards-stack fade-in">
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">✝️</span>
+        <span class="card-acc-title">Deus deve ser o centro</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Orem juntos e busquem crescimento espiritual como casal. Participem de atividades que fortaleçam a fé e o compromisso com Deus. "Se o Senhor não edificar a casa, em vão trabalham os que a edificam." (Salmos 127:1)
+        </div>
+      </div>
+    </div>
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">💬</span>
+        <span class="card-acc-title">Comunicação aberta e respeitosa</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Aprendam a conversar sem ataques e cobranças. Estabeleçam um ambiente seguro para expressar sentimentos sem medo. Pratiquem o perdão diário.
+        </div>
+      </div>
+    </div>
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">❤️</span>
+        <span class="card-acc-title">Cultivem o relacionamento</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Redescubram o prazer de estarem juntos, façam coisas novas. Invistam em momentos de qualidade e carinho no dia a dia. Lembrem-se do que os uniu no começo.
+        </div>
+      </div>
+    </div>
+    <div class="card-acc" onclick="toggleCard(this)">
+      <div class="card-acc-header">
+        <span class="card-acc-icon">🤝</span>
+        <span class="card-acc-title">Superem as fragilidades juntos</span>
+        <span class="card-acc-arrow">▼</span>
+      </div>
+      <div class="card-acc-body">
+        <div class="card-acc-content">
+          Se necessário, busquem aconselhamento pastoral ou terapia de casal. Tenham paciência um com o outro — reconstrução leva tempo. Sejam intencionais em manter a paz e a harmonia no lar.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CONCLUSÃO -->
+<section class="conclusao fade-in">
+  <h2>A vitória pertence a quem<br><em>não desiste!</em> 👑</h2>
+  <p>Chegar até aqui significa que você decidiu lutar pelo seu casamento com sabedoria e dignidade. Mas, mais do que isso, significa que você permitiu que Deus transformasse a sua vida primeiro.</p>
+
+  <div class="conclusao-verse">
+    <p>A restauração começa dentro de você. Seu casamento não pode ser restaurado se você mesma não estiver fortalecida.</p>
+  </div>
+
+  <p>A luta não é contra seu cônjuge, mas contra as forças espirituais que tentam destruir famílias.</p>
+  <p>Se você confiar e se posicionar corretamente, Deus agirá. Pode não ser no seu tempo ou da forma como você espera, mas Ele nunca falha.</p>
+
+  <div class="lista-check" style="margin: 20px 0;">
+    <div class="check-item" style="background: rgba(255,255,255,0.1); border-radius: 12px;">
+      <span class="check-icon">✅</span>
+      <p style="color: rgba(255,255,255,0.9);">Continue crescendo espiritualmente e emocionalmente.</p>
+    </div>
+    <div class="check-item" style="background: rgba(255,255,255,0.1); border-radius: 12px;">
+      <span class="check-icon">✅</span>
+      <p style="color: rgba(255,255,255,0.9);">Posicione-se com sabedoria e dignidade.</p>
+    </div>
+    <div class="check-item" style="background: rgba(255,255,255,0.1); border-radius: 12px;">
+      <span class="check-icon">✅</span>
+      <p style="color: rgba(255,255,255,0.9);">Nunca perca sua identidade em Cristo, independentemente do desfecho.</p>
+    </div>
+    <div class="check-item" style="background: rgba(255,255,255,0.1); border-radius: 12px;">
+      <span class="check-icon">✅</span>
+      <p style="color: rgba(255,255,255,0.9);">Confie que Deus está no controle e que o melhor dEle sempre prevalecerá.</p>
+    </div>
+  </div>
+
+  <p>Se esse ebook falou ao seu coração, me deixe uma mensagem no direct compartilhando seu testemunho. 💌</p>
+  <div class="conclusao-assinatura">Com amor e fé,<br>Alinne Vieira 🌹</div>
+</section>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progressBar').style.width = (scrolled/total*100) + '%';
+    document.getElementById('backTop').classList.toggle('visible', scrolled > 300);
+  });
+
+  // Fade in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Accordion
+  function toggleCard(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.card-acc.open').forEach(c => c.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+</script>
+</body>
+</html>
