@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mulher de Valor — Comunidade Cristã</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa: #F2A4A4;
+    --vinho: #7B2D3E;
+    --vinho-light: #C4566A;
+    --vinho-deep: #3A0A18;
+    --creme: #FFF8F5;
+    --dourado: #C9A96E;
+    --texto: #3A1A20;
+    --texto-suave: #7A4A52;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    max-width: 430px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--vinho-deep) 0%, var(--vinho) 60%, var(--vinho-light) 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 48px 28px 60px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '♛';
+    position: absolute; font-size: 300px;
+    color: rgba(255,255,255,0.04);
+    top: -60px; right: -60px; pointer-events: none;
+  }
+  .hero-badge {
+    background: rgba(201,169,110,0.2);
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 50px; padding: 6px 18px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--dourado); margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px; color: white; line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .hero h1 em { font-style: italic; color: #F0BFBC; display: block; }
+  .hero-sub {
+    font-size: 14px; color: rgba(255,255,255,0.75);
+    margin: 16px 0 28px; line-height: 1.7;
+  }
+  .hero-divider {
+    width: 40px; height: 1px;
+    background: var(--dourado);
+    margin: 0 auto 28px; opacity: 0.5;
+  }
+  .preco-box {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px; padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .preco-de {
+    font-size: 12px; color: rgba(255,255,255,0.5);
+    text-decoration: line-through; margin-bottom: 4px;
+  }
+  .preco-por { font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+  .preco-valor {
+    font-size: 48px; font-weight: 800; color: white;
+    line-height: 1;
+  }
+  .preco-valor span { font-size: 20px; font-weight: 400; }
+  .preco-info { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 6px; }
+  .btn-hero {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--dourado), #E8C99A);
+    color: var(--vinho-deep); font-family: 'Nunito', sans-serif;
+    font-size: 15px; font-weight: 800;
+    letter-spacing: 0.5px; padding: 18px 24px;
+    border-radius: 50px; text-decoration: none;
+    margin-bottom: 12px; border: none; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(201,169,110,0.3);
+    transition: transform 0.2s;
+  }
+  .btn-hero:active { transform: scale(0.98); }
+  .hero-garantia { font-size: 12px; color: rgba(255,255,255,0.5); }
+
+  /* PARA QUEM É */
+  .para-quem {
+    background: white; padding: 40px 20px;
+    border-bottom: 2px solid #FDE8EC;
+  }
+  .sec-badge {
+    display: inline-block; background: #FDE8EC;
+    color: var(--vinho-light); font-size: 10px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 50px; margin-bottom: 12px;
+  }
+  .sec-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--vinho); line-height: 1.2; margin-bottom: 20px;
+  }
+  .sec-titulo em { font-style: italic; color: var(--vinho-light); }
+
+  .para-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 0; border-bottom: 1px solid #FDE8EC;
+  }
+  .para-item:last-child { border-bottom: none; }
+  .para-icon { font-size: 20px; flex-shrink: 0; }
+  .para-item p { font-size: 14px; line-height: 1.6; color: var(--texto); }
+
+  /* O QUE VOCÊ RECEBE */
+  .recebe { padding: 40px 20px; background: var(--creme); }
+  .recebe-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+  .recebe-card {
+    background: white; border-radius: 16px;
+    padding: 20px; display: flex; gap: 16px;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+    border: 1.5px solid #FDE8EC;
+  }
+  .recebe-icon {
+    font-size: 32px; flex-shrink: 0;
+    width: 56px; height: 56px;
+    background: #FDE8EC; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .recebe-content h3 {
+    font-size: 15px; font-weight: 800;
+    color: var(--vinho); margin-bottom: 4px;
+  }
+  .recebe-content p { font-size: 13px; color: var(--texto-suave); line-height: 1.5; }
+
+  /* VERSICULO */
+  .versiculo {
+    margin: 0; padding: 32px 24px;
+    background: linear-gradient(135deg, var(--vinho-deep), var(--vinho));
+    text-align: center;
+  }
+  .versiculo p {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 16px; color: #F0BFBC; line-height: 1.7; margin-bottom: 8px;
+  }
+  .versiculo span {
+    font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(201,169,110,0.7);
+  }
+
+  /* PLANOS */
+  .planos { padding: 40px 20px; background: white; }
+  .planos-grid { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+  .plano-card {
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(123,45,62,0.12);
+  }
+  .plano-header {
+    padding: 20px; text-align: center;
+  }
+  .plano-header.mensal { background: #FDE8EC; }
+  .plano-header.anual { background: linear-gradient(135deg, var(--vinho-deep), var(--vinho)); }
+  .plano-nome {
+    font-size: 11px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .plano-header.mensal .plano-nome { color: var(--vinho-light); }
+  .plano-header.anual .plano-nome { color: var(--dourado); }
+  .plano-preco {
+    font-size: 40px; font-weight: 800; line-height: 1;
+  }
+  .plano-header.mensal .plano-preco { color: var(--vinho); }
+  .plano-header.anual .plano-preco { color: white; }
+  .plano-preco span { font-size: 16px; font-weight: 400; }
+  .plano-info { font-size: 12px; margin-top: 4px; }
+  .plano-header.mensal .plano-info { color: var(--texto-suave); }
+  .plano-header.anual .plano-info { color: rgba(255,255,255,0.6); }
+  .plano-body { padding: 20px; background: white; }
+  .plano-item {
+    display: flex; gap: 10px; align-items: flex-start;
+    padding: 8px 0; border-bottom: 1px solid #FDE8EC;
+    font-size: 13px; color: var(--texto);
+  }
+  .plano-item:last-child { border-bottom: none; }
+  .plano-check { color: var(--vinho-light); font-weight: 800; flex-shrink: 0; }
+  .plano-badge-destaque {
+    background: var(--dourado); color: white;
+    font-size: 10px; font-weight: 800; padding: 2px 8px;
+    border-radius: 50px; margin-left: 6px;
+  }
+  .btn-plano {
+    display: block; width: 100%;
+    padding: 16px; border-radius: 50px;
+    font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800;
+    text-align: center; text-decoration: none; border: none; cursor: pointer;
+    margin-top: 16px; transition: transform 0.2s;
+  }
+  .btn-plano:active { transform: scale(0.98); }
+  .btn-plano.mensal {
+    background: #FDE8EC; color: var(--vinho);
+    border: 2px solid var(--rosa);
+  }
+  .btn-plano.anual {
+    background: linear-gradient(135deg, var(--dourado), #E8C99A);
+    color: var(--vinho-deep);
+    box-shadow: 0 4px 16px rgba(201,169,110,0.3);
+  }
+
+  /* ALINNE */
+  .alinne {
+    padding: 40px 20px;
+    background: var(--creme);
+  }
+  .alinne-card {
+    background: white; border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(123,45,62,0.1);
+    border: 2px solid #FDE8EC;
+  }
+  .alinne-header {
+    background: linear-gradient(135deg, var(--vinho-deep), var(--vinho));
+    padding: 24px; text-align: center;
+  }
+  .alinne-header h3 {
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 22px; font-weight: 400;
+  }
+  .alinne-header p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+  .alinne-body { padding: 20px; }
+  .alinne-body p {
+    font-size: 14px; line-height: 1.8;
+    color: var(--texto-suave); margin-bottom: 12px;
+  }
+
+  /* FAQ */
+  .faq { padding: 40px 20px; background: white; }
+  .faq-item {
+    background: var(--creme); border-radius: 14px;
+    margin-bottom: 10px; overflow: hidden;
+    border: 1.5px solid #FDE8EC;
+  }
+  .faq-pergunta {
+    padding: 16px 18px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 14px; font-weight: 700; color: var(--vinho);
+    transition: background 0.2s;
+  }
+  .faq-pergunta:active { background: #FDE8EC; }
+  .faq-arrow { font-size: 12px; color: var(--rosa); transition: transform 0.3s; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+  .faq-resposta { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .faq-item.open .faq-resposta { max-height: 300px; }
+  .faq-content {
+    padding: 0 18px 16px;
+    font-size: 14px; line-height: 1.7; color: var(--texto-suave);
+    border-top: 1px solid #FDE8EC; padding-top: 12px;
+  }
+
+  /* CTA FINAL */
+  .cta-final {
+    background: linear-gradient(160deg, var(--vinho-deep), var(--vinho));
+    padding: 48px 24px; text-align: center;
+  }
+  .cta-final h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; color: white; line-height: 1.2; margin-bottom: 16px;
+  }
+  .cta-final h2 em { font-style: italic; color: #F0BFBC; }
+  .cta-final p { font-size: 14px; color: rgba(255,255,255,0.75); margin-bottom: 28px; line-height: 1.7; }
+
+  /* DIVISOR */
+  .divisor { height: 8px; background: #FDE8EC; }
+
+  /* FADE IN */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">👑 Comunidade exclusiva</div>
+  <h1>Mulher<br><em>de Valor</em></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">A comunidade para mulheres cristãs que desejam restaurar o casamento, florescer como mulher virtuosa e viver com propósito.</p>
+
+  <div class="preco-box">
+    <div class="preco-de">De R$97/mês</div>
+    <div class="preco-por">por apenas</div>
+    <div class="preco-valor"><span>R$</span>47<span>/mês</span></div>
+    <div class="preco-info">ou R$397/ano — economize R$167</div>
+  </div>
+
+  <a href="#planos" class="btn-hero">👑 Quero fazer parte agora</a>
+  <p class="hero-garantia">🔒 7 dias de garantia · Cancele quando quiser</p>
+</section>
+
+<div class="divisor"></div>
+
+<!-- PARA QUEM É -->
+<section class="para-quem fade-in">
+  <div class="sec-badge">Para quem é</div>
+  <h2 class="sec-titulo">Esta comunidade<br>é para <em>você</em> que…</h2>
+
+  <div class="para-item"><span class="para-icon">💔</span><p>Sente que o casamento precisa de restauração e não quer lutar sozinha</p></div>
+  <div class="para-item"><span class="para-icon">🙏</span><p>Quer crescer espiritualmente e se tornar a mulher que Deus planejou</p></div>
+  <div class="para-item"><span class="para-icon">👑</span><p>Deseja construir uma rotina virtuosa com equilíbrio e propósito</p></div>
+  <div class="para-item"><span class="para-icon">💬</span><p>Precisa de um espaço seguro para compartilhar, aprender e crescer com outras mulheres</p></div>
+  <div class="para-item"><span class="para-icon">🌱</span><p>Está cansada de tentar sozinha e quer suporte, direção e comunidade</p></div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- O QUE VOCÊ RECEBE -->
+<section class="recebe fade-in">
+  <div class="sec-badge">Benefícios</div>
+  <h2 class="sec-titulo">O que você<br><em>recebe</em></h2>
+
+  <div class="recebe-grid">
+    <div class="recebe-card">
+      <div class="recebe-icon">🎥</div>
+      <div class="recebe-content">
+        <h3>2 encontros ao vivo por mês</h3>
+        <p>Aulas e conversas quinzenais com a Alinne sobre casamento, vida espiritual e mulher virtuosa — gravadas para você assistir quando quiser.</p>
+      </div>
+    </div>
+    <div class="recebe-card">
+      <div class="recebe-icon">💬</div>
+      <div class="recebe-content">
+        <h3>Grupo exclusivo no Telegram</h3>
+        <p>Uma comunidade de mulheres cristãs que lutam pelas mesmas coisas que você. Troca, apoio e oração mútua todos os dias.</p>
+      </div>
+    </div>
+    <div class="recebe-card">
+      <div class="recebe-icon">📖</div>
+      <div class="recebe-content">
+        <h3>Conteúdo gravado toda semana</h3>
+        <p>Biblioteca crescente com devocionais, ensinamentos práticos e materiais exclusivos sobre casamento e mulher virtuosa.</p>
+      </div>
+    </div>
+    <div class="recebe-card">
+      <div class="recebe-icon">🙏</div>
+      <div class="recebe-content">
+        <h3>Devocional mensal exclusivo</h3>
+        <p>Todo mês um material especial para aprofundar sua vida com Deus e aplicar na sua rotina e no seu casamento.</p>
+      </div>
+    </div>
+    <div class="recebe-card">
+      <div class="recebe-icon">🎁</div>
+      <div class="recebe-content">
+        <h3>Bônus de entrada</h3>
+        <p>Ao entrar, você recebe acesso imediato aos ebooks "De Sapo a Príncipe e Rei" e "Manual da Mulher Virtuosa".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERSÍCULO -->
+<div class="versiculo fade-in">
+  <p>"Mulher virtuosa, quem a achará? O seu valor muito excede ao de rubis."</p>
+  <span>Provérbios 31:10</span>
+</div>
+
+<!-- PLANOS -->
+<section id="planos" class="planos fade-in">
+  <div class="sec-badge">Escolha seu plano</div>
+  <h2 class="sec-titulo">Entre para a<br><em>Mulher de Valor</em></h2>
+
+  <div class="planos-grid">
+
+    <!-- PLANO MENSAL -->
+    <div class="plano-card">
+      <div class="plano-header mensal">
+        <div class="plano-nome">Plano Mensal</div>
+        <div class="plano-preco"><span>R$</span>47<span>/mês</span></div>
+        <div class="plano-info">Cancele quando quiser</div>
+      </div>
+      <div class="plano-body">
+        <div class="plano-item"><span class="plano-check">✓</span> 2 encontros ao vivo por mês</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Grupo exclusivo no Telegram</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Conteúdo gravado toda semana</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Devocional mensal exclusivo</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Bônus de entrada (2 ebooks)</div>
+        <a href="https://pay.kiwify.com.br/HgMPcGh" class="btn-plano mensal">Assinar por R$47/mês</a>
+      </div>
+    </div>
+
+    <!-- PLANO ANUAL -->
+    <div class="plano-card">
+      <div class="plano-header anual">
+        <div class="plano-nome">Plano Anual ⭐ Mais popular</div>
+        <div class="plano-preco"><span>R$</span>397<span>/ano</span></div>
+        <div class="plano-info">Equivale a R$33/mês — economize R$167</div>
+      </div>
+      <div class="plano-body">
+        <div class="plano-item"><span class="plano-check">✓</span> Tudo do plano mensal</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Acesso a cursos extras exclusivos <span class="plano-badge-destaque">BÔNUS</span></div>
+        <div class="plano-item"><span class="plano-check">✓</span> Checklist & Planner imprimível <span class="plano-badge-destaque">BÔNUS</span></div>
+        <div class="plano-item"><span class="plano-check">✓</span> Prioridade nas lives e perguntas</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Pagamento via PIX ou boleto</div>
+        <a href="https://pay.kiwify.com.br/HgMPcGh" class="btn-plano anual">👑 Assinar plano anual</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- SOBRE A ALINNE -->
+<section class="alinne fade-in">
+  <div class="sec-badge">Quem é Alinne</div>
+  <div class="alinne-card">
+    <div class="alinne-header">
+      <h3>Alinne Vieira</h3>
+      <p>@alinnevie · Esposa, mãe e empreendedora</p>
+    </div>
+    <div class="alinne-body">
+      <p>Sou esposa, mãe e uma mulher que acredita profundamente no poder de Deus para restaurar casamentos e transformar vidas.</p>
+      <p>Passei por um processo real de restauração no meu casamento — com dor, fé, erros e muita graça. E foi exatamente essa jornada que me deu autoridade para falar sobre o assunto.</p>
+      <p>Hoje, quero caminhar ao lado de mulheres como você, oferecendo suporte, direção e uma comunidade que entende o que você está vivendo.</p>
+      <p>A Comunidade Mulher de Valor nasceu desse desejo: que nenhuma mulher precise lutar sozinha. 🌸</p>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- FAQ -->
+<section class="faq fade-in">
+  <div class="sec-badge">Dúvidas</div>
+  <h2 class="sec-titulo" style="margin-bottom: 20px;">Perguntas<br><em>frequentes</em></h2>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">Quando acontecem os encontros ao vivo? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">Os encontros acontecem duas vezes por mês, quinzenalmente. As datas são anunciadas com antecedência no grupo do Telegram. Todas as lives ficam gravadas para você assistir quando quiser.</div></div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">Posso cancelar quando quiser? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">Sim! No plano mensal você cancela quando quiser, sem fidelidade. No plano anual, você cancela a renovação automática e mantém o acesso até o final do período pago.</div></div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">Tem garantia? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">Sim! Você tem 7 dias de garantia. Se não se sentir bem com o conteúdo ou a metodologia, devolvemos 100% do seu dinheiro sem perguntas.</div></div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">É só para mulheres com casamento em crise? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">Não! A comunidade é para toda mulher cristã que quer crescer — seja para fortalecer o casamento, desenvolver a virtude, aprofundar a vida espiritual ou simplesmente não caminhar sozinha.</div></div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">Como acesso o conteúdo? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">Após a compra você recebe acesso à área de membros com todos os conteúdos gravados, e também é adicionada ao grupo exclusivo no Telegram.</div></div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final fade-in">
+  <h2>Você não precisa<br>caminhar <em>sozinha</em> 🌸</h2>
+  <p>Junte-se à Comunidade Mulher de Valor e tenha ao seu lado uma irmã que entende o que você está vivendo — e sabe o caminho para a transformação.</p>
+  <a href="#planos" class="btn-hero" style="max-width: 320px; margin: 0 auto 12px; display: block;">👑 Quero entrar agora</a>
+  <p style="font-size: 12px; color: rgba(255,255,255,0.4);">7 dias de garantia · Cancele quando quiser</p>
+</section>
+
+<script>
+  // Fade in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // FAQ
+  function toggleFaq(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+</script>
+</body>
+</html>
