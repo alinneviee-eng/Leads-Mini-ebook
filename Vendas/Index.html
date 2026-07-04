@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combo Transformação — Alinne Vieira</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa: #F2A4A4;
+    --vinho: #7B2D3E;
+    --vinho-light: #C4566A;
+    --vinho-deep: #3A0A18;
+    --creme: #FFF8F5;
+    --dourado: #C9A96E;
+    --texto: #3A1A20;
+    --texto-suave: #7A4A52;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    max-width: 430px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* BARRA DE URGÊNCIA */
+  .urgencia {
+    background: var(--vinho-deep);
+    color: #F0BFBC;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(160deg, var(--vinho-deep) 0%, var(--vinho) 60%, var(--vinho-light) 100%);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '♛';
+    position: absolute; font-size: 280px;
+    color: rgba(255,255,255,0.04);
+    top: -50px; right: -50px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(201,169,110,0.2);
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 50px; padding: 6px 18px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--dourado); margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px; color: white; line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: italic; color: #F0BFBC; }
+  .hero-sub {
+    font-size: 14px; color: rgba(255,255,255,0.75);
+    line-height: 1.7; margin-bottom: 28px;
+  }
+
+  /* COMBO VISUAL */
+  .combo-visual {
+    display: flex; flex-direction: column; gap: 8px;
+    margin-bottom: 28px;
+  }
+  .combo-item {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px; padding: 12px 16px;
+    display: flex; align-items: center; gap: 12px;
+    text-align: left;
+  }
+  .combo-item-icon { font-size: 24px; flex-shrink: 0; }
+  .combo-item-info h4 { font-size: 13px; font-weight: 800; color: white; }
+  .combo-item-info p { font-size: 11px; color: rgba(255,255,255,0.6); }
+  .combo-item-preco {
+    margin-left: auto; font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    text-decoration: line-through; flex-shrink: 0;
+  }
+
+  /* PREÇO */
+  .preco-box {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px; padding: 24px;
+    margin-bottom: 20px;
+  }
+  .preco-tudo { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .preco-de {
+    font-size: 14px; color: rgba(255,255,255,0.4);
+    text-decoration: line-through;
+  }
+  .preco-valor {
+    font-size: 52px; font-weight: 800; color: white; line-height: 1;
+  }
+  .preco-valor span { font-size: 22px; font-weight: 400; }
+  .preco-parcela { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 6px; }
+
+  .btn-comprar {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--dourado), #E8C99A);
+    color: var(--vinho-deep); font-family: 'Nunito', sans-serif;
+    font-size: 16px; font-weight: 800;
+    padding: 18px 24px; border-radius: 50px;
+    text-decoration: none; border: none; cursor: pointer;
+    box-shadow: 0 8px 24px rgba(201,169,110,0.4);
+    transition: transform 0.2s; margin-bottom: 12px;
+  }
+  .btn-comprar:active { transform: scale(0.98); }
+  .hero-garantia { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+  /* DIVISOR */
+  .divisor { height: 8px; background: #FDE8EC; }
+
+  /* SEÇÕES */
+  .secao { padding: 40px 20px; }
+  .secao.branca { background: white; }
+  .secao.creme { background: var(--creme); }
+
+  .sec-badge {
+    display: inline-block; background: #FDE8EC;
+    color: var(--vinho-light); font-size: 10px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 50px; margin-bottom: 12px;
+  }
+  .sec-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--vinho); line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .sec-titulo em { font-style: italic; color: var(--vinho-light); }
+
+  /* PARA QUEM É */
+  .dor-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 12px 0; border-bottom: 1px solid #FDE8EC;
+  }
+  .dor-item:last-child { border-bottom: none; }
+  .dor-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .dor-item p { font-size: 14px; line-height: 1.6; color: var(--texto); }
+
+  /* EBOOKS DETALHES */
+  .ebook-card {
+    background: white; border-radius: 20px;
+    overflow: hidden; margin-bottom: 16px;
+    box-shadow: 0 4px 20px rgba(123,45,62,0.1);
+    border: 2px solid #FDE8EC;
+  }
+  .ebook-header {
+    padding: 20px; position: relative; overflow: hidden;
+  }
+  .ebook-header.sapo { background: linear-gradient(135deg, var(--vinho-deep), var(--vinho)); }
+  .ebook-header.casamento { background: linear-gradient(135deg, #4A1A2A, #8B3050); }
+  .ebook-header.virtuosa { background: linear-gradient(135deg, #FDDDE6, #F7B8C4); }
+  .ebook-header.checklist { background: linear-gradient(135deg, #F0EBF7, #E0D0EE); }
+  .ebook-num {
+    font-size: 10px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .ebook-header.sapo .ebook-num,
+  .ebook-header.casamento .ebook-num { color: rgba(240,191,188,0.7); }
+  .ebook-header.virtuosa .ebook-num { color: var(--vinho-light); }
+  .ebook-header.checklist .ebook-num { color: #6B3A8A; }
+  .ebook-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; line-height: 1.2;
+  }
+  .ebook-header.sapo .ebook-titulo,
+  .ebook-header.casamento .ebook-titulo { color: white; }
+  .ebook-header.virtuosa .ebook-titulo { color: var(--vinho); }
+  .ebook-header.checklist .ebook-titulo { color: #5A2A7A; }
+  .ebook-body { padding: 18px; }
+  .ebook-desc { font-size: 14px; color: var(--texto-suave); line-height: 1.7; margin-bottom: 14px; }
+  .ebook-topicos { display: flex; flex-direction: column; gap: 6px; }
+  .ebook-topico {
+    display: flex; gap: 8px; align-items: flex-start;
+    font-size: 13px; color: var(--texto);
+  }
+  .ebook-topico::before {
+    content: '✦'; color: var(--rosa); flex-shrink: 0;
+    font-size: 10px; margin-top: 3px;
+  }
+
+  /* VERSICULO */
+  .versiculo {
+    margin: 0; padding: 32px 24px;
+    background: linear-gradient(135deg, var(--vinho-deep), var(--vinho));
+    text-align: center;
+  }
+  .versiculo p {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 16px; color: #F0BFBC; line-height: 1.7; margin-bottom: 8px;
+  }
+  .versiculo span {
+    font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(201,169,110,0.7);
+  }
+
+  /* SOBRE ALINNE */
+  .alinne-card {
+    background: var(--creme); border-radius: 20px;
+    overflow: hidden; box-shadow: 0 4px 20px rgba(123,45,62,0.08);
+    border: 2px solid #FDE8EC;
+  }
+  .alinne-header {
+    background: linear-gradient(135deg, var(--vinho-deep), var(--vinho));
+    padding: 24px; text-align: center;
+  }
+  .alinne-header h3 {
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 22px; font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .alinne-header p { font-size: 12px; color: rgba(255,255,255,0.6); }
+  .alinne-body { padding: 20px; }
+  .alinne-body p {
+    font-size: 14px; line-height: 1.8; color: var(--texto-suave); margin-bottom: 10px;
+  }
+
+  /* GARANTIA */
+  .garantia {
+    background: white; border-radius: 20px;
+    padding: 24px; text-align: center;
+    border: 2px solid #FDE8EC;
+    box-shadow: 0 4px 20px rgba(123,45,62,0.08);
+  }
+  .garantia-icon { font-size: 48px; margin-bottom: 12px; display: block; }
+  .garantia h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--vinho); margin-bottom: 10px;
+  }
+  .garantia p { font-size: 14px; color: var(--texto-suave); line-height: 1.7; }
+
+  /* DEPOIMENTOS */
+  .depo-card {
+    background: white; border-radius: 16px;
+    padding: 20px; margin-bottom: 12px;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.07);
+    border-left: 4px solid var(--rosa);
+  }
+  .depo-texto {
+    font-size: 14px; font-style: italic;
+    color: var(--texto); line-height: 1.7; margin-bottom: 12px;
+  }
+  .depo-autor {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .depo-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--vinho), var(--rosa));
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 800; font-size: 14px; flex-shrink: 0;
+  }
+  .depo-nome { font-size: 13px; font-weight: 700; color: var(--vinho); }
+  .depo-stars { font-size: 11px; color: var(--dourado); }
+
+  /* FAQ */
+  .faq-item {
+    background: white; border-radius: 14px;
+    margin-bottom: 10px; overflow: hidden;
+    border: 1.5px solid #FDE8EC;
+  }
+  .faq-pergunta {
+    padding: 16px 18px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 14px; font-weight: 700; color: var(--vinho);
+  }
+  .faq-arrow { font-size: 12px; color: var(--rosa); transition: transform 0.3s; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+  .faq-resposta { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .faq-item.open .faq-resposta { max-height: 300px; }
+  .faq-content {
+    padding: 0 18px 16px; padding-top: 12px;
+    font-size: 14px; line-height: 1.7; color: var(--texto-suave);
+    border-top: 1px solid #FDE8EC;
+  }
+
+  /* CTA FINAL */
+  .cta-final {
+    background: linear-gradient(160deg, var(--vinho-deep), var(--vinho));
+    padding: 48px 24px; text-align: center;
+  }
+  .cta-final h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; color: white; line-height: 1.2; margin-bottom: 16px;
+  }
+  .cta-final h2 em { font-style: italic; color: #F0BFBC; }
+  .cta-final p { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 28px; line-height: 1.7; }
+
+  /* FADE IN */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- URGÊNCIA -->
+<div class="urgencia">🔥 Oferta de lançamento — Preço especial por tempo limitado!</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">✨ Combo completo de transformação</div>
+  <h1>Tudo que você precisa para <em>restaurar e florescer</em></h1>
+  <p class="hero-sub">4 materiais poderosos para transformar seu casamento e sua vida — por um único valor acessível.</p>
+
+  <div class="combo-visual">
+    <div class="combo-item">
+      <span class="combo-item-icon">👑</span>
+      <div class="combo-item-info">
+        <h4>De Sapo a Príncipe e Rei</h4>
+        <p>A história real de restauração</p>
+      </div>
+      <span class="combo-item-preco">R$47</span>
+    </div>
+    <div class="combo-item">
+      <span class="combo-item-icon">💍</span>
+      <div class="combo-item-info">
+        <h4>Manual do Casamento Restaurado</h4>
+        <p>Guia prático para restaurar</p>
+      </div>
+      <span class="combo-item-preco">R$37</span>
+    </div>
+    <div class="combo-item">
+      <span class="combo-item-icon">🌸</span>
+      <div class="combo-item-info">
+        <h4>Manual da Mulher Virtuosa</h4>
+        <p>Rotina, lar, fé e propósito</p>
+      </div>
+      <span class="combo-item-preco">R$37</span>
+    </div>
+    <div class="combo-item">
+      <span class="combo-item-icon">📋</span>
+      <div class="combo-item-info">
+        <h4>Checklist & Planner Interativo</h4>
+        <p>Bônus exclusivo</p>
+      </div>
+      <span class="combo-item-preco">R$27</span>
+    </div>
+  </div>
+
+  <div class="preco-box">
+    <div class="preco-tudo">Tudo isso por apenas</div>
+    <div class="preco-de">De R$148,00</div>
+    <div class="preco-valor"><span>R$</span>49<span>,90</span></div>
+    <div class="preco-parcela">ou 5x de R$9,98 no cartão</div>
+  </div>
+
+  <a href="https://pay.kiwify.com.br/HgMPcGh" class="btn-comprar">👑 Quero o combo agora</a>
+  <p class="hero-garantia">🔒 Pagamento seguro · 7 dias de garantia</p>
+</section>
+
+<div class="divisor"></div>
+
+<!-- PARA QUEM É -->
+<section class="secao branca fade-in">
+  <div class="sec-badge">Para quem é</div>
+  <h2 class="sec-titulo">Esse combo é para <em>você</em> que…</h2>
+
+  <div class="dor-item"><span class="dor-icon">💔</span><p>Sente que o casamento esfriou e não sabe como reconectar</p></div>
+  <div class="dor-item"><span class="dor-icon">😔</span><p>Passou por traição ou infidelidade e quer entender como restaurar</p></div>
+  <div class="dor-item"><span class="dor-icon">🙏</span><p>Acredita que Deus pode restaurar o que parece perdido, mas precisa de direção</p></div>
+  <div class="dor-item"><span class="dor-icon">🔄</span><p>Quer sair do papel de vítima e assumir sua responsabilidade na transformação</p></div>
+  <div class="dor-item"><span class="dor-icon">👑</span><p>Deseja se tornar a mulher virtuosa que Deus planejou — dentro e fora do casamento</p></div>
+  <div class="dor-item"><span class="dor-icon">🌱</span><p>Quer uma rotina com propósito, equilíbrio e fé no centro</p></div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- O QUE ESTÁ INCLUÍDO -->
+<section class="secao creme fade-in">
+  <div class="sec-badge">O que você recebe</div>
+  <h2 class="sec-titulo">4 materiais para sua <em>transformação</em></h2>
+
+  <!-- EBOOK 1 -->
+  <div class="ebook-card">
+    <div class="ebook-header sapo">
+      <div class="ebook-num">Ebook 01</div>
+      <div class="ebook-titulo">De Sapo a<br>Príncipe e Rei</div>
+    </div>
+    <div class="ebook-body">
+      <p class="ebook-desc">A história real de como Alinne restaurou seu casamento — com um homem ríspido, explosivo e infiel — usando amor, paciência, fé e posicionamento correto.</p>
+      <div class="ebook-topicos">
+        <div class="ebook-topico">As raízes invisíveis da dor masculina</div>
+        <div class="ebook-topico">O processo real de restauração</div>
+        <div class="ebook-topico">Como lutar espiritualmente pelo casamento</div>
+        <div class="ebook-topico">Estabelecendo limites saudáveis</div>
+        <div class="ebook-topico">O poder do perdão e como construir um novo começo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EBOOK 2 -->
+  <div class="ebook-card">
+    <div class="ebook-header casamento">
+      <div class="ebook-num">Ebook 02</div>
+      <div class="ebook-titulo">Manual do<br>Casamento Restaurado</div>
+    </div>
+    <div class="ebook-body">
+      <p class="ebook-desc">Um guia prático com ferramentas, estratégias e princípios bíblicos para restaurar e fortalecer o casamento no dia a dia.</p>
+      <div class="ebook-topicos">
+        <div class="ebook-topico">Como se posicionar corretamente durante a crise</div>
+        <div class="ebook-topico">Ferramentas de comunicação que funcionam</div>
+        <div class="ebook-topico">Sinais de que Deus está trabalhando</div>
+        <div class="ebook-topico">Como reconstruir a confiança perdida</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EBOOK 3 -->
+  <div class="ebook-card">
+    <div class="ebook-header virtuosa">
+      <div class="ebook-num">Ebook 03</div>
+      <div class="ebook-titulo">Manual da<br>Mulher Virtuosa</div>
+    </div>
+    <div class="ebook-body">
+      <p class="ebook-desc">Um guia completo para alinhar sua rotina aos planos de Deus — vida espiritual, lar, maternidade, finanças e autocuidado.</p>
+      <div class="ebook-topicos">
+        <div class="ebook-topico">Como priorizar o devocional diário</div>
+        <div class="ebook-topico">Rotina virtuosa e cronograma de limpeza</div>
+        <div class="ebook-topico">Maternidade com propósito e tarefas por idade</div>
+        <div class="ebook-topico">Finanças: orçamento 50-30-10-10</div>
+        <div class="ebook-topico">Autocuidado sem culpa</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BÔNUS -->
+  <div class="ebook-card">
+    <div class="ebook-header checklist">
+      <div class="ebook-num">🎁 Bônus exclusivo</div>
+      <div class="ebook-titulo">Checklist & Planner<br>Interativo</div>
+    </div>
+    <div class="ebook-body">
+      <p class="ebook-desc">Material interativo que funciona como um app no seu celular — checklists clicáveis, planner semanal e diário de anotações para colocar tudo em prática.</p>
+      <div class="ebook-topicos">
+        <div class="ebook-topico">Checklist de vida espiritual diário e semanal</div>
+        <div class="ebook-topico">Checklist de casamento e bondade diária</div>
+        <div class="ebook-topico">Planner semanal com tarefas clicáveis</div>
+        <div class="ebook-topico">Diário interativo editável direto no celular</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERSÍCULO -->
+<div class="versiculo fade-in">
+  <p>"Mulher virtuosa, quem a achará? O seu valor muito excede ao de rubis."</p>
+  <span>Provérbios 31:10</span>
+</div>
+
+<!-- SOBRE ALINNE -->
+<section class="secao branca fade-in">
+  <div class="sec-badge">Quem é Alinne</div>
+  <div class="alinne-card">
+    <div class="alinne-header">
+      <h3>Alinne Vieira</h3>
+      <p>@alinnevie · Esposa, mãe e empreendedora</p>
+    </div>
+    <div class="alinne-body">
+      <p>Não escrevo sobre o que estudei em livros. Escrevo sobre o que vivi.</p>
+      <p>Passei por traição, por noites de choro, por momentos em que desistir parecia a única saída. E foi exatamente nesse processo que aprendi as ferramentas que hoje compartilho com você.</p>
+      <p>Hoje meu casamento é restaurado, minha família está de pé, e meu coração arde para ajudar outras mulheres a encontrar o mesmo caminho — com fé, sabedoria e posicionamento correto.</p>
+      <p>Esses materiais são o meu coração aberto para você. 🌸</p>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- GARANTIA -->
+<section class="secao creme fade-in">
+  <div class="garantia">
+    <span class="garantia-icon">🛡️</span>
+    <h3>7 dias de garantia total</h3>
+    <p>Se por qualquer motivo você não ficar satisfeita com os materiais nos primeiros 7 dias, devolvemos 100% do seu dinheiro — sem perguntas, sem burocracia.</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- DEPOIMENTOS -->
+<section class="secao branca fade-in">
+  <div class="sec-badge">Resultados reais</div>
+  <h2 class="sec-titulo">O que dizem as <em>mulheres</em></h2>
+
+  <div class="depo-card">
+    <p class="depo-texto">"Eu estava prestes a desistir do meu casamento. Após ler o ebook da Alinne, entendi que a luta não era contra meu marido, mas contra forças espirituais. Isso mudou tudo na minha postura."</p>
+    <div class="depo-autor">
+      <div class="depo-avatar">M</div>
+      <div>
+        <div class="depo-nome">Marcela S.</div>
+        <div class="depo-stars">⭐⭐⭐⭐⭐</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="depo-card">
+    <p class="depo-texto">"O Manual da Mulher Virtuosa transformou minha rotina. Nunca tinha conseguido manter um devocional consistente. Hoje é parte do meu dia e minha família sentiu a diferença."</p>
+    <div class="depo-autor">
+      <div class="depo-avatar">J</div>
+      <div>
+        <div class="depo-nome">Juliana R.</div>
+        <div class="depo-stars">⭐⭐⭐⭐⭐</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="depo-card">
+    <p class="depo-texto">"A Alinne fala com uma autoridade que só vem de quem viveu. Não é teoria. É experiência real. Me senti acompanhada em cada página."</p>
+    <div class="depo-autor">
+      <div class="depo-avatar">P</div>
+      <div>
+        <div class="depo-nome">Patricia L.</div>
+        <div class="depo-stars">⭐⭐⭐⭐⭐</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- FAQ -->
+<section class="secao creme fade-in">
+  <div class="sec-badge">Dúvidas</div>
+  <h2 class="sec-titulo" style="margin-bottom: 20px;">Perguntas <em>frequentes</em></h2>
+
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">Como recebo os materiais? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">Imediatamente após a confirmação do pagamento, você recebe acesso à área de membros com todos os 4 materiais disponíveis para acessar no celular ou computador.</div></div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">Os materiais ficam disponíveis por quanto tempo? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">O acesso é vitalício! Você pode acessar quando quiser, quantas vezes quiser.</div></div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">Funciona para casamento que parece sem solução? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">O casamento da Alinne também parecia sem solução. Ela passou por traição, distância emocional e momentos de quase desistência. Os materiais foram escritos exatamente para quem está nesse lugar difícil.</div></div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">E se eu não gostar? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">Você tem 7 dias de garantia total. Se não ficar satisfeita por qualquer motivo, devolvemos 100% do seu dinheiro sem perguntas.</div></div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">Posso parcelar? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">Sim! Você pode parcelar em até 5x no cartão de crédito, ficando em parcelas de R$9,98.</div></div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final fade-in">
+  <h2>A transformação começa<br><em>com uma decisão</em> 🌸</h2>
+  <p>Você chegou até aqui porque algo dentro de você sabe que é possível. Não deixe esse momento passar. Dê o primeiro passo hoje.</p>
+  <a href="https://pay.kiwify.com.br/HgMPcGh" class="btn-comprar" style="max-width: 320px; margin: 0 auto 16px; display: block;">👑 Quero o combo por R$49,90</a>
+  <p style="font-size: 12px; color: rgba(255,255,255,0.4);">🔒 Pagamento seguro · 7 dias de garantia · Acesso imediato</p>
+</section>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  function toggleFaq(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(f => f.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+</script>
+</body>
+</html>
