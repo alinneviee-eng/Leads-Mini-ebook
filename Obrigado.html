@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -9,189 +8,178 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-```
-html { scroll-behavior: smooth; height: 100%; }
+    html { scroll-behavior: smooth; height: 100%; }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: #FFF8F7;
-  color: #3A1014;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 24px;
-  text-align: center;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #FFF8F7;
+      color: #3A1014;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+    }
 
-.container {
-  max-width: 560px;
-  width: 100%;
-}
+    .container {
+      max-width: 560px;
+      width: 100%;
+    }
 
-.check {
-  font-size: 56px;
-  margin-bottom: 16px;
-  animation: pop 0.5s ease;
-}
+    .check {
+      font-size: 56px;
+      margin-bottom: 16px;
+      animation: pop 0.5s ease;
+    }
 
-@keyframes pop {
-  from { transform: scale(0); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
-}
+    @keyframes pop {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
 
-h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(32px, 7vw, 52px);
-  font-weight: 300;
-  line-height: 1.15;
-  color: #5B1A2A;
-  margin-bottom: 12px;
-}
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 7vw, 52px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: #5B1A2A;
+      margin-bottom: 12px;
+    }
 
-h1 em { font-style: italic; color: #A8344A; }
+    h1 em { font-style: italic; color: #A8344A; }
 
-.subtitle {
-  font-size: 16px;
-  color: #6B2A2A;
-  line-height: 1.65;
-  margin-bottom: 40px;
-}
+    .subtitle {
+      font-size: 16px;
+      color: #6B2A2A;
+      line-height: 1.65;
+      margin-bottom: 40px;
+    }
 
-.divider {
-  width: 48px;
-  height: 1px;
-  background: #A8344A;
-  margin: 0 auto 40px;
-  opacity: 0.4;
-}
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: #A8344A;
+      margin: 0 auto 40px;
+      opacity: 0.4;
+    }
 
-.btn-primary {
-  display: block;
-  width: 100%;
-  background: #5B1A2A;
-  color: #F9F4EE;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 18px 24px;
-  border-radius: 4px;
-  text-decoration: none;
-  margin-bottom: 14px;
-  transition: background 0.2s, transform 0.15s;
-}
+    .btn-primary {
+      display: block;
+      width: 100%;
+      background: #5B1A2A;
+      color: #F9F4EE;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 18px 24px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-bottom: 14px;
+      transition: background 0.2s, transform 0.15s;
+    }
 
-.btn-primary:hover {
-  background: #3A0D18;
-  transform: translateY(-2px);
-}
+    .btn-primary:hover {
+      background: #3A0D18;
+      transform: translateY(-2px);
+    }
 
-.btn-secondary {
-  display: block;
-  width: 100%;
-  background: #2E7D32;
-  color: #FFFFFF;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 18px 24px;
-  border-radius: 4px;
-  text-decoration: none;
-  margin-bottom: 32px;
-  transition: background 0.2s, transform 0.15s;
-}
+    .btn-secondary {
+      display: block;
+      width: 100%;
+      background: #2E7D32;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 18px 24px;
+      border-radius: 4px;
+      text-decoration: none;
+      margin-bottom: 32px;
+      transition: background 0.2s, transform 0.15s;
+    }
 
-.btn-secondary:hover {
-  background: #1B5E20;
-  transform: translateY(-2px);
-}
+    .btn-secondary:hover {
+      background: #1B5E20;
+      transform: translateY(-2px);
+    }
 
-.note {
-  font-size: 13px;
-  color: #9A6A6A;
-  line-height: 1.6;
-  margin-top: 8px;
-}
+    .note {
+      font-size: 13px;
+      color: #9A6A6A;
+      line-height: 1.6;
+      margin-top: 8px;
+    }
 
-.card {
-  background: #FBEAE8;
-  border: 1px solid rgba(168,52,74,0.2);
-  border-radius: 4px;
-  padding: 28px 24px;
-  margin-bottom: 32px;
-  text-align: left;
-}
+    .card {
+      background: #FBEAE8;
+      border: 1px solid rgba(168,52,74,0.2);
+      border-radius: 4px;
+      padding: 28px 24px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
 
-.card h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
-  font-weight: 400;
-  color: #5B1A2A;
-  margin-bottom: 10px;
-}
+    .card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #5B1A2A;
+      margin-bottom: 10px;
+    }
 
-.card p {
-  font-size: 14px;
-  color: #6B2A2A;
-  line-height: 1.65;
-}
+    .card p {
+      font-size: 14px;
+      color: #6B2A2A;
+      line-height: 1.65;
+    }
 
-footer {
-  margin-top: 40px;
-  font-size: 12px;
-  color: #C0A0A0;
-}
-```
-
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #C0A0A0;
+    }
   </style>
 </head>
 <body>
   <div class="container">
 
-```
-<div class="check">🎁</div>
+    <div class="check">🎁</div>
 
-<h1>Seu presente<br>está <em>aqui!</em></h1>
+    <h1>Seu presente<br>está <em>aqui!</em></h1>
 
-<p class="subtitle">
-  Que alegria ter você aqui, mulher!<br>
-  Clique abaixo e acesse o seu mini ebook gratuitamente agora.
-</p>
+    <p class="subtitle">
+      Que alegria ter você aqui, mulher!<br>
+      Clique abaixo e acesse o seu mini ebook gratuitamente agora.
+    </p>
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
-<div class="card">
-  <h2>📖 Seu mini ebook gratuito</h2>
-  <p>"7 Sinais de que Você Está Aceitando Menos do que Deus Tem para Seus Relacionamentos" — leia com calma e permita que Deus fale ao seu coração.</p>
-</div>
+    <div class="card">
+      <h2>📖 Seu mini ebook gratuito</h2>
+      <p>"7 Sinais de que Você Está Aceitando Menos do que Deus Tem para Seus Relacionamentos" — leia com calma e permita que Deus fale ao seu coração.</p>
+    </div>
 
-<a href="https://drive.google.com/file/d/1XOYBC_wsLTMPew9nz3MgiP5UU-wPWl87/view?usp=drivesdk" class="btn-primary" target="_blank">
-  📥 Baixar meu mini ebook grátis
-</a>
+    <a href="https://drive.google.com/file/d/1XOYBC_wsLTMPew9nz3MgiP5UU-wPWl87/view?usp=drivesdk" class="btn-primary" target="_blank">
+      📥 Baixar meu mini ebook grátis
+    </a>
 
-<a href="https://pay.kiwify.com.br/HgMPcGh" class="btn-secondary" target="_blank">
-  👑 Quero conhecer o ebook completo →
-</a>
+    <a href="https://desapoaprincipeerei.netlify.app/vendas" class="btn-secondary" target="_blank">
+      👑 Quero conhecer o ebook completo →
+    </a>
 
-<p class="note">
-  Após a leitura, se sentir que está pronta para dar o próximo passo,<br>
-  o ebook <em>De Sapo a Príncipe e Rei</em> foi feito para você.
-</p>
+    <p class="note">
+      Após a leitura, se sentir que está pronta para dar o próximo passo,<br>
+      o ebook <em>De Sapo a Príncipe e Rei</em> foi feito para você.
+    </p>
 
-<footer>© 2026 · De Sapo a Príncipe e Rei · Com carinho, Alinne</footer>
-```
+    <footer>© 2026 · De Sapo a Príncipe e Rei · Com carinho, Alinne</footer>
 
   </div>
 </body>
 </html>
-
-
-
-
-
-
