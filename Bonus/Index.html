@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist & Planner — Mulher Virtuosa e Casamento Restaurado</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa: #F2A4A4;
+    --vinho: #7B2D3E;
+    --vinho-light: #C4566A;
+    --creme: #FFF8F5;
+    --texto: #3A1A20;
+    --texto-suave: #7A4A52;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    max-width: 430px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: fixed; top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--vinho), var(--rosa));
+    z-index: 999;
+    transition: width 0.1s;
+  }
+
+  /* BACK TO TOP */
+  .back-top {
+    position: fixed; bottom: 24px; right: 20px;
+    width: 44px; height: 44px;
+    background: var(--vinho); color: white;
+    border: none; border-radius: 50%;
+    font-size: 18px; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(123,45,62,0.3);
+    display: none; align-items: center; justify-content: center;
+    z-index: 998;
+  }
+  .back-top.visible { display: flex; }
+
+  /* CAPA */
+  .capa {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #FDDDE6 0%, #F7B8C4 50%, #E8899A 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 48px 28px 80px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .capa::before {
+    content: '✿'; position: absolute;
+    font-size: 280px; color: rgba(255,255,255,0.12);
+    top: -50px; right: -50px; pointer-events: none;
+  }
+  .capa-badge {
+    background: rgba(255,255,255,0.3);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 50px; padding: 6px 18px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--vinho); margin-bottom: 24px;
+  }
+  .capa h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px; color: white; line-height: 1.1;
+    margin-bottom: 8px;
+    text-shadow: 0 4px 24px rgba(123,45,62,0.2);
+  }
+  .capa h1 em { font-style: italic; color: #FFF0F3; display: block; }
+  .capa-sub {
+    font-size: 13px; color: rgba(255,255,255,0.8);
+    margin: 16px 0 24px; line-height: 1.6; font-style: italic;
+  }
+  .capa-autor {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+  .scroll-hint {
+    position: absolute; bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.5); font-size: 11px; text-align: center;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ÍNDICE */
+  .indice { background: white; padding: 28px 20px; border-bottom: 2px solid #FDE8EC; }
+  .indice-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--vinho); margin-bottom: 16px; }
+  .indice-list { display: flex; flex-direction: column; gap: 8px; }
+  .indice-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; background: var(--creme);
+    border-radius: 12px; text-decoration: none;
+    color: var(--texto); font-weight: 600; font-size: 14px;
+    border: 1.5px solid transparent; transition: all 0.2s;
+  }
+  .indice-item:active { background: #FDDDE6; border-color: var(--rosa); }
+  .indice-emoji { font-size: 20px; min-width: 32px; text-align: center; }
+
+  /* SEÇÕES */
+  .secao { padding: 0 0 40px; }
+  .sec-cover {
+    background: linear-gradient(160deg, #FDDDE6 0%, #F8D0D6 100%);
+    padding: 40px 24px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .sec-cover::before {
+    content: '✦'; position: absolute;
+    font-size: 140px; color: rgba(255,255,255,0.2);
+    top: -10px; right: -10px;
+  }
+  .sec-badge {
+    display: inline-block; background: rgba(123,45,62,0.1);
+    color: var(--vinho-light); font-size: 10px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 50px; margin-bottom: 10px;
+  }
+  .sec-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--vinho); line-height: 1.2; position: relative;
+  }
+  .sec-titulo em { font-style: italic; color: var(--vinho-light); }
+
+  /* TÍTULO INTERNO */
+  .titulo-int {
+    font-size: 11px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--texto-suave);
+    padding: 20px 20px 8px; opacity: 0.6;
+  }
+
+  /* CHECKLIST INTERATIVO */
+  .checklist { padding: 0 16px; display: flex; flex-direction: column; gap: 8px; margin: 8px 0; }
+  .check-row {
+    display: flex; align-items: center; gap: 12px;
+    background: white; border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 8px rgba(123,45,62,0.06);
+    cursor: pointer; transition: all 0.2s;
+    border: 1.5px solid transparent;
+  }
+  .check-row.checked {
+    background: #FDE8EC; border-color: var(--rosa);
+    text-decoration: line-through;
+  }
+  .check-row.checked .check-label { color: var(--texto-suave); }
+  .check-box {
+    width: 22px; height: 22px; min-width: 22px;
+    border: 2px solid var(--rosa); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; transition: all 0.2s;
+    background: white;
+  }
+  .check-row.checked .check-box {
+    background: var(--vinho-light); border-color: var(--vinho-light);
+    color: white;
+  }
+  .check-label { font-size: 14px; color: var(--texto); line-height: 1.4; flex: 1; }
+
+  /* PLANNER SEMANAL */
+  .planner { padding: 0 16px; margin: 8px 0; }
+  .planner-card {
+    background: white; border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+    margin-bottom: 10px;
+  }
+  .planner-dia {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .planner-dia:active { background: #FDE8EC; }
+  .dia-nome {
+    font-size: 13px; font-weight: 800;
+    color: white; background: var(--vinho);
+    padding: 4px 12px; border-radius: 50px;
+    min-width: 80px; text-align: center;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .dia-foco {
+    font-size: 13px; font-weight: 600;
+    color: var(--texto-suave); flex: 1;
+  }
+  .dia-arrow { font-size: 12px; color: var(--rosa); transition: transform 0.3s; }
+  .planner-card.open .dia-arrow { transform: rotate(180deg); }
+  .planner-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .planner-card.open .planner-body { max-height: 600px; }
+  .planner-content { border-top: 1px solid #FDE8EC; padding: 14px 16px; }
+  .planner-tarefa {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid #FDE8EC;
+    cursor: pointer;
+  }
+  .planner-tarefa:last-child { border-bottom: none; }
+  .p-check {
+    width: 18px; height: 18px; min-width: 18px;
+    border: 2px solid var(--rosa); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; background: white; transition: all 0.2s;
+    margin-top: 1px;
+  }
+  .planner-tarefa.done .p-check { background: var(--vinho-light); border-color: var(--vinho-light); color: white; }
+  .planner-tarefa.done .p-text { text-decoration: line-through; color: var(--texto-suave); }
+  .p-text { font-size: 13px; color: var(--texto); line-height: 1.5; }
+  .p-tag {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    padding: 2px 8px; border-radius: 50px; margin-left: 4px;
+  }
+  .p-tag.esp { background: #FDE8EC; color: var(--vinho); }
+  .p-tag.cas { background: #F0EBF7; color: #6B3A8A; }
+
+  /* NOTAS */
+  .notas { padding: 0 16px; margin: 8px 0; }
+  .nota-card {
+    background: white; border-radius: 16px;
+    padding: 20px; margin-bottom: 10px;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+    border: 2px solid #FDE8EC; position: relative; overflow: hidden;
+  }
+  .nota-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: linear-gradient(90deg, var(--vinho), var(--rosa));
+  }
+  .nota-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; color: var(--vinho); margin-bottom: 14px;
+  }
+  .nota-campo { margin-bottom: 14px; }
+  .nota-label {
+    font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--vinho-light);
+    margin-bottom: 6px; display: block;
+  }
+  .nota-input {
+    width: 100%; border: none;
+    border-bottom: 1.5px solid #FDE8EC;
+    padding: 8px 0; font-family: 'Nunito', sans-serif;
+    font-size: 14px; color: var(--texto); background: transparent;
+    outline: none; transition: border-color 0.2s;
+  }
+  .nota-input:focus { border-bottom-color: var(--rosa); }
+  .nota-textarea {
+    width: 100%; border: 1.5px solid #FDE8EC;
+    border-radius: 10px; padding: 10px 12px;
+    font-family: 'Nunito', sans-serif; font-size: 13px;
+    color: var(--texto); background: var(--creme);
+    outline: none; resize: none; min-height: 70px;
+    transition: border-color 0.2s;
+  }
+  .nota-textarea:focus { border-color: var(--rosa); }
+
+  /* VERSÍCULO */
+  .versiculo {
+    margin: 16px 16px;
+    background: linear-gradient(135deg, #3A0A18, #7B2D3E);
+    border-radius: 16px; padding: 20px; text-align: center;
+  }
+  .versiculo p {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 14px; color: #F0BFBC; line-height: 1.7; margin-bottom: 8px;
+  }
+  .versiculo span {
+    font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(240,191,188,0.6);
+  }
+
+  /* HIGHLIGHT */
+  .highlight {
+    margin: 16px 16px; background: white;
+    border-radius: 16px; padding: 18px;
+    border-left: 4px solid var(--rosa);
+    box-shadow: 0 2px 12px rgba(123,45,62,0.06);
+  }
+  .highlight p {
+    font-size: 14px; line-height: 1.7;
+    color: var(--texto-suave); font-style: italic; margin: 0;
+  }
+
+  /* CONTADOR DE PROGRESSO */
+  .progresso-box {
+    margin: 16px 16px; background: white;
+    border-radius: 16px; padding: 18px;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+    text-align: center;
+  }
+  .prog-titulo {
+    font-size: 12px; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--vinho-light); margin-bottom: 12px;
+  }
+  .prog-bar-bg {
+    background: #FDE8EC; border-radius: 50px;
+    height: 10px; margin-bottom: 8px; overflow: hidden;
+  }
+  .prog-bar-fill {
+    background: linear-gradient(90deg, var(--vinho), var(--rosa));
+    height: 100%; border-radius: 50px; transition: width 0.5s ease;
+  }
+  .prog-texto { font-size: 13px; color: var(--texto-suave); }
+
+  /* DIVISOR */
+  .divisor { height: 8px; background: #FDE8EC; }
+
+  /* CONCLUSÃO */
+  .conclusao {
+    background: linear-gradient(160deg, #7B2D3E 0%, #C4566A 100%);
+    padding: 60px 24px; text-align: center;
+  }
+  .conclusao h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; color: white; line-height: 1.2; margin-bottom: 16px;
+  }
+  .conclusao h2 em { font-style: italic; color: #FDE8EC; }
+  .conclusao p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 10px; }
+  .conclusao-assinatura { font-size: 16px; color: white; font-style: italic; margin-top: 20px; }
+
+  /* FADE IN */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- CAPA -->
+<section class="capa">
+  <div class="capa-badge">🎁 Bônus exclusivo</div>
+  <h1>Checklist &<br><em>Planner</em></h1>
+  <p class="capa-sub">Mulher Virtuosa & Casamento Restaurado<br>Seu guia prático para colocar tudo em ação 🌸</p>
+  <span class="capa-autor">Por Alinne Vieira · @alinnevie</span>
+  <div class="scroll-hint">▼<br>comece aqui</div>
+</section>
+
+<!-- COMO SALVAR -->
+<div style="background: linear-gradient(135deg, #3A0A18, #7B2D3E); padding: 24px 20px; text-align: center;" class="fade-in">
+  <div style="font-size: 32px; margin-bottom: 12px;">📱</div>
+  <div style="font-family: 'Playfair Display', serif; font-size: 18px; color: white; margin-bottom: 8px;">Salve na sua tela inicial!</div>
+  <p style="font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.6; margin-bottom: 16px;">Adicione este material como um app no seu celular e acesse com um toque, sem precisar entrar na Kiwify!</p>
+  <div style="background: rgba(255,255,255,0.1); border-radius: 14px; padding: 16px; text-align: left;">
+    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+      <div style="background: #F2A4A4; color: #7B2D3E; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; flex-shrink: 0;">1</div>
+      <p style="font-size: 13px; color: rgba(255,255,255,0.9); margin: 0; line-height: 1.5;">Toque no ícone de <strong style="color: white;">compartilhar ↑</strong> no seu navegador</p>
+    </div>
+    <div style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px;">
+      <div style="background: #F2A4A4; color: #7B2D3E; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; flex-shrink: 0;">2</div>
+      <p style="font-size: 13px; color: rgba(255,255,255,0.9); margin: 0; line-height: 1.5;">Escolha <strong style="color: white;">"Adicionar à tela de início"</strong></p>
+    </div>
+    <div style="display: flex; align-items: flex-start; gap: 10px;">
+      <div style="background: #F2A4A4; color: #7B2D3E; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; flex-shrink: 0;">3</div>
+      <p style="font-size: 13px; color: rgba(255,255,255,0.9); margin: 0; line-height: 1.5;">Pronto! Um ícone aparece na sua tela — <strong style="color: white;">igual a um app!</strong> 🎉</p>
+    </div>
+  </div>
+</div>
+<div class="indice fade-in">
+  <div class="indice-title">📋 O que tem aqui</div>
+  <div class="indice-list">
+    <a href="#check-espiritual" class="indice-item"><span class="indice-emoji">🙏</span> Checklist — Vida Espiritual</a>
+    <a href="#check-casamento" class="indice-item"><span class="indice-emoji">💍</span> Checklist — Casamento Restaurado</a>
+    <a href="#check-rotina" class="indice-item"><span class="indice-emoji">🏠</span> Checklist — Rotina Virtuosa</a>
+    <a href="#planner" class="indice-item"><span class="indice-emoji">📅</span> Planner Semanal Interativo</a>
+    <a href="#notas" class="indice-item"><span class="indice-emoji">✍️</span> Minhas Anotações</a>
+  </div>
+</div>
+
+<div class="divisor"></div>
+
+<!-- CHECKLIST ESPIRITUAL -->
+<section id="check-espiritual" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-badge">Checklist 01</div>
+    <h2 class="sec-titulo">Vida<br><em>Espiritual</em></h2>
+  </div>
+
+  <div class="versiculo fade-in">
+    <p>"Buscai primeiro o reino de Deus e a sua justiça, e todas as demais coisas vos serão acrescentadas."</p>
+    <span>Mateus 6:33</span>
+  </div>
+
+  <p class="titulo-int">Hábitos diários ✅</p>
+  <div class="checklist fade-in" id="cl-esp-diario">
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Tive meu tempo devocional pela manhã</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Li pelo menos um capítulo da Bíblia</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Orei pelo meu casamento e meu marido</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Declarei palavras de fé sobre a minha família</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Anotei o que aprendi no devocional</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Não deixei o dia terminar sem agradecer a Deus</span></div>
+  </div>
+
+  <p class="titulo-int">Hábitos semanais ✅</p>
+  <div class="checklist fade-in">
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Participei de um culto ou reunião de célula</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Fiz pelo menos um devocional em casal</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Fiz um tempo de jejum ou oração estratégica</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Li um livro cristão ou material de edificação</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Orei especificamente pela libertação do meu marido</span></div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CHECKLIST CASAMENTO -->
+<section id="check-casamento" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-badge">Checklist 02</div>
+    <h2 class="sec-titulo">Casamento<br><em>Restaurado</em></h2>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>A restauração começa dentro de você. Marque o que já está praticando e trabalhe no que ainda falta.</p>
+  </div>
+
+  <p class="titulo-int">Posicionamento ✅</p>
+  <div class="checklist fade-in">
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Estou cuidando da minha autoestima e identidade em Cristo</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Não estou me colocando como "segunda opção"</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Estabeleci limites saudáveis e comuniquei com sabedoria</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Estou lutando pelo casamento sem obsessão ou controle</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Busquei aconselhamento pastoral ou terapia de casal</span></div>
+  </div>
+
+  <p class="titulo-int">Cura interior ✅</p>
+  <div class="checklist fade-in">
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Identifiquei padrões emocionais que preciso mudar</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Trabalhei feridas do passado com ajuda profissional ou espiritual</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Quebrei crenças negativas sobre homens e relacionamentos</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Escolhi perdoar — a ele e a mim mesma</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Não estou tomando decisões baseadas apenas na dor do momento</span></div>
+  </div>
+
+  <p class="titulo-int">Bondade diária ✅</p>
+  <div class="checklist fade-in">
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Pratiquei um gesto de bondade genuína com meu marido hoje</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Usei palavras que edificam, não que destroem</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Criei um ambiente de paz e acolhimento em casa</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Pratiquei a escuta ativa — ouvi sem interromper</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Expressei minhas necessidades de forma clara e respeitosa</span></div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CHECKLIST ROTINA -->
+<section id="check-rotina" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-badge">Checklist 03</div>
+    <h2 class="sec-titulo">Rotina<br><em>Virtuosa</em></h2>
+  </div>
+
+  <p class="titulo-int">Lar e família ✅</p>
+  <div class="checklist fade-in">
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Arrumei a cama e arejei os quartos</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Preparei refeições com amor e intenção</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Mantive a casa limpa e organizada</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Dediquei tempo de qualidade aos filhos</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Envolvi os filhos em tarefas adequadas para a idade</span></div>
+  </div>
+
+  <p class="titulo-int">Desenvolvimento pessoal ✅</p>
+  <div class="checklist fade-in">
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Li pelo menos 10 páginas de um livro edificante</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Pratiquei uma habilidade que estou desenvolvendo</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Limitei o tempo de redes sociais ao que planejei</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Cuidei do meu corpo — exercício, alimentação ou descanso</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Pratiquei meu ritual de autocuidado</span></div>
+  </div>
+
+  <p class="titulo-int">Finanças ✅</p>
+  <div class="checklist fade-in">
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Registrei meus gastos do dia</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Não fiz compras por impulso</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Separei o dízimo antes de qualquer gasto</span></div>
+    <div class="check-row" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Trabalhei em alguma fonte de renda extra</span></div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- PLANNER SEMANAL -->
+<section id="planner" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-badge">Planner</div>
+    <h2 class="sec-titulo">Planner<br><em>Semanal</em></h2>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Toque em cada dia para expandir as tarefas. Marque conforme for concluindo! 🌸 <span style="font-size:10px; opacity:0.7">🟣 Espiritual · 🔵 Casamento</span></p>
+  </div>
+
+  <div class="planner fade-in">
+
+    <div class="planner-card" onclick="togglePlanner(this)">
+      <div class="planner-dia">
+        <span class="dia-nome">Segunda</span>
+        <span class="dia-foco">Renovação espiritual</span>
+        <span class="dia-arrow">▼</span>
+      </div>
+      <div class="planner-body">
+        <div class="planner-content">
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Devocional pela manhã <span class="p-tag esp">🟣</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Declarações de fé sobre o casamento <span class="p-tag cas">🔵</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Organizar a semana e definir prioridades</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Um gesto de bondade para o marido <span class="p-tag cas">🔵</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Limpeza rápida da casa</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="planner-card" onclick="togglePlanner(this)">
+      <div class="planner-dia">
+        <span class="dia-nome" style="background: var(--vinho-light);">Terça</span>
+        <span class="dia-foco">Desenvolvimento pessoal</span>
+        <span class="dia-arrow">▼</span>
+      </div>
+      <div class="planner-body">
+        <div class="planner-content">
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Devocional e oração <span class="p-tag esp">🟣</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Ler 10 páginas de um livro edificante</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Praticar uma habilidade nova</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Exercício físico</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Conversa intencional com o marido <span class="p-tag cas">🔵</span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="planner-card" onclick="togglePlanner(this)">
+      <div class="planner-dia">
+        <span class="dia-nome" style="background: #8B2D3F;">Quarta</span>
+        <span class="dia-foco">Cura interior</span>
+        <span class="dia-arrow">▼</span>
+      </div>
+      <div class="planner-body">
+        <div class="planner-content">
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Devocional com foco em perdão <span class="p-tag esp">🟣</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Escrever 3 coisas que admiro no meu marido <span class="p-tag cas">🔵</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Refletir sobre um padrão emocional que quero mudar</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Faxina semanal de um cômodo</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Planejar o cardápio da semana</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="planner-card" onclick="togglePlanner(this)">
+      <div class="planner-dia">
+        <span class="dia-nome" style="background: #C4566A;">Quinta</span>
+        <span class="dia-foco">Relacionamento e lar</span>
+        <span class="dia-arrow">▼</span>
+      </div>
+      <div class="planner-body">
+        <div class="planner-content">
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Devocional e intercessão pelo casamento <span class="p-tag esp">🟣</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Preparar algo especial para o marido <span class="p-tag cas">🔵</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Tempo de qualidade com os filhos</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Lavar e organizar roupas</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Registrar gastos e verificar finanças</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="planner-card" onclick="togglePlanner(this)">
+      <div class="planner-dia">
+        <span class="dia-nome" style="background: #D4956A;">Sexta</span>
+        <span class="dia-foco">Autocuidado</span>
+        <span class="dia-arrow">▼</span>
+      </div>
+      <div class="planner-body">
+        <div class="planner-content">
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Devocional com gratidão <span class="p-tag esp">🟣</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Ritual de autocuidado (skin care, cabelo)</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Atividade que te traz alegria</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Planejar um momento especial de casal <span class="p-tag cas">🔵</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Descansar sem culpa 🌸</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="planner-card" onclick="togglePlanner(this)">
+      <div class="planner-dia">
+        <span class="dia-nome" style="background: #8FAF8A;">Sábado</span>
+        <span class="dia-foco">Família e conexão</span>
+        <span class="dia-arrow">▼</span>
+      </div>
+      <div class="planner-body">
+        <div class="planner-content">
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Devocional em família <span class="p-tag esp">🟣</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Atividade especial com o marido <span class="p-tag cas">🔵</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Passeio ou lazer em família</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Refletir sobre a semana e anotar aprendizados</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Preparar roupas e organizar para o domingo</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="planner-card" onclick="togglePlanner(this)">
+      <div class="planner-dia">
+        <span class="dia-nome" style="background: #C9B8D8; color: #5A3A7A;">Domingo</span>
+        <span class="dia-foco">Descanso e adoração</span>
+        <span class="dia-arrow">▼</span>
+      </div>
+      <div class="planner-body">
+        <div class="planner-content">
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Ir ao culto e adorar a Deus <span class="p-tag esp">🟣</span></span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Almoço especial em família</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Descanso genuíno — corpo e mente</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Planejar a semana seguinte</span></div>
+          <div class="planner-tarefa" onclick="toggleTarefa(event, this)"><div class="p-check"></div><span class="p-text">Orar por um novo começo na semana <span class="p-tag cas">🔵</span></span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- NOTAS -->
+<section id="notas" class="secao">
+  <div class="sec-cover fade-in">
+    <div class="sec-badge">Reflexões</div>
+    <h2 class="sec-titulo">Minhas<br><em>Anotações</em></h2>
+  </div>
+
+  <div class="notas fade-in">
+    <div class="nota-card">
+      <div class="nota-titulo">📖 O que Deus falou para mim esta semana</div>
+      <div class="nota-campo">
+        <label class="nota-label">Versículo que tocou meu coração</label>
+        <input type="text" class="nota-input" placeholder="Ex: Jeremias 29:11">
+      </div>
+      <div class="nota-campo">
+        <label class="nota-label">O que aprendi</label>
+        <textarea class="nota-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      </div>
+    </div>
+
+    <div class="nota-card">
+      <div class="nota-titulo">💍 Meu casamento esta semana</div>
+      <div class="nota-campo">
+        <label class="nota-label">Uma vitória que vivemos juntos</label>
+        <textarea class="nota-textarea" placeholder="Por menor que seja, celebre!"></textarea>
+      </div>
+      <div class="nota-campo">
+        <label class="nota-label">Uma área que preciso trabalhar em mim</label>
+        <textarea class="nota-textarea" placeholder="Com honestidade e sem julgamento..."></textarea>
+      </div>
+    </div>
+
+    <div class="nota-card">
+      <div class="nota-titulo">🌱 Meu crescimento pessoal</div>
+      <div class="nota-campo">
+        <label class="nota-label">3 coisas pelas quais sou grata</label>
+        <input type="text" class="nota-input" placeholder="1.">
+        <input type="text" class="nota-input" placeholder="2." style="margin-top:8px">
+        <input type="text" class="nota-input" placeholder="3." style="margin-top:8px">
+      </div>
+      <div class="nota-campo">
+        <label class="nota-label">Minha intenção para a próxima semana</label>
+        <textarea class="nota-textarea" placeholder="O que você quer ser diferente?"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CONCLUSÃO -->
+<section class="conclusao fade-in">
+  <h2>Você está no<br><em>caminho certo!</em> 🌸</h2>
+  <p>Cada tarefa marcada, cada oração feita, cada gesto de amor — tudo isso está construindo o casamento e a vida que Deus planejou para você.</p>
+  <p>Não desista. A transformação acontece no dia a dia, nos pequenos atos de coragem e fé.</p>
+  <div class="conclusao-assinatura">Com amor,<br>Alinne Vieira 🌹</div>
+</section>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY, t = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progressBar').style.width = (s/t*100) + '%';
+    document.getElementById('backTop').classList.toggle('visible', s > 300);
+  });
+
+  // Fade in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // Checklist
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    el.querySelector('.check-box').textContent = el.classList.contains('checked') ? '✓' : '';
+  }
+
+  // Planner accordion
+  function togglePlanner(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.planner-card.open').forEach(c => c.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
+  // Tarefa individual no planner
+  function toggleTarefa(e, el) {
+    e.stopPropagation();
+    el.classList.toggle('done');
+    el.querySelector('.p-check').textContent = el.classList.contains('done') ? '✓' : '';
+  }
+</script>
+</body>
+</html>
