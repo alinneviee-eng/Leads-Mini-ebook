@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>O Manual do Casamento Restaurado</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Karla:wght@400;500;600;700&display=swap');
+
+  :root{
+    --wine: #5c1a2b;
+    --wine-deep: #3d0f1c;
+    --terracotta: #b5573f;
+    --gold: #b8935a;
+    --gold-soft: #e8d9b8;
+    --cream: #fbf5ee;
+    --paper: #f4ece1;
+    --ink: #2a1c1a;
+    --ink-soft: #6b5750;
+    --line: rgba(92,26,43,0.18);
+    --shadow: 0 12px 30px -14px rgba(61,15,28,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Karla', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55;
+  }
+
+  /* ---------- Textura de fundo sutil ---------- */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(181,87,63,0.05), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(92,26,43,0.06), transparent 45%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{ position:relative; z-index:1; max-width:560px; margin:0 auto; padding:0 0 80px; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background: linear-gradient(165deg, var(--wine) 0%, var(--wine-deep) 78%);
+    color: var(--gold-soft);
+    padding: 56px 28px 64px;
+    text-align:center;
+    overflow:hidden;
+    border-bottom: 3px solid var(--gold);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:-1px; height:26px;
+    background-image: repeating-linear-gradient(45deg, var(--gold) 0 3px, transparent 3px 14px);
+    opacity:.35;
+  }
+  .hero .kicker{
+    font-family:'Karla',sans-serif;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    font-size:11.5px;
+    color: var(--gold);
+    margin-bottom:18px;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .hero .kicker span.dash{ width:26px; height:1px; background:var(--gold); opacity:.6; }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size: clamp(2.1rem, 9vw, 2.9rem);
+    line-height:1.08;
+    margin: 0 0 6px;
+    color:#fbf5ee;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color: var(--gold);
+    display:block;
+    font-size:.62em;
+    margin-top:6px;
+  }
+  .hero p.sub{
+    font-size:15px;
+    color: rgba(251,245,238,0.75);
+    max-width:380px;
+    margin: 18px auto 0;
+  }
+
+  .stitch-row{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    margin-top:26px;
+  }
+  .stitch-row .knot{ width:6px; height:6px; border-radius:50%; background:var(--gold); }
+  .stitch-line{ width:60px; height:1px; background: repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 10px); }
+
+  .verse-tag{
+    display:inline-block;
+    margin-top:24px;
+    padding: 10px 18px;
+    border: 1px solid rgba(184,147,90,0.5);
+    border-radius: 3px;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:14px;
+    color: var(--gold-soft);
+    background: rgba(0,0,0,0.12);
+  }
+
+  /* ---------- Barra de progresso da jornada ---------- */
+  .journey{
+    background: var(--paper);
+    padding: 18px 22px 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .journey-label{
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--ink-soft); margin-bottom:10px; text-align:center;
+    font-weight:700;
+  }
+  .journey-track{
+    display:flex; align-items:center; gap:0;
+  }
+  .journey-track .seg{
+    flex:1; height:4px; background: var(--gold-soft); border-radius:2px; margin:0 2px;
+    position:relative;
+  }
+  .journey-track .seg.done{ background: var(--terracotta); }
+  #progressPct{
+    text-align:center; font-size:11px; color: var(--terracotta); margin-top:8px; font-weight:700; letter-spacing:.04em;
+  }
+
+  /* ---------- Intro ---------- */
+  .intro-card{
+    margin: 26px 20px 8px;
+    padding: 26px 24px;
+    background:#fff;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    position:relative;
+  }
+  .intro-card::before{
+    content:"";
+    position:absolute; top:0; left:24px; right:24px; height:3px;
+    background: linear-gradient(90deg, var(--terracotta), var(--gold));
+    border-radius: 0 0 4px 4px;
+  }
+  .intro-card p{ margin: 0 0 14px; font-size:15px; color:var(--ink); }
+  .intro-card p:last-child{ margin-bottom:0; }
+  .intro-card .highlight{
+    color: var(--wine); font-weight:700;
+  }
+
+  /* ---------- Seção títulos ---------- */
+  .section-label{
+    margin: 38px 20px 14px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .section-label .num{
+    font-family:'Fraunces', serif; font-weight:700; font-size:13px;
+    color: #fff; background: var(--wine);
+    width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .section-label .txt{
+    font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    color: var(--ink-soft); font-weight:700;
+  }
+
+  /* ---------- Accordion cards ---------- */
+  .chapters{ margin: 0 16px; display:flex; flex-direction:column; gap:12px; }
+
+  .chapter{
+    background:#fff;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 14px -8px rgba(61,15,28,0.18);
+    overflow:hidden;
+  }
+
+  .chapter-btn{
+    width:100%;
+    display:flex; align-items:center; gap:14px;
+    background:none; border:none; cursor:pointer;
+    padding: 18px 18px;
+    text-align:left;
+    font-family:'Karla', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .chapter-btn .icon{
+    width:40px; height:40px; border-radius:10px;
+    background: var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px;
+    flex-shrink:0;
+    color: var(--wine);
+  }
+  .chapter-btn .title-block{ flex:1; }
+  .chapter-btn .chapter-num{
+    font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--terracotta); font-weight:700; margin-bottom:2px; display:block;
+  }
+  .chapter-btn .chapter-title{
+    font-family:'Fraunces', serif; font-weight:600; font-size:16.5px;
+    color: var(--wine-deep); line-height:1.25;
+  }
+  .chapter-btn .chevron{
+    width:22px; height:22px; flex-shrink:0;
+    color: var(--gold);
+    transition: transform .35s cubic-bezier(.65,0,.35,1);
+  }
+  .chapter.open .chevron{ transform: rotate(180deg); }
+
+  .chapter-body{
+    max-height:0;
+    overflow:hidden;
+    transition: max-height .45s cubic-bezier(.65,0,.35,1);
+  }
+  .chapter-body-inner{
+    padding: 0 20px 22px;
+    border-top: 1px dashed var(--line);
+    margin-top: -1px;
+  }
+  .chapter-body-inner p{
+    font-size:14.5px; color: var(--ink); margin: 16px 0;
+  }
+  .chapter-body-inner p:first-child{ margin-top:18px; }
+
+  /* ---------- Versículos ---------- */
+  .verse{
+    background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+    color: var(--gold-soft);
+    border-radius: 10px;
+    padding: 18px 18px 16px;
+    margin: 16px 0;
+    position:relative;
+    font-family:'Fraunces', serif;
+  }
+  .verse::before{
+    content:"\201C";
+    position:absolute; top:2px; left:12px;
+    font-size:44px; color: rgba(184,147,90,0.35);
+    font-family:'Fraunces', serif; line-height:1;
+  }
+  .verse-text{
+    font-style:italic; font-size:15.5px; line-height:1.5;
+    padding-left:14px; position:relative; z-index:1;
+    color:#fbf5ee;
+  }
+  .verse-ref{
+    display:block; text-align:right; margin-top:10px;
+    font-family:'Karla',sans-serif; font-style:normal;
+    font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color: var(--gold); font-weight:700;
+  }
+
+  /* ---------- Listas de check / X ---------- */
+  ul.check-list, ul.x-list{
+    list-style:none; margin:16px 0; padding:0;
+  }
+  ul.check-list li, ul.x-list li{
+    display:flex; gap:10px; align-items:flex-start;
+    font-size:14.5px; margin-bottom:10px; padding-bottom:10px;
+    border-bottom: 1px solid rgba(92,26,43,0.08);
+  }
+  ul.check-list li:last-child, ul.x-list li:last-child{ border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  ul.check-list li::before{
+    content:"✓";
+    flex-shrink:0;
+    width:20px; height:20px; border-radius:50%;
+    background: var(--terracotta); color:#fff;
+    font-size:11px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    margin-top:1px;
+  }
+  ul.x-list li::before{
+    content:"✕";
+    flex-shrink:0;
+    width:20px; height:20px; border-radius:50%;
+    background: var(--wine-deep); color: var(--gold-soft);
+    font-size:10px; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    margin-top:1px;
+  }
+
+  /* ---------- Subtítulos internos ---------- */
+  .sub-head{
+    font-family:'Fraunces', serif; font-weight:600; font-size:16px;
+    color: var(--wine); margin: 22px 0 6px;
+    padding-top: 4px;
+  }
+
+  /* ---------- Passos numerados ---------- */
+  .step{
+    display:flex; gap:12px; margin: 14px 0;
+  }
+  .step .step-num{
+    flex-shrink:0; width:26px; height:26px; border-radius:8px;
+    background: var(--paper); color: var(--wine);
+    font-family:'Fraunces', serif; font-weight:700; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step .step-body{ font-size:14.5px; }
+  .step .step-body b{ color: var(--wine-deep); }
+
+  /* ---------- Reflexão / caixa quote ---------- */
+  .reflect{
+    border-left: 3px solid var(--terracotta);
+    background: var(--paper);
+    padding: 14px 16px;
+    border-radius: 0 10px 10px 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 16px 0;
+  }
+
+  /* ---------- Callout dourado (dica/nota) ---------- */
+  .callout{
+    background: var(--gold-soft);
+    border: 1px solid rgba(184,147,90,0.5);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 14px;
+    color: var(--wine-deep);
+    margin: 16px 0;
+  }
+  .callout b{ color: var(--wine); }
+
+  /* ---------- Divisor de costura entre capítulos ---------- */
+  .seam{
+    display:flex; align-items:center; gap:8px;
+    margin: 30px 20px 4px;
+    opacity:.55;
+  }
+  .seam .dot{ width:4px; height:4px; border-radius:50%; background: var(--terracotta); }
+  .seam .segline{ flex:1; height:1px; background: repeating-linear-gradient(90deg, var(--terracotta) 0 5px, transparent 5px 9px);}
+
+  /* ---------- Encerramento ---------- */
+  .closing{
+    margin: 44px 20px 0;
+    background: linear-gradient(165deg, var(--wine) 0%, var(--wine-deep) 100%);
+    border-radius: 18px;
+    padding: 34px 26px;
+    text-align:center;
+    color: var(--gold-soft);
+    box-shadow: var(--shadow);
+  }
+  .closing .mark{
+    font-family:'Fraunces', serif; font-style:italic; font-size:13px;
+    letter-spacing:.05em; color: var(--gold); margin-bottom:14px;
+  }
+  .closing h2{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.5rem;
+    color:#fbf5ee; margin: 0 0 16px;
+  }
+  .closing .pledge{
+    text-align:left;
+    font-size:14px;
+    margin: 18px 0;
+    display:flex; flex-direction:column; gap:12px;
+  }
+  .closing .pledge div{ display:flex; gap:10px; align-items:flex-start;}
+  .closing .pledge div::before{
+    content:"✎";
+    color: var(--gold); flex-shrink:0; margin-top:1px;
+  }
+  .closing .final-verse{
+    margin-top:22px; font-family:'Fraunces', serif; font-style:italic;
+    font-size:15px; color: var(--gold-soft); line-height:1.5;
+  }
+  .closing .final-note{
+    margin-top:18px; font-size:13px; color: rgba(251,245,238,0.65);
+  }
+
+  /* ---------- Rodapé ---------- */
+  .footer-tag{
+    text-align:center; margin: 30px 0 0;
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--ink-soft); opacity:.6;
+  }
+
+  /* Ícones inline simples (SVG) */
+  .icon svg{ width:20px; height:20px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="kicker"><span class="dash"></span>Guia de restauração<span class="dash"></span></div>
+    <h1>O Manual do<br>Casamento Restaurado<em>Princípios, fé e prática para reconstruir sua aliança</em></h1>
+    <div class="stitch-row">
+      <div class="knot"></div><div class="stitch-line"></div><div class="knot"></div>
+    </div>
+    <p class="sub">Um guia completo para curar feridas, restaurar a aliança e construir um casamento forte, íntimo e duradouro.</p>
+    <div class="verse-tag">"O que Deus uniu, ninguém separe." — Mateus 19:6</div>
+  </div>
+
+  <!-- BARRA DE JORNADA -->
+  <div class="journey">
+    <div class="journey-label">Sua jornada de restauração</div>
+    <div class="journey-track" id="journeyTrack"></div>
+    <div id="progressPct">0 de 10 capítulos lidos</div>
+  </div>
+
+  <!-- INTRODUÇÃO -->
+  <div class="intro-card">
+    <p>Passar por uma separação ou crise no casamento pode ser doloroso e cheio de incertezas. Muitas vezes, buscamos respostas e queremos restaurar o relacionamento rapidamente, mas <span class="highlight">a verdadeira restauração começa dentro de nós mesmas</span> — e precisamos passar por esse processo.</p>
+    <p>Este e-book é um guia para te ajudar nessa jornada, ensinando como se fortalecer, se posicionar com sabedoria e como lutar espiritualmente para ter seu casamento restaurado.</p>
+    <p>A transformação que você deseja <span class="highlight">começa em você</span>. Este é o momento de crescer, se fortalecer e se preparar para um novo começo no seu relacionamento.</p>
+  </div>
+
+  <!-- LISTA DE CAPÍTULOS -->
+  <div class="chapters" id="chaptersContainer">
+
+    <!-- 1 -->
+    <div class="chapter" data-chapter="1">
+      <button class="chapter-btn" aria-expanded="false">
+        <div class="icon">🕊️</div>
+        <div class="title-block">
+          <span class="chapter-num">Capítulo 01</span>
+          <span class="chapter-title">A restauração começa aqui</span>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="chapter-body">
+        <div class="chapter-body-inner">
+          <p>Antes de buscar a restauração do seu casamento, você precisa entender uma verdade fundamental: <b>sem Deus, você não conseguirá.</b></p>
+          <div class="verse">
+            <div class="verse-text">Sem mim, nada podeis fazer.</div>
+            <span class="verse-ref">João 15:5</span>
+          </div>
+          <p>Essas palavras de Jesus nos lembram que tentar restaurar um casamento com nossas próprias forças pode nos levar à frustração. A restauração não é apenas sobre o casamento, mas sobre você. Deus deseja te transformar de dentro para fora.</p>
+          <p>Muitas pessoas, ao enfrentarem uma crise no casamento, começam a orar, jejuar e buscar a Deus apenas para que Ele traga o cônjuge de volta. Mas Deus não quer apenas mudar a situação; <b>Ele quer mudar você primeiro.</b></p>
+          <p>Muitas vezes, Deus permite crises e desertos para nos ensinar, nos transformar e nos trazer de volta ao centro da vontade dEle.</p>
+          <div class="verse">
+            <div class="verse-text">Portanto, eis que eu a atrairei, e a levarei para o deserto, e lhe falarei ao coração.</div>
+            <span class="verse-ref">Oséias 2:14</span>
+          </div>
+          <p>Se você está passando por um período difícil, pode ser que Deus esteja te chamando para alinhar as prioridades do seu coração. Talvez, antes da crise, você tenha colocado o casamento, a família, o cônjuge ou outras coisas acima de Deus. Mas agora Ele está te chamando para voltar o seu olhar para Ele.</p>
+          <div class="reflect">Se você deseja um casamento abençoado, comece permitindo que Deus trabalhe primeiro em você.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="chapter" data-chapter="2">
+      <button class="chapter-btn" aria-expanded="false">
+        <div class="icon">🤍</div>
+        <div class="title-block">
+          <span class="chapter-num">Capítulo 02</span>
+          <span class="chapter-title">O poder do perdão</span>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="chapter-body">
+        <div class="chapter-body-inner">
+          <p>Seja qual for o motivo da sua separação — traição, abandono, palavras duras, frieza — o perdão será necessário para sua cura.</p>
+          <p>Perdoar não é ignorar o que aconteceu, fingir que a dor não existe ou justificar o erro do outro. <b>Perdoar é se libertar da prisão da mágoa</b> para seguir em frente com um coração curado.</p>
+          <div class="verse">
+            <div class="verse-text">Antes, sede uns para com os outros benignos, misericordiosos, perdoando-vos uns aos outros, como também Deus vos perdoou em Cristo.</div>
+            <span class="verse-ref">Efésios 4:32</span>
+          </div>
+          <p><b>Mas como perdoar alguém que nos machucou tanto?</b></p>
+          <ul class="check-list">
+            <li>Entenda que perdoar não é aceitar a injustiça. Você pode perdoar e, ao mesmo tempo, não aceitar um relacionamento tóxico.</li>
+            <li>O perdão não depende do arrependimento do outro. Talvez seu cônjuge nunca peça desculpas, mas você precisa liberar essa dor para ser livre.</li>
+            <li>Guardar rancor só mantém a ferida aberta. O perdão fecha o ciclo da dor e abre espaço para a restauração.</li>
+          </ul>
+          <p>Perdoar não significa reatar o casamento imediatamente. Significa que você está escolhendo a paz em vez da amargura.</p>
+          <div class="verse">
+            <div class="verse-text">Se perdoardes aos homens as suas ofensas, também vosso Pai celestial vos perdoará a vós.</div>
+            <span class="verse-ref">Mateus 6:14</span>
+          </div>
+          <div class="sub-head">Perdoando a si mesma</div>
+          <p>Muitas mulheres se culpam pela separação: <em>"Se eu tivesse sido mais paciente..."</em>, <em>"Eu falhei como esposa..."</em></p>
+          <p><b>Mas a verdade é que nenhum casamento acaba por culpa de uma única pessoa.</b> O outro também fez suas escolhas.</p>
+          <div class="sub-head" style="margin-top:18px;">Como se libertar da culpa?</div>
+          <ul class="check-list">
+            <li>Aceite que você não pode mudar o passado. Mas pode aprender e crescer com ele.</li>
+            <li>Peça perdão a Deus e a você mesma. Deus não quer que você viva se punindo.</li>
+          </ul>
+          <div class="sub-head" style="margin-top:18px;">Como saber se você realmente perdoou?</div>
+          <ul class="check-list">
+            <li>Você não sente mais raiva sempre que pensa no que aconteceu.</li>
+            <li>Você não deseja vingança ou que o outro "pague" pelo que fez.</li>
+            <li>Você consegue orar por essa pessoa sem ressentimento.</li>
+            <li>Você sente paz ao lembrar do passado, porque sabe que Deus está cuidando do seu futuro.</li>
+          </ul>
+          <div class="reflect">Se ainda não sente isso, não se culpe. O perdão é um processo. Entregue a Deus e peça que Ele te ajude a liberar essa dor.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="chapter" data-chapter="3">
+      <button class="chapter-btn" aria-expanded="false">
+        <div class="icon">⚔️</div>
+        <div class="title-block">
+          <span class="chapter-num">Capítulo 03</span>
+          <span class="chapter-title">Como lutar espiritualmente pela restauração</span>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="chapter-body">
+        <div class="chapter-body-inner">
+          <p>A crise no casamento não é apenas uma questão humana. Há uma batalha espiritual acontecendo. Mas você não está sozinha nessa luta — <b>Deus luta ao seu lado.</b></p>
+          <div class="verse">
+            <div class="verse-text">O Senhor lutará por vocês; tão somente acalmem-se.</div>
+            <span class="verse-ref">Êxodo 14:14</span>
+          </div>
+          <div class="sub-head">A verdadeira luta: não é contra pessoas</div>
+          <p>Quando enfrentamos uma separação, é fácil enxergar o cônjuge como o "inimigo". Mas a Bíblia nos ensina que nossa batalha é contra forças espirituais que tentam destruir lares.</p>
+          <div class="verse">
+            <div class="verse-text">Porque a nossa luta não é contra carne e sangue, mas contra os principados e potestades, contra os dominadores deste mundo tenebroso, contra as forças espirituais do mal.</div>
+            <span class="verse-ref">Efésios 6:12</span>
+          </div>
+          <ul class="check-list">
+            <li>Ore pelo seu cônjuge, em vez de alimentar rancor.</li>
+            <li>Rejeite pensamentos de vingança, raiva e desespero.</li>
+            <li>Cubra seu casamento com a Palavra de Deus.</li>
+          </ul>
+          <div class="sub-head">Oração estratégica pela restauração</div>
+          <ul class="check-list">
+            <li>Ore pela transformação do seu coração. Peça para Deus te fortalecer e moldar seu caráter.</li>
+            <li>Ore pela libertação do seu cônjuge. Se ele está distante, endurecido ou envolvido em pecado, interceda para que Deus traga arrependimento.</li>
+            <li>Ore pela restauração do casamento. Declare que Deus pode reconstruir aquilo que foi quebrado.</li>
+            <li>Ore para que a vontade de Deus prevaleça, no tempo certo dEle.</li>
+          </ul>
+          <div class="sub-head">Jejum: uma arma poderosa</div>
+          <div class="verse">
+            <div class="verse-text">Esta casta de demônios não se expulsa senão pela oração e pelo jejum.</div>
+            <span class="verse-ref">Mateus 17:21</span>
+          </div>
+          <div class="step"><div class="step-num">1</div><div class="step-body">Escolha um tipo de jejum — parcial (redes sociais, doces) ou total (algumas horas do dia).</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body">Defina um propósito claro: sabedoria, fortalecimento e restauração.</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body">Mantenha um coração focado em Deus — não é só sobre deixar de comer, mas sobre se aproximar do Senhor.</div></div>
+          <div class="sub-head">Declarações proféticas para declarar</div>
+          <div class="verse">
+            <div class="verse-text">A vida e a morte estão no poder da língua.</div>
+            <span class="verse-ref">Provérbios 18:21</span>
+          </div>
+          <ul class="check-list">
+            <li>"O que Deus uniu, ninguém separe." (Marcos 10:9)</li>
+            <li>"Senhor, restaura-nos como restauras os riachos no deserto." (Salmos 126:4)</li>
+            <li>"O Senhor faz nova todas as coisas." (Apocalipse 21:5)</li>
+          </ul>
+          <div class="callout"><b>Dica:</b> escreva esses versículos e declare-os diariamente sobre sua vida e seu casamento.</div>
+          <div class="sub-head">Protegendo sua mente durante a espera</div>
+          <ul class="check-list">
+            <li>Rejeite pensamentos negativos. Quando a dúvida vier, declare a Palavra de Deus.</li>
+            <li>Evite vozes que te desmotivam — cuidado com conselhos errados.</li>
+            <li>Alimente sua fé: leia a Bíblia, ouça louvores, cerque-se de conteúdos que fortalecem.</li>
+          </ul>
+          <div class="verse">
+            <div class="verse-text">Não andeis ansiosos por coisa alguma, mas em tudo apresentem seus pedidos a Deus.</div>
+            <span class="verse-ref">Filipenses 4:6</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="chapter" data-chapter="4">
+      <button class="chapter-btn" aria-expanded="false">
+        <div class="icon">🌿</div>
+        <div class="title-block">
+          <span class="chapter-num">Capítulo 04</span>
+          <span class="chapter-title">Cuidando de si mesma</span>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="chapter-body">
+        <div class="chapter-body-inner">
+          <p>No processo de restauração do casamento, <b>cuidar de si mesma é essencial.</b> Para amar o outro como Deus pede, precisamos primeiro aprender a nos amar e cuidar de nós mesmas, reconhecendo nosso valor em Cristo.</p>
+          <p>O autocuidado tem um impacto direto na visão do seu cônjuge. Quando ele vê uma mulher que se cuida, está em processo de evolução e busca crescer, isso transmite força e transformação.</p>
+          <p>Por outro lado, uma mulher desesperada, focada apenas na dor, pode afastar ainda mais o cônjuge. O autocuidado, portanto, não só fortalece você, mas também pode contribuir para a restauração do casamento.</p>
+          <div class="sub-head">Autocuidado físico</div>
+          <div class="step"><div class="step-num">1</div><div class="step-body"><b>Alimentação equilibrada:</b> frutas, vegetais e proteínas de qualidade.</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><b>Exercício regular:</b> caminhadas, yoga, dança ou treinos em casa.</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><b>Cuidados com pele e cabelo:</b> limpeza, hidratação e proteção diária.</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><b>Arrume-se, mesmo em casa:</b> coloque batom, olhe-se no espelho — isso melhora sua autoestima.</div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body"><b>Descanse e durma bem:</b> priorize o descanso para manter energia e saúde mental.</div></div>
+          <div class="reflect">Ninguém cuida melhor de uma mulher do que ela mesma, quando se ama. Deus fica feliz quando suas filhas se cuidam!</div>
+          <div class="sub-head">Autocuidado emocional e dependência emocional</div>
+          <p>Liberte-se da dependência emocional do seu cônjuge. Muitas vezes, passamos a ver nossa felicidade atrelada ao outro, mas a verdadeira felicidade vem de Deus e de nossa identidade nEle.</p>
+          <p>Cultive seus próprios gostos, seus momentos de lazer. Aprenda a ter tempo para si mesma sem a necessidade da aprovação ou presença de outra pessoa.</p>
+          <div class="sub-head">Crescimento pessoal — desenvolva novos interesses</div>
+          <p>Agora é o momento de se reconectar com seus gostos, talentos e interesses. Pintar, tocar um instrumento, estudar algo relacionado à sua carreira — invista nisso! Busque sair, passear, tomar um café, fazer coisas que te fazem bem.</p>
+          <div class="sub-head">Independência financeira</div>
+          <p>Muitas mulheres, ao se separarem, percebem que estavam 100% dependentes financeiramente do marido. Deus não quer que você dependa de ninguém além dEle. Busque novas formas de gerar renda — isso fortalece sua confiança e autoestima.</p>
+          <div class="sub-head">Ideias de renda extra em casa</div>
+          <ul class="check-list">
+            <li><b>Vendas na internet:</b> divulgue produtos nas redes sociais.</li>
+            <li><b>Afiliado:</b> divulgue produtos de lojas ou cursos e ganhe comissões.</li>
+            <li><b>Serviços prestados:</b> unhas, cabelo, maquiagem, aulas particulares.</li>
+          </ul>
+          <div class="callout">Aqui está resumido — se estiver comprometida a fazer isso, pesquise mais no YouTube: lá você encontra conhecimento de qualidade e gratuito!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="chapter" data-chapter="5">
+      <button class="chapter-btn" aria-expanded="false">
+        <div class="icon">🧭</div>
+        <div class="title-block">
+          <span class="chapter-num">Capítulo 05</span>
+          <span class="chapter-title">Como se posicionar no processo de restauração</span>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="chapter-body">
+        <div class="chapter-body-inner">
+          <div class="sub-head">Quando seu cônjuge está com outra pessoa</div>
+          <p>Há duas possíveis situações: ele está confuso e mantendo contato com você, ou já decidiu ficar com o(a) amante e se afastou totalmente. Cada caso exige uma abordagem diferente, mas em qualquer cenário, sua postura precisa ser <b>firme, sem desespero e sem se humilhar.</b></p>
+          <div class="sub-head">O que NÃO fazer se há um(a) amante</div>
+          <ul class="x-list">
+            <li>Não implore para que ele termine o relacionamento. Quanto mais você corre atrás, mais ele se sente no controle.</li>
+            <li>Não tente competir. Você não precisa se rebaixar ou provar que é "melhor".</li>
+            <li>Não se revolte com Deus. A traição é resultado das escolhas humanas, não um castigo divino.</li>
+            <li>Não confronte o(a) amante. Sua luta não é contra a outra pessoa, mas contra a situação em si.</li>
+          </ul>
+          <div class="verse">
+            <div class="verse-text">A nossa luta não é contra carne e sangue, mas contra os principados e potestades.</div>
+            <span class="verse-ref">Efésios 6:12</span>
+          </div>
+          <div class="sub-head">Como se posicionar corretamente</div>
+          <div class="step"><div class="step-num">1</div><div class="step-body"><b>Deixe claro que não aceita um casamento com traição.</b> A decisão de ser fiel precisa ser dele, não algo imposto.</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><b>Fortaleça sua autoestima e identidade.</b> Se ele escolheu outra pessoa, isso não define seu valor.</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><b>Lute espiritualmente, mas sem obsessão.</b> Apresente seu casamento a Deus, sem tentar "forçar" um retorno.</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><b>Se ele quiser manter contato, imponha limites.</b> Não aceite ser a "segunda opção".</div></div>
+          <div class="verse">
+            <div class="verse-text">O que Deus uniu, ninguém separe.</div>
+            <span class="verse-ref">Marcos 10:9</span>
+          </div>
+          <div class="sub-head">E se ele parece estar feliz com a outra pessoa?</div>
+          <p>Antes de acreditar que "tudo está bem", lembre-se: relacionamentos que começam em infidelidade raramente prosperam. A culpa e a consciência podem levar seu cônjuge a agir como se estivesse bem para evitar questionamentos.</p>
+          <div class="verse">
+            <div class="verse-text">Não vos enganeis: Deus não se deixa escarnecer. Tudo o que o homem semear, isso também ceifará.</div>
+            <span class="verse-ref">Gálatas 6:7</span>
+          </div>
+          <p><b>O que fazer nesse caso?</b></p>
+          <ul class="check-list">
+            <li>Não confronte, não pressione — continue orando e lutando espiritualmente, confiando que Deus está no controle.</li>
+            <li>Se afaste e dê espaço para que ele perceba por si mesmo.</li>
+            <li>Continue sua vida — quando ele te ver bem, pode repensar suas escolhas.</li>
+          </ul>
+          <div class="verse">
+            <div class="verse-text">O Senhor está perto dos que têm o coração quebrantado e salva os de espírito abatido.</div>
+            <span class="verse-ref">Salmos 34:18</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="chapter" data-chapter="6">
+      <button class="chapter-btn" aria-expanded="false">
+        <div class="icon">💎</div>
+        <div class="title-block">
+          <span class="chapter-num">Capítulo 06</span>
+          <span class="chapter-title">Como agir quando há uma amante</span>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="chapter-body">
+        <div class="chapter-body-inner">
+          <p>O processo de restauração é um momento de muita instabilidade emocional e incertezas. Saber se posicionar da forma certa pode acelerar esse processo de reconciliação. <b>Uma postura firme e confiante é a melhor forma de enfrentar esse momento.</b></p>
+          <ul class="check-list">
+            <li>Não se humilhe ou implore para seu cônjuge ficar com você.</li>
+            <li>Quando tiver oportunidade de encontrá-lo, mesmo triste, busque estar com o rosto alegre e confiante.</li>
+            <li>Não se coloque em posição inferior: seja gentil, mas mantenha seus próprios princípios e valores.</li>
+            <li>Mostre que sua felicidade não depende dele. Você é uma pessoa completa em Cristo.</li>
+            <li>Se você quer a restauração, comunique isso de forma clara e sincera, mas sem pressão.</li>
+          </ul>
+          <div class="sub-head">Evite o desespero e a pressão</div>
+          <p>Não faça cobranças excessivas ou tente controlar a situação. O desespero pode afastar ainda mais o seu cônjuge e prejudicar o processo de restauração.</p>
+          <div class="sub-head">Tenha confiança em Deus</div>
+          <p>Lembre-se de que Deus está no controle de toda a situação. Confie no tempo dEle e mantenha a sua paz, independentemente das circunstâncias.</p>
+          <div class="sub-head">Seja paciente, mas firme nos limites</div>
+          <p>A paciência é essencial, mas isso não significa que você deva tolerar comportamentos que não condizem com o seu valor. Estabeleça limites claros e esteja disposta a mantê-los, mesmo que o caminho seja difícil.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="chapter" data-chapter="7">
+      <button class="chapter-btn" aria-expanded="false">
+        <div class="icon">💬</div>
+        <div class="title-block">
+          <span class="chapter-num">Capítulo 07</span>
+          <span class="chapter-title">Reconstruindo a comunicação com seu cônjuge</span>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="chapter-body">
+        <div class="chapter-body-inner">
+          <p>Depois de um período de crise, separação ou afastamento, a comunicação entre o casal pode ficar fria, difícil ou até inexistente. Mas se houver qualquer nível de contato, essa é uma oportunidade de reconstrução.</p>
+          <div class="verse">
+            <div class="verse-text">Seja a vossa palavra sempre agradável, temperada com sal, para que saibais como deveis responder a cada um.</div>
+            <span class="verse-ref">Colossenses 4:6</span>
+          </div>
+          <div class="sub-head">O que não fazer na comunicação</div>
+          <ul class="x-list">
+            <li>Evite conversas carregadas de emoção exagerada — choros e desabafos longos podem gerar desconforto.</li>
+            <li>Não pressione o outro para tomar decisões ("Quando vai voltar?").</li>
+            <li>Não traga brigas do passado. A reconstrução precisa de um ambiente leve.</li>
+            <li>Evite mensagens em excesso — o silêncio pode ser mais poderoso do que a insistência.</li>
+          </ul>
+          <div class="verse">
+            <div class="verse-text">Até um tolo passará por sábio se ficar calado, e, se contiver a língua, parecerá que tem discernimento.</div>
+            <span class="verse-ref">Provérbios 17:28</span>
+          </div>
+          <div class="sub-head">Como criar uma comunicação saudável</div>
+          <ul class="check-list">
+            <li>Fale de forma tranquila e natural — o tom de voz faz toda a diferença.</li>
+            <li>Seja breve e objetiva. Não tente resolver tudo em uma única conversa.</li>
+            <li>Demonstre maturidade e crescimento — isso pode despertar a curiosidade do cônjuge.</li>
+            <li>Seja respeitosa, mesmo que ele não esteja certo.</li>
+            <li>Se houver silêncio da parte dele, respeite. O tempo dele pode ser necessário.</li>
+          </ul>
+          <div class="verse">
+            <div class="verse-text">O sábio usa palavras agradáveis e convence com elas.</div>
+            <span class="verse-ref">Provérbios 16:23</span>
+          </div>
+          <div class="sub-head">Estratégias práticas para melhorar o contato</div>
+          <p><b>Se ele ainda fala com você:</b></p>
+          <ul class="check-list">
+            <li>Evite discutir o relacionamento logo de cara. Mantenha conversas neutras e amigáveis.</li>
+            <li>Mostre mudanças através da sua postura.</li>
+            <li>Ouça mais e fale menos — isso cria conexão e faz o outro se sentir respeitado.</li>
+          </ul>
+          <p><b>Se ele não responde ou evita contato:</b></p>
+          <ul class="check-list">
+            <li>Dê espaço e não force interações.</li>
+            <li>Envie mensagens curtas e ocasionais, sem pressão. Algo como: "Oi, espero que esteja bem."</li>
+            <li>Se ele responder, evite perguntas difíceis ou cobranças. Vá aos poucos.</li>
+          </ul>
+          <div class="reflect">Às vezes, a melhor comunicação não está nas palavras, mas nas atitudes. A comunicação vai além do que você fala — é também sobre o que você transmite sem palavras.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="chapter" data-chapter="8">
+      <button class="chapter-btn" aria-expanded="false">
+        <div class="icon">✨</div>
+        <div class="title-block">
+          <span class="chapter-num">Capítulo 08</span>
+          <span class="chapter-title">Sinais de restauração — como saber se Deus está trabalhando?</span>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="chapter-body">
+        <div class="chapter-body-inner">
+          <p>Muitas vezes, quando estamos orando pela restauração do casamento, esperamos ver mudanças imediatas e visíveis. Mas Deus trabalha de formas que nem sempre conseguimos perceber no momento.</p>
+          <div class="verse">
+            <div class="verse-text">O que eu faço agora, você não entende, mas depois entenderá.</div>
+            <span class="verse-ref">João 13:7</span>
+          </div>
+          <div class="sub-head">A restauração acontece primeiro no mundo espiritual</div>
+          <ul class="check-list">
+            <li>O coração do seu cônjuge pode estar sendo quebrantado sem que você veja.</li>
+            <li>O próprio Deus pode estar moldando você para ser uma nova pessoa.</li>
+            <li>As circunstâncias podem parecer desfavoráveis, mas Deus está ajustando tudo para o tempo certo.</li>
+          </ul>
+          <div class="verse">
+            <div class="verse-text">O Senhor desfaz os planos das nações e frustra os propósitos dos povos. Mas os planos do Senhor permanecem para sempre.</div>
+            <span class="verse-ref">Salmos 33:10-11</span>
+          </div>
+          <div class="sub-head">Pequenos sinais de que Deus está trabalhando</div>
+          <div class="step"><div class="step-num">1</div><div class="step-body"><b>Seu cônjuge demonstra pequenas mudanças</b> — menos resistente ao contato, tom mais amigável, pergunta sobre você.</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><b>Você percebe mudanças em si mesma</b> — mais paz, menos ansiedade, consegue orar sem ressentimento.</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><b>O cônjuge sente o peso das decisões dele</b> — algo dá errado, ele questiona suas escolhas, amigos aconselham repensar.</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><b>Sinais inesperados aparecem</b> — palavras proféticas, sonhos, situações que trazem esperança.</div></div>
+          <div class="verse">
+            <div class="verse-text">Eis que faço uma coisa nova, agora está saindo à luz; porventura, não a percebeis?</div>
+            <span class="verse-ref">Isaías 43:19</span>
+          </div>
+          <div class="sub-head">E se nada aconteceu ainda?</div>
+          <ul class="check-list">
+            <li>O tempo de Deus não é o nosso tempo. O que parece demora pode ser o tempo perfeito no plano dEle.</li>
+            <li>A transformação do seu cônjuge pode estar acontecendo internamente, sem que você perceba.</li>
+            <li>O silêncio de Deus também é um sinal — Ele pode estar te ensinando a confiar e a depender completamente dEle.</li>
+          </ul>
+          <div class="verse">
+            <div class="verse-text">Porque andamos por fé, e não pelo que vemos.</div>
+            <span class="verse-ref">2 Coríntios 5:7</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="chapter" data-chapter="9">
+      <button class="chapter-btn" aria-expanded="false">
+        <div class="icon">🏡</div>
+        <div class="title-block">
+          <span class="chapter-num">Capítulo 09</span>
+          <span class="chapter-title">Como construir um novo começo</span>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="chapter-body">
+        <div class="chapter-body-inner">
+          <p>Se a restauração aconteceu, esse não é o fim da jornada — <b>é um novo começo.</b> Agora, o desafio é diferente: construir um casamento saudável, livre dos erros do passado e baseado em princípios sólidos.</p>
+          <div class="verse">
+            <div class="verse-text">Eis que faço nova todas as coisas.</div>
+            <span class="verse-ref">Apocalipse 21:5</span>
+          </div>
+          <div class="sub-head">O que evitar após a reconciliação</div>
+          <ul class="x-list">
+            <li>Não transforme o casamento em um tribunal do passado.</li>
+            <li>Não volte aos mesmos comportamentos que causaram o afastamento.</li>
+            <li>Não ignore os sinais de alerta — conversem com maturidade antes que o problema cresça.</li>
+          </ul>
+          <div class="verse">
+            <div class="verse-text">Esqueçam o que se foi; não vivam no passado.</div>
+            <span class="verse-ref">Isaías 43:18</span>
+          </div>
+          <div class="sub-head">Como construir um casamento novo e forte</div>
+          <div class="step"><div class="step-num">1</div><div class="step-body"><b>Deus deve ser o centro do relacionamento.</b> Orem juntos e coloquem Deus como prioridade.</div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><b>A comunicação precisa ser aberta e respeitosa.</b> Pratiquem o perdão diário.</div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><b>Cultivem o relacionamento como no início.</b> Redescubram o prazer de estarem juntos.</div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><b>Trabalhem juntos para superar as fragilidades.</b> Se necessário, busquem aconselhamento pastoral ou terapia de casal.</div></div>
+          <div class="verse">
+            <div class="verse-text">Se o Senhor não edificar a casa, em vão trabalham os que a edificam.</div>
+            <span class="verse-ref">Salmos 127:1</span>
+          </div>
+          <div class="verse">
+            <div class="verse-text">Revesti-vos de amor, que é o vínculo da perfeição.</div>
+            <span class="verse-ref">Colossenses 3:14</span>
+          </div>
+          <div class="reflect">A restauração do casamento não significa voltar ao que era antes, mas construir algo novo e melhor. Se Deus restaurou seu relacionamento, cuide dele com sabedoria e amor.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="chapter" data-chapter="10">
+      <button class="chapter-btn" aria-expanded="false">
+        <div class="icon">📌</div>
+        <div class="title-block">
+          <span class="chapter-num">Capítulo 10</span>
+          <span class="chapter-title">Conclusão</span>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="chapter-body">
+        <div class="chapter-body-inner">
+          <p>Chegar até aqui significa que você decidiu lutar pelo seu casamento com sabedoria e dignidade. Mas, mais do que isso, significa que você permitiu que Deus transformasse sua vida primeiro.</p>
+          <p>A restauração do casamento é um processo que exige fé, paciência e crescimento pessoal. Se há algo que você deve levar deste guia, é que:</p>
+          <ul class="check-list">
+            <li>A restauração começa dentro de você. Seu casamento não pode ser restaurado se você mesma não estiver fortalecida.</li>
+            <li>A luta não é contra seu cônjuge, mas contra as forças espirituais que tentam destruir famílias.</li>
+            <li>Se você confiar e se posicionar corretamente, Deus agirá. Pode não ser no seu tempo, mas Ele nunca falha.</li>
+          </ul>
+          <p><b>Agora, o que você pode fazer?</b></p>
+          <ul class="check-list">
+            <li>Continue crescendo espiritualmente e emocionalmente.</li>
+            <li>Se posicione com sabedoria e dignidade.</li>
+            <li>Nunca perca sua identidade em Cristo, independentemente do desfecho dessa história.</li>
+            <li>Confie que Deus está no controle e que o melhor dEle sempre prevalecerá.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ENCERRAMENTO -->
+  <div class="closing">
+    <div class="mark">Agora é com você</div>
+    <h2>Sua história ainda<br>está sendo escrita</h2>
+    <div class="pledge">
+      <div>Se esse guia falou com seu coração, guarde consigo o testemunho que Deus está construindo em você.</div>
+      <div>Ore e peça a Deus para continuar guiando seu caminho.</div>
+      <div>Lembre-se: a vitória pertence àqueles que não desistem daquilo que Deus colocou em seus corações.</div>
+    </div>
+    <div class="final-verse">"Com amor e fé, que Deus abençoe sua jornada."</div>
+  </div>
+
+  <div class="footer-tag">O Manual do Casamento Restaurado</div>
+
+</div>
+
+<script>
+(function(){
+  const chapters = document.querySelectorAll('.chapter');
+  const total = chapters.length;
+  const track = document.getElementById('journeyTrack');
+  const pctLabel = document.getElementById('progressPct');
+  const readSet = new Set();
+
+  // build progress segments
+  chapters.forEach((_, i) => {
+    const seg = document.createElement('div');
+    seg.className = 'seg';
+    seg.dataset.idx = i;
+    track.appendChild(seg);
+  });
+  const segs = track.querySelectorAll('.seg');
+
+  function updateProgress(){
+    segs.forEach((s, i) => {
+      if (readSet.has(i)) s.classList.add('done');
+    });
+    pctLabel.textContent = readSet.size + ' de ' + total + ' capítulos lidos';
+  }
+
+  chapters.forEach((chapter, idx) => {
+    const btn = chapter.querySelector('.chapter-btn');
+    const body = chapter.querySelector('.chapter-body');
+
+    btn.addEventListener('click', () => {
+      const isOpen = chapter.classList.contains('open');
+
+      // close all others
+      chapters.forEach(c => {
+        if (c !== chapter) {
+          c.classList.remove('open');
+          c.querySelector('.chapter-body').style.maxHeight = null;
+          c.querySelector('.chapter-btn').setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      if (isOpen) {
+        chapter.classList.remove('open');
+        body.style.maxHeight = null;
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        chapter.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded', 'true');
+        readSet.add(idx);
+        updateProgress();
+        setTimeout(() => {
+          chapter.scrollIntoView({behavior:'smooth', block:'start'});
+        }, 120);
+      }
+    });
+  });
+
+  updateProgress();
+})();
+</script>
+
+</body>
+</html>
