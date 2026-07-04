@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual da Mulher Virtuosa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa: #F2A4A4;
+    --vinho: #7B2D3E;
+    --vinho-light: #C4566A;
+    --creme: #FFF8F5;
+    --coral: #F28B82;
+    --dourado: #D4956A;
+    --verde-sage: #8FAF8A;
+    --lavanda: #C9B8D8;
+    --texto: #3A1A20;
+    --texto-suave: #7A4A52;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    max-width: 430px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* ===== CAPA ===== */
+  .capa {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #FDDDE6 0%, #F7B8C4 40%, #E8899A 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .capa::before {
+    content: '✿';
+    position: absolute;
+    font-size: 300px;
+    color: rgba(255,255,255,0.12);
+    top: -60px; right: -60px;
+    pointer-events: none;
+  }
+
+  .capa::after {
+    content: '✿';
+    position: absolute;
+    font-size: 200px;
+    color: rgba(255,255,255,0.10);
+    bottom: -40px; left: -40px;
+    pointer-events: none;
+  }
+
+  .capa-badge {
+    background: rgba(255,255,255,0.35);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 50px;
+    padding: 6px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--vinho);
+    margin-bottom: 24px;
+  }
+
+  .capa h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 20px rgba(123,45,62,0.3);
+  }
+
+  .capa h1 span {
+    font-style: italic;
+    color: #FFF0F3;
+  }
+
+  .capa-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .capa-verse {
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 16px 20px;
+    border: 1px solid rgba(255,255,255,0.4);
+    font-style: italic;
+    font-size: 13px;
+    color: var(--vinho);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .capa-autor {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.6);
+    font-size: 11px;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ===== MENU ÍNDICE ===== */
+  .indice {
+    background: white;
+    padding: 28px 20px;
+    border-bottom: 2px solid #FDE8EC;
+  }
+
+  .indice-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--vinho);
+    margin-bottom: 16px;
+  }
+
+  .indice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .indice-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--creme);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--texto);
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: 1.5px solid transparent;
+  }
+
+  .indice-item:hover, .indice-item:active {
+    background: #FDDDE6;
+    border-color: var(--rosa);
+    transform: translateX(4px);
+  }
+
+  .indice-emoji {
+    font-size: 20px;
+    min-width: 32px;
+    text-align: center;
+  }
+
+  /* ===== SEÇÃO ===== */
+  .secao {
+    padding: 0 0 40px;
+  }
+
+  .secao-header {
+    padding: 40px 24px 24px;
+    text-align: center;
+    position: relative;
+  }
+
+  .secao-emoji {
+    font-size: 52px;
+    display: block;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+  }
+
+  .secao-badge {
+    display: inline-block;
+    background: #FDE8EC;
+    color: var(--vinho-light);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+  }
+
+  .secao-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: var(--vinho);
+    line-height: 1.2;
+  }
+
+  .secao-titulo em {
+    font-style: italic;
+    color: var(--vinho-light);
+  }
+
+  .secao-intro {
+    padding: 0 24px 20px;
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--texto-suave);
+    text-align: center;
+  }
+
+  /* ===== CARDS ACCORDION ===== */
+  .cards-stack {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-accordion {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+    border: 1.5px solid #FDE8EC;
+  }
+
+  .card-accordion-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .card-accordion-header:active {
+    background: #FDE8EC;
+  }
+
+  .card-accordion-icon {
+    font-size: 22px;
+    min-width: 36px;
+    text-align: center;
+  }
+
+  .card-accordion-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--texto);
+    flex: 1;
+  }
+
+  .card-accordion-arrow {
+    font-size: 12px;
+    color: var(--rosa);
+    transition: transform 0.3s;
+  }
+
+  .card-accordion.open .card-accordion-arrow {
+    transform: rotate(180deg);
+  }
+
+  .card-accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .card-accordion.open .card-accordion-body {
+    max-height: 600px;
+  }
+
+  .card-accordion-content {
+    padding: 0 18px 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--texto-suave);
+    border-top: 1px solid #FDE8EC;
+    padding-top: 14px;
+  }
+
+  /* ===== VERSÍCULO ===== */
+  .versiculo {
+    margin: 20px 16px;
+    background: linear-gradient(135deg, #FDE8EC, #F7D0D8);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .versiculo::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 100px;
+    color: rgba(123,45,62,0.08);
+    position: absolute;
+    top: -20px; left: 10px;
+    line-height: 1;
+  }
+
+  .versiculo-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--vinho);
+    line-height: 1.7;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .versiculo-ref {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--vinho-light);
+  }
+
+  /* ===== HIGHLIGHT ===== */
+  .highlight {
+    margin: 16px 16px;
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    border-left: 4px solid var(--rosa);
+    box-shadow: 0 2px 12px rgba(123,45,62,0.06);
+  }
+
+  .highlight p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--texto-suave);
+    font-style: italic;
+  }
+
+  /* ===== LISTA ESTILIZADA ===== */
+  .lista-bonita {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .lista-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: white;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 8px rgba(123,45,62,0.06);
+  }
+
+  .lista-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--rosa);
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .lista-item p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--texto);
+  }
+
+  /* ===== GRID 2 COLUNAS ===== */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 16px;
+    margin: 16px 0;
+  }
+
+  .grid-card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 14px;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.07);
+    text-align: center;
+  }
+
+  .grid-card-emoji {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .grid-card-title {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--vinho);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .grid-card p {
+    font-size: 12px;
+    color: var(--texto-suave);
+    line-height: 1.5;
+  }
+
+  /* ===== CRONOGRAMA ===== */
+  .cronograma {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .crono-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.07);
+  }
+
+  .crono-header {
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  .crono-header.diario { background: var(--vinho); }
+  .crono-header.semanal { background: var(--vinho-light); }
+  .crono-header.mensal { background: var(--rosa); color: var(--vinho); }
+
+  .crono-body {
+    padding: 12px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .crono-tag {
+    background: var(--creme);
+    border: 1px solid #FDE8EC;
+    border-radius: 50px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--texto);
+    font-weight: 600;
+  }
+
+  /* ===== ORÇAMENTO ===== */
+  .orcamento {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .orc-item {
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .orc-pct {
+    min-width: 70px;
+    padding: 16px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+  }
+
+  .orc-pct.p50 { background: var(--vinho); }
+  .orc-pct.p30 { background: var(--vinho-light); }
+  .orc-pct.p10a { background: var(--coral); }
+  .orc-pct.p10b { background: var(--rosa); color: var(--vinho); }
+
+  .orc-label {
+    flex: 1;
+    padding: 12px 16px;
+    background: white;
+    font-size: 13px;
+    color: var(--texto);
+    font-weight: 600;
+    border-radius: 0 14px 14px 0;
+    box-shadow: 0 2px 8px rgba(123,45,62,0.06);
+  }
+
+  /* ===== DIÁRIO INTERATIVO ===== */
+  .diario {
+    padding: 0 16px;
+    margin: 16px 0;
+  }
+
+  .diario-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px 20px;
+    box-shadow: 0 4px 20px rgba(123,45,62,0.1);
+    border: 2px solid #FDE8EC;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .diario-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--vinho), var(--rosa));
+  }
+
+  .diario-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--vinho);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .diario-campo {
+    margin-bottom: 16px;
+  }
+
+  .diario-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--vinho-light);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .diario-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #FDE8EC;
+    padding: 8px 0;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    color: var(--texto);
+    background: transparent;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .diario-input:focus {
+    border-bottom-color: var(--rosa);
+  }
+
+  .diario-textarea {
+    width: 100%;
+    border: 1.5px solid #FDE8EC;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    color: var(--texto);
+    background: var(--creme);
+    outline: none;
+    resize: none;
+    min-height: 80px;
+    transition: border-color 0.2s;
+  }
+
+  .diario-textarea:focus {
+    border-color: var(--rosa);
+  }
+
+  /* ===== DECLARAÇÕES ===== */
+  .declaracoes {
+    padding: 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .declaracao-item {
+    background: linear-gradient(135deg, white, #FFF0F3);
+    border-radius: 14px;
+    padding: 16px;
+    border-left: 3px solid var(--rosa);
+    box-shadow: 0 2px 8px rgba(123,45,62,0.06);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .declaracao-item:active {
+    transform: scale(0.98);
+  }
+
+  .declaracao-text {
+    font-size: 14px;
+    font-style: italic;
+    color: var(--texto);
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .declaracao-ref {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--vinho-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ===== TAREFAS POR IDADE ===== */
+  .idade-tabs {
+    padding: 0 16px;
+    margin: 16px 0;
+  }
+
+  .tab-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    background: white;
+    color: var(--texto-suave);
+    border: 1.5px solid #FDE8EC;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active {
+    background: var(--vinho);
+    color: white;
+    border-color: var(--vinho);
+  }
+
+  .tab-content {
+    display: none;
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .tab-content li {
+    font-size: 14px;
+    color: var(--texto);
+    padding: 8px 0;
+    border-bottom: 1px solid #FDE8EC;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tab-content li:last-child { border-bottom: none; }
+
+  .tab-content li::before {
+    content: '✓';
+    color: var(--rosa);
+    font-weight: 800;
+  }
+
+  /* ===== DIVISOR ===== */
+  .divisor {
+    height: 8px;
+    background: #FDE8EC;
+    margin: 0;
+  }
+
+  /* ===== CONCLUSÃO ===== */
+  .conclusao {
+    background: linear-gradient(160deg, #7B2D3E 0%, #C4566A 100%);
+    padding: 60px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .conclusao::before {
+    content: '✿';
+    position: absolute;
+    font-size: 200px;
+    color: rgba(255,255,255,0.06);
+    top: -30px; right: -30px;
+  }
+
+  .conclusao h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .conclusao h2 em {
+    font-style: italic;
+    color: #FDE8EC;
+  }
+
+  .conclusao p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.75;
+    margin-bottom: 12px;
+  }
+
+  .conclusao-verse {
+    background: rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 20px;
+    margin: 24px 0;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .conclusao-verse p {
+    font-style: italic;
+    color: #FDE8EC;
+  }
+
+  .conclusao-assinatura {
+    font-size: 16px;
+    color: white;
+    font-style: italic;
+    margin-top: 24px;
+  }
+
+  /* ===== SEÇÃO COLORS ===== */
+  .secao-1 .secao-header { background: linear-gradient(180deg, #FDE8EC 0%, var(--creme) 100%); }
+  .secao-2 .secao-header { background: linear-gradient(180deg, #EDF5EC 0%, var(--creme) 100%); }
+  .secao-3 .secao-header { background: linear-gradient(180deg, #F0EBF7 0%, var(--creme) 100%); }
+  .secao-4 .secao-header { background: linear-gradient(180deg, #FEF0E8 0%, var(--creme) 100%); }
+  .secao-5 .secao-header { background: linear-gradient(180deg, #E8F2FE 0%, var(--creme) 100%); }
+  .secao-6 .secao-header { background: linear-gradient(180deg, #FDE8EC 0%, var(--creme) 100%); }
+  .secao-7 .secao-header { background: linear-gradient(180deg, #FEFCE8 0%, var(--creme) 100%); }
+  .secao-8 .secao-header { background: linear-gradient(180deg, #EDF5EC 0%, var(--creme) 100%); }
+  .secao-9 .secao-header { background: linear-gradient(180deg, #F0EBF7 0%, var(--creme) 100%); }
+
+  /* ===== ANIMAÇÕES ===== */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== PROGRESS BAR ===== */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--vinho), var(--rosa));
+    z-index: 999;
+    transition: width 0.1s;
+  }
+
+  /* ===== BACK TO TOP ===== */
+  .back-top {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    background: var(--vinho);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(123,45,62,0.3);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 998;
+    transition: transform 0.2s;
+  }
+
+  .back-top.visible {
+    display: flex;
+  }
+
+  .back-top:active { transform: scale(0.9); }
+
+  /* ===== TÍTULO SEÇÃO ===== */
+  .titulo-secao {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--texto-suave);
+    padding: 24px 24px 8px;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ===== CAPA ===== -->
+<section class="capa">
+  <div class="capa-badge">✨ Guia completo</div>
+  <h1>Manual da<br><span>Mulher Virtuosa</span></h1>
+  <p class="capa-sub">Um caderno prático para alinhar<br>sua rotina aos planos de Deus 🌸</p>
+  <div class="capa-verse">
+    "Mulher virtuosa, quem a achará?<br>O seu valor muito excede ao de rubis."<br>
+    <strong>Provérbios 31:10</strong>
+  </div>
+  <span class="capa-autor">Por Alinne Vieira</span>
+  <div class="scroll-hint">▼<br>role para começar</div>
+</section>
+
+<!-- ===== ÍNDICE ===== -->
+<div class="indice fade-in">
+  <div class="indice-title">📖 O que você vai aprender</div>
+  <div class="indice-list">
+    <a href="#espiritual" class="indice-item"><span class="indice-emoji">🙏</span> Vida Espiritual</a>
+    <a href="#rotina" class="indice-item"><span class="indice-emoji">📋</span> Rotina Intencional</a>
+    <a href="#casamento" class="indice-item"><span class="indice-emoji">💍</span> Casamento Virtuoso</a>
+    <a href="#maternidade" class="indice-item"><span class="indice-emoji">👶</span> Maternidade</a>
+    <a href="#desenvolvimento" class="indice-item"><span class="indice-emoji">🌱</span> Desenvolvimento Pessoal</a>
+    <a href="#lar" class="indice-item"><span class="indice-emoji">🏠</span> Cuidados com o Lar</a>
+    <a href="#tempo" class="indice-item"><span class="indice-emoji">⏰</span> Gerenciamento de Tempo</a>
+    <a href="#financas" class="indice-item"><span class="indice-emoji">💰</span> Finanças</a>
+    <a href="#autocuidado" class="indice-item"><span class="indice-emoji">💆</span> Autocuidado</a>
+  </div>
+</div>
+
+<div class="divisor"></div>
+
+<!-- ===== SEÇÃO 1: ESPIRITUAL ===== -->
+<section id="espiritual" class="secao secao-1">
+  <div class="secao-header fade-in">
+    <span class="secao-emoji">🙏</span>
+    <div class="secao-badge">Capítulo 01</div>
+    <h2 class="secao-titulo">Vida Espiritual<br><em>O Centro de Tudo</em></h2>
+  </div>
+
+  <p class="secao-intro fade-in">Sem Deus no centro, nada faz sentido. A vida espiritual não é uma tarefa — é uma necessidade.</p>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"É impossível buscar a Deus com profundidade e permanecer a mesma. Ele nos transforma, nos molda e nos capacita."</p>
+  </div>
+
+  <div class="titulo-secao">Como priorizar seu devocional</div>
+  <div class="cards-stack fade-in">
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">⏰</span>
+        <span class="card-accordion-title">Escolha o horário certo</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Se tem filhos pequenos, acorde antes deles. Não deixe pra última hora do dia — isso mostra que Deus não é prioridade. Sugiro as primeiras horas, mesmo que precise acordar 35 minutos mais cedo!
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">📍</span>
+        <span class="card-accordion-title">Defina um cantinho sagrado</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Reserve um local com sua Bíblia, caneta, marcador e bloco de anotações sempre prontos. Esse espaço vai te ajudar a entrar no modo devocional mais rápido.
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">⌛</span>
+        <span class="card-accordion-title">Divida os 30 minutos</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          🎵 5 min — Louvor<br>
+          📖 10 min — Leitura<br>
+          🤔 5 min — Meditação<br>
+          🙏 10 min — Oração<br><br>
+          O foco não deve ser quantidade, mas qualidade!
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">📚</span>
+        <span class="card-accordion-title">Métodos de leitura bíblica</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          1. <strong>Plano anual</strong> — intercala Novo e Velho Testamento<br><br>
+          2. <strong>Por temas</strong> — estude todas as referências sobre um assunto<br><br>
+          3. <strong>Em sequência</strong> — de Gênesis ao Apocalipse<br><br>
+          4. <strong>Por livros</strong> — conclua um livro antes de começar outro
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="titulo-secao">Meu diário de leitura 📓</div>
+  <div class="diario fade-in">
+    <div class="diario-card">
+      <div class="diario-titulo">✍️ Diário de Leitura</div>
+      <div class="diario-campo">
+        <label class="diario-label">Data</label>
+        <input type="date" class="diario-input">
+      </div>
+      <div class="diario-campo">
+        <label class="diario-label">Texto bíblico lido</label>
+        <input type="text" class="diario-input" placeholder="Ex: João 3">
+      </div>
+      <div class="diario-campo">
+        <label class="diario-label">Versículo-chave</label>
+        <textarea class="diario-textarea" placeholder="Escreva o versículo que tocou seu coração..."></textarea>
+      </div>
+      <div class="diario-campo">
+        <label class="diario-label">O que eu aprendi</label>
+        <textarea class="diario-textarea" placeholder="Qual foi sua reflexão de hoje?"></textarea>
+      </div>
+      <div class="diario-campo">
+        <label class="diario-label">Como vou aplicar na minha vida</label>
+        <textarea class="diario-textarea" placeholder="Qual ação prática você vai tomar?"></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ===== SEÇÃO 2: ROTINA ===== -->
+<section id="rotina" class="secao secao-2">
+  <div class="secao-header fade-in">
+    <span class="secao-emoji">📋</span>
+    <div class="secao-badge">Capítulo 02</div>
+    <h2 class="secao-titulo">Rotina<br><em>Intencional</em></h2>
+  </div>
+
+  <p class="secao-intro fade-in">Glorificar a Deus na rotina é transformar cada tarefa em ato de adoração — sem produtividade tóxica!</p>
+
+  <div class="highlight fade-in">
+    <p>Deus não nos chamou para encher a agenda e se sobrecarregar. É priorizar o que realmente importa, cuidar do que Ele confiou a você sem abrir mão do descanso.</p>
+  </div>
+
+  <div class="titulo-secao">Declare sobre o seu dia ✨</div>
+  <div class="declaracoes fade-in">
+    <div class="declaracao-item">
+      <p class="declaracao-text">"Hoje, eu irei fazer o bem para minha família, porque a Palavra de Deus me ensina a amar e servir com alegria."</p>
+      <span class="declaracao-ref">1 Pedro 4:10</span>
+    </div>
+    <div class="declaracao-item">
+      <p class="declaracao-text">"Declaro que Deus é a força da minha vida, e não permitirei que as emoções me desestabilizem, pois o Senhor é a minha paz."</p>
+      <span class="declaracao-ref">Êxodo 15:2</span>
+    </div>
+    <div class="declaracao-item">
+      <p class="declaracao-text">"Hoje, eu escolho falar de sabedoria e bondade, porque fui chamada para edificar e trazer vida."</p>
+      <span class="declaracao-ref">Provérbios 15:1</span>
+    </div>
+    <div class="declaracao-item">
+      <p class="declaracao-text">"Eu confio que Deus está no controle de todas as coisas e, por isso, não andarei ansiosa, mas descansarei em Sua fidelidade."</p>
+      <span class="declaracao-ref">Salmos 37:5</span>
+    </div>
+    <div class="declaracao-item">
+      <p class="declaracao-text">"Hoje, eu serei luz onde estiver, refletindo o amor de Deus em minhas ações e palavras."</p>
+      <span class="declaracao-ref">Mateus 5:16</span>
+    </div>
+  </div>
+
+  <div class="titulo-secao">O que não pode faltar</div>
+  <div class="lista-bonita fade-in">
+    <div class="lista-item"><div class="lista-dot"></div><p>🙏 Tempo de oração e leitura da Palavra</p></div>
+    <div class="lista-item"><div class="lista-dot"></div><p>📝 Planejamento do dia</p></div>
+    <div class="lista-item"><div class="lista-dot"></div><p>🏠 Cuidado com a família e o lar</p></div>
+    <div class="lista-item"><div class="lista-dot"></div><p>💼 Trabalho com propósito</p></div>
+    <div class="lista-item"><div class="lista-dot"></div><p>💆 Atividades de autocuidado</p></div>
+    <div class="lista-item"><div class="lista-dot"></div><p>❤️ Atos de serviço e bondade</p></div>
+    <div class="lista-item"><div class="lista-dot"></div><p>🌱 Momento de desenvolvimento pessoal</p></div>
+    <div class="lista-item"><div class="lista-dot"></div><p>👨‍👩‍👧 Tempo com a família</p></div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ===== SEÇÃO 3: CASAMENTO ===== -->
+<section id="casamento" class="secao secao-3">
+  <div class="secao-header fade-in">
+    <span class="secao-emoji">💍</span>
+    <div class="secao-badge">Capítulo 03</div>
+    <h2 class="secao-titulo">Casamento<br><em>Virtuoso</em></h2>
+  </div>
+
+  <p class="secao-intro fade-in">Edificando o lar através da bondade, confiança e do amor de Cristo — todos os dias.</p>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"O coração do seu marido confia nela e lhe faz bem, e não mal, todos os dias da sua vida."</p>
+    <span class="versiculo-ref">Provérbios 31:11-12</span>
+  </div>
+
+  <div class="titulo-secao">Pratique a bondade diária</div>
+  <div class="cards-stack fade-in">
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">🤝</span>
+        <span class="card-accordion-title">Facilite a rotina dele</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Deixe as coisas que ele precisa organizadas. Realize os favores que ele pede de boa vontade. Esses pequenos gestos constroem confiança e mostram que você o valoriza.
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">🤗</span>
+        <span class="card-accordion-title">Toque físico diário</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Cultive o hábito de fazer um carinho, beijar e abraçar seu esposo todos os dias. O toque físico é uma das linguagens do amor mais poderosas!
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">🍽️</span>
+        <span class="card-accordion-title">Ambiente e alimentação</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Faça comidas que ele goste pelo menos em uma das refeições. Organize a casa, deixe-a com um cheirinho bom e crie um clima de paz para quando ele chegar.
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">🙏</span>
+        <span class="card-accordion-title">Ore por ele todos os dias</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Separe um tempo para interceder pelo seu marido em todas as áreas da vida. A oração da esposa tem um poder especial!
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">📖</span>
+        <span class="card-accordion-title">Devocional de casal</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Uma vez por semana, leiam a Bíblia juntos, compartilhem reflexões e orem pelo casamento. Reserve também um tempo semanal só para estarem juntos fazendo algo que ambos gostam!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ===== SEÇÃO 4: MATERNIDADE ===== -->
+<section id="maternidade" class="secao secao-4">
+  <div class="secao-header fade-in">
+    <span class="secao-emoji">👶</span>
+    <div class="secao-badge">Capítulo 04</div>
+    <h2 class="secao-titulo">Maternidade<br><em>com Propósito</em></h2>
+  </div>
+
+  <p class="secao-intro fade-in">Ser mãe é uma oportunidade divina de deixar um legado eterno. Deus confiou a você essa missão!</p>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"Abre a sua boca com sabedoria, e a lei da beneficência está na sua língua."</p>
+    <span class="versiculo-ref">Provérbios 31:26</span>
+  </div>
+
+  <div class="grid-2 fade-in">
+    <div class="grid-card">
+      <span class="grid-card-emoji">🗣️</span>
+      <div class="grid-card-title">Sem gritar</div>
+      <p>Pratique falar em tom agradável, mesmo quando estiver brava.</p>
+    </div>
+    <div class="grid-card">
+      <span class="grid-card-emoji">🕊️</span>
+      <div class="grid-card-title">Paciência</div>
+      <p>Eles logo crescerão. Seja a mãe que eles vão lembrar com amor.</p>
+    </div>
+    <div class="grid-card">
+      <span class="grid-card-emoji">📚</span>
+      <div class="grid-card-title">Devocional</div>
+      <p>Leia a Bíblia infantil diariamente e orem juntos.</p>
+    </div>
+    <div class="grid-card">
+      <span class="grid-card-emoji">✝️</span>
+      <div class="grid-card-title">Versículo</div>
+      <p>Um versículo por semana memorizado com premiação!</p>
+    </div>
+  </div>
+
+  <div class="titulo-secao">Tarefas por idade 👧</div>
+  <div class="idade-tabs fade-in">
+    <div class="tab-buttons">
+      <button class="tab-btn active" onclick="showTab('t1', this)">2-4 anos</button>
+      <button class="tab-btn" onclick="showTab('t2', this)">5-8 anos</button>
+      <button class="tab-btn" onclick="showTab('t3', this)">9+ anos</button>
+    </div>
+    <div id="t1" class="tab-content active">
+      <ul>
+        <li>Guardar brinquedos</li>
+        <li>Jogar lixo na lixeira</li>
+        <li>Colocar roupas sujas no cesto</li>
+        <li>Ajudar a regar plantas</li>
+      </ul>
+    </div>
+    <div id="t2" class="tab-content">
+      <ul>
+        <li>Arrumar a cama</li>
+        <li>Pôr e tirar a mesa</li>
+        <li>Ajudar a dobrar roupas</li>
+        <li>Varrer pequenas áreas</li>
+      </ul>
+    </div>
+    <div id="t3" class="tab-content">
+      <ul>
+        <li>Lavar a louça</li>
+        <li>Aspirar a casa</li>
+        <li>Ajudar no preparo de refeições</li>
+        <li>Organizar o próprio quarto</li>
+        <li>Ajudar com as compras</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ===== SEÇÃO 5: DESENVOLVIMENTO ===== -->
+<section id="desenvolvimento" class="secao secao-5">
+  <div class="secao-header fade-in">
+    <span class="secao-emoji">🌱</span>
+    <div class="secao-badge">Capítulo 05</div>
+    <h2 class="secao-titulo">Desenvolvimento<br><em>Pessoal</em></h2>
+  </div>
+
+  <p class="secao-intro fade-in">Deus te criou com dons e talentos únicos. Desenvolvê-los não é egoísmo — é glorificá-Lo!</p>
+
+  <div class="highlight fade-in">
+    <p>Seja aprender algo novo, fazer um curso ou aprofundar um talento já existente — tudo isso glorifica a Deus e te torna uma mulher mais preparada!</p>
+  </div>
+
+  <div class="titulo-secao">Habilidades para cultivar</div>
+  <div class="cards-stack fade-in">
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">🧵</span>
+        <span class="card-accordion-title">Habilidades criativas</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Costura • Bordado • Crochê • Cerâmica • Colorir • Pintar unhas • Fazer bolos de aniversário • Automaquiagem
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">🍞</span>
+        <span class="card-accordion-title">Culinária e lar</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Fazer pão • Receitas novas • Cultivar uma horta • Pequenos reparos em casa • Primeiros socorros
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">📚</span>
+        <span class="card-accordion-title">Intelectual e profissional</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Leitura • Escrita • Aprender inglês • Tocar um instrumento • Cursos de especialização • Habilitação
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ===== SEÇÃO 6: LAR ===== -->
+<section id="lar" class="secao secao-6">
+  <div class="secao-header fade-in">
+    <span class="secao-emoji">🏠</span>
+    <div class="secao-badge">Capítulo 06</div>
+    <h2 class="secao-titulo">Cuidados<br><em>com o Lar</em></h2>
+  </div>
+
+  <p class="secao-intro fade-in">A mulher virtuosa transforma a casa em um lar de paz, harmonia e amor através das suas palavras e ações.</p>
+
+  <div class="grid-2 fade-in">
+    <div class="grid-card">
+      <span class="grid-card-emoji">⏱️</span>
+      <div class="grid-card-title">5 minutos</div>
+      <p>Tarefas de até 5 min: faça agora! Não acumule.</p>
+    </div>
+    <div class="grid-card">
+      <span class="grid-card-emoji">🧹</span>
+      <div class="grid-card-title">Faxina fracionada</div>
+      <p>Um cômodo por dia. Sem sobrecarga!</p>
+    </div>
+    <div class="grid-card">
+      <span class="grid-card-emoji">📦</span>
+      <div class="grid-card-title">Um lugar para tudo</div>
+      <p>Ensine toda a família onde cada coisa fica.</p>
+    </div>
+    <div class="grid-card">
+      <span class="grid-card-emoji">📋</span>
+      <div class="grid-card-title">Método 1-3-5</div>
+      <p>1 tarefa grande, 3 médias, 5 pequenas por dia.</p>
+    </div>
+  </div>
+
+  <div class="titulo-secao">Cronograma de limpeza 🗓️</div>
+  <div class="cronograma fade-in">
+    <div class="crono-card">
+      <div class="crono-header diario">📅 Diariamente</div>
+      <div class="crono-body">
+        <span class="crono-tag">Arrumar a cama</span>
+        <span class="crono-tag">Arejar quartos</span>
+        <span class="crono-tag">Varrer</span>
+        <span class="crono-tag">Lavar louça</span>
+        <span class="crono-tag">Limpar pia</span>
+        <span class="crono-tag">Esvaziar lixo</span>
+      </div>
+    </div>
+    <div class="crono-card">
+      <div class="crono-header semanal">📆 Semanalmente</div>
+      <div class="crono-body">
+        <span class="crono-tag">Trocar roupa de cama</span>
+        <span class="crono-tag">Lavar roupas</span>
+        <span class="crono-tag">Lavar banheiro</span>
+        <span class="crono-tag">Tirar pó</span>
+        <span class="crono-tag">Cardápio da semana</span>
+        <span class="crono-tag">Lista de compras</span>
+      </div>
+    </div>
+    <div class="crono-card">
+      <div class="crono-header mensal">🗓️ Mensalmente</div>
+      <div class="crono-body">
+        <span class="crono-tag">Limpar máquina de lavar</span>
+        <span class="crono-tag">Organizar armários</span>
+        <span class="crono-tag">Limpar janelas</span>
+        <span class="crono-tag">Organizar documentos</span>
+        <span class="crono-tag">Colchão ao sol</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ===== SEÇÃO 7: TEMPO ===== -->
+<section id="tempo" class="secao secao-7">
+  <div class="secao-header fade-in">
+    <span class="secao-emoji">⏰</span>
+    <div class="secao-badge">Capítulo 07</div>
+    <h2 class="secao-titulo">Gerenciamento<br><em>de Tempo</em></h2>
+  </div>
+
+  <p class="secao-intro fade-in">O tempo é um recurso precioso dado por Deus. Usá-lo com sabedoria é uma forma de honrá-Lo.</p>
+
+  <div class="cards-stack fade-in">
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">🌅</span>
+        <span class="card-accordion-title">Acorde mais cedo</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Nas primeiras horas do dia, quando a casa está em silêncio e você está bem disposta, é possível organizar o dia inteiro e agilizar muito mais coisas!
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">📵</span>
+        <span class="card-accordion-title">Controle o celular</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Muito da nossa falta de tempo está no excesso de entretenimento. Enquanto não concluir as tarefas mais importantes, não mexa no celular. Deixe-o distante!
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">🎯</span>
+        <span class="card-accordion-title">Foque no propósito</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Pergunte-se constantemente: "Isso me aproxima dos meus objetivos ou é apenas uma distração?" Essa mentalidade ajuda a filtrar o que vale a pena dedicar tempo.
+        </div>
+      </div>
+    </div>
+    <div class="card-accordion" onclick="toggleCard(this)">
+      <div class="card-accordion-header">
+        <span class="card-accordion-icon">🔄</span>
+        <span class="card-accordion-title">Revise o dia à noite</span>
+        <span class="card-accordion-arrow">▼</span>
+      </div>
+      <div class="card-accordion-body">
+        <div class="card-accordion-content">
+          Reserve alguns minutos no final do dia para avaliar o que foi concluído e ajustar o planejamento para o próximo dia. Isso cria um ciclo de melhoria contínua!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ===== SEÇÃO 8: FINANÇAS ===== -->
+<section id="financas" class="secao secao-8">
+  <div class="secao-header fade-in">
+    <span class="secao-emoji">💰</span>
+    <div class="secao-badge">Capítulo 08</div>
+    <h2 class="secao-titulo">Honrando a Deus<br><em>com as Finanças</em></h2>
+  </div>
+
+  <p class="secao-intro fade-in">Administrar bem o que Deus nos deu é uma expressão de obediência e gratidão a Ele.</p>
+
+  <div class="versiculo fade-in">
+    <p class="versiculo-text">"Ela sorri para o futuro." A mulher virtuosa não tem medo do amanhã — está confiante e preparada!</p>
+    <span class="versiculo-ref">Provérbios 31:25</span>
+  </div>
+
+  <div class="titulo-secao">Orçamento 50-30-10-10</div>
+  <div class="orcamento fade-in">
+    <div class="orc-item">
+      <div class="orc-pct p50">50%</div>
+      <div class="orc-label">Despesas fixas<br><small style="color:#999">Moradia, alimentação, contas</small></div>
+    </div>
+    <div class="orc-item">
+      <div class="orc-pct p30">30%</div>
+      <div class="orc-label">Despesas variáveis<br><small style="color:#999">Lazer, academia, roupas</small></div>
+    </div>
+    <div class="orc-item">
+      <div class="orc-pct p10a">10%</div>
+      <div class="orc-label">Dízimo 🙏<br><small style="color:#999">Honrando ao Senhor</small></div>
+    </div>
+    <div class="orc-item">
+      <div class="orc-pct p10b">10%</div>
+      <div class="orc-label">Reserva de emergência<br><small style="color:#999">Para o futuro</small></div>
+    </div>
+  </div>
+
+  <div class="titulo-secao">Ideias de renda extra 💡</div>
+  <div class="lista-bonita fade-in">
+    <div class="lista-item"><div class="lista-dot"></div><p>📱 <strong>Produtora digital</strong> — crie e-books, planners, cursos e venda</p></div>
+    <div class="lista-item"><div class="lista-dot"></div><p>📲 <strong>Social Media</strong> — gerencie redes sociais de empreendedores</p></div>
+    <div class="lista-item"><div class="lista-dot"></div><p>🎨 <strong>Criação de posts</strong> — pacotes de artes no Canva</p></div>
+    <div class="lista-item"><div class="lista-dot"></div><p>🔗 <strong>Afiliada</strong> — divulgue produtos e ganhe comissões</p></div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ===== SEÇÃO 9: AUTOCUIDADO ===== -->
+<section id="autocuidado" class="secao secao-9">
+  <div class="secao-header fade-in">
+    <span class="secao-emoji">💆</span>
+    <div class="secao-badge">Capítulo 09</div>
+    <h2 class="secao-titulo">Auto<br><em>cuidado</em></h2>
+  </div>
+
+  <p class="secao-intro fade-in">Cuidar do templo que Deus te deu é uma forma de glorificá-Lo. Não é egoísmo — é necessário!</p>
+
+  <div class="grid-2 fade-in">
+    <div class="grid-card">
+      <span class="grid-card-emoji">🏃</span>
+      <div class="grid-card-title">Exercícios</div>
+      <p>20-30 min, 3x por semana. Converse com Deus enquanto cuida do corpo.</p>
+    </div>
+    <div class="grid-card">
+      <span class="grid-card-emoji">🥗</span>
+      <div class="grid-card-title">Alimentação</div>
+      <p>Planeje refeições saudáveis. Prepare marmitas para os dias corridos.</p>
+    </div>
+    <div class="grid-card">
+      <span class="grid-card-emoji">🧴</span>
+      <div class="grid-card-title">Skin care</div>
+      <p>Manhã e noite. Desfrute do ritual — não corra por ele!</p>
+    </div>
+    <div class="grid-card">
+      <span class="grid-card-emoji">🛁</span>
+      <div class="grid-card-title">Banho premium</div>
+      <p>Velas, playlist relaxante e produtos especiais no fim de semana.</p>
+    </div>
+  </div>
+
+  <div class="highlight fade-in">
+    <p>Saúde emocional também é autocuidado! Programe uma pausa durante o dia para uma atividade que te relaxe. Defina limites para as redes sociais.</p>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- ===== CONCLUSÃO ===== -->
+<section class="conclusao fade-in">
+  <h2>Você foi feita<br>para <em>florescer!</em> 🌸</h2>
+  <p>Ser uma mulher virtuosa é simplesmente cuidar bem de tudo aquilo que Deus nos confiou e honrá-Lo em todas as áreas da vida.</p>
+  <p>Não importa onde estiver, em casa ou trabalhando fora, você exala o bom perfume de Cristo em tudo que faz.</p>
+  <p>Você não precisa ser perfeita — você precisa ser <strong>intencional</strong>. E Deus está com você em cada passo!</p>
+  <div class="conclusao-verse">
+    <p>"Mulher virtuosa, quem a achará?<br>O seu valor muito excede ao de rubis."</p>
+    <strong style="color: #FDE8EC; font-size: 12px; letter-spacing: 1px;">PROVÉRBIOS 31:10</strong>
+  </div>
+  <div class="conclusao-assinatura">Com muito carinho,<br>Alinne Vieira 🌹</div>
+</section>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progressBar').style.width = (scrolled/total*100) + '%';
+    document.getElementById('backTop').classList.toggle('visible', scrolled > 300);
+  });
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Accordion
+  function toggleCard(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.card-accordion.open').forEach(c => c.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+
+  // Tabs
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
