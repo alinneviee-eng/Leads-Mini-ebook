@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devocional 30 Dias — Identidade em Cristo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa: #F2A4A4;
+    --vinho: #7B2D3E;
+    --vinho-light: #C4566A;
+    --vinho-deep: #3A0A18;
+    --creme: #FFF8F5;
+    --dourado: #C9A96E;
+    --texto: #3A1A20;
+    --texto-suave: #7A4A52;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--creme);
+    color: var(--texto);
+    max-width: 430px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: fixed; top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--vinho), var(--rosa));
+    z-index: 999; transition: width 0.1s;
+  }
+
+  /* BACK TO TOP */
+  .back-top {
+    position: fixed; bottom: 24px; right: 20px;
+    width: 44px; height: 44px;
+    background: var(--vinho); color: white;
+    border: none; border-radius: 50%;
+    font-size: 18px; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(123,45,62,0.3);
+    display: none; align-items: center; justify-content: center;
+    z-index: 998;
+  }
+  .back-top.visible { display: flex; }
+
+  /* CAPA */
+  .capa {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--vinho-deep) 0%, var(--vinho) 60%, var(--vinho-light) 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 48px 28px 80px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .capa::before {
+    content: '✦';
+    position: absolute; font-size: 300px;
+    color: rgba(255,255,255,0.04);
+    top: -50px; right: -50px;
+  }
+  .capa-badge {
+    background: rgba(201,169,110,0.2);
+    border: 1px solid rgba(201,169,110,0.4);
+    border-radius: 50px; padding: 6px 18px;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--dourado); margin-bottom: 24px;
+  }
+  .capa h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px; color: white; line-height: 1.1; margin-bottom: 8px;
+  }
+  .capa h1 em { font-style: italic; color: #F0BFBC; display: block; }
+  .capa-sub {
+    font-size: 13px; color: rgba(255,255,255,0.7);
+    margin: 16px 0 24px; line-height: 1.7; font-style: italic;
+  }
+  .capa-divider {
+    width: 40px; height: 1px;
+    background: var(--dourado); margin: 16px auto; opacity: 0.5;
+  }
+  .capa-autor {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .scroll-hint {
+    position: absolute; bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.4); font-size: 11px; text-align: center;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* PROGRESSO GERAL */
+  .prog-geral {
+    background: white; padding: 24px 20px;
+    border-bottom: 2px solid #FDE8EC; text-align: center;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+  }
+  .prog-titulo {
+    font-size: 11px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--vinho-light); margin-bottom: 10px;
+  }
+  .prog-bar-bg {
+    background: #FDE8EC; border-radius: 50px;
+    height: 8px; margin-bottom: 8px; overflow: hidden;
+  }
+  .prog-bar-fill {
+    background: linear-gradient(90deg, var(--vinho), var(--rosa));
+    height: 100%; border-radius: 50px; transition: width 0.5s ease;
+    width: 0%;
+  }
+  .prog-texto { font-size: 13px; color: var(--texto-suave); }
+  .prog-texto span { font-weight: 800; color: var(--vinho); }
+
+  /* INTRODUÇÃO */
+  .intro {
+    background: white; padding: 32px 20px;
+    border-bottom: 2px solid #FDE8EC;
+  }
+  .intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: var(--vinho); margin-bottom: 14px;
+  }
+  .intro p {
+    font-size: 14px; line-height: 1.8; color: var(--texto-suave); margin-bottom: 10px;
+  }
+
+  /* SEMANA HEADER */
+  .semana-header {
+    background: linear-gradient(135deg, var(--vinho-deep), var(--vinho));
+    padding: 20px 24px; text-align: center;
+  }
+  .semana-num {
+    font-size: 10px; font-weight: 800; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--dourado); margin-bottom: 6px;
+  }
+  .semana-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; color: white; line-height: 1.2;
+  }
+  .semana-titulo em { font-style: italic; color: #F0BFBC; }
+
+  /* DIA CARD */
+  .dia-card {
+    background: white; margin: 12px 16px;
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+    border: 2px solid #FDE8EC;
+    transition: border-color 0.3s;
+  }
+  .dia-card.concluido { border-color: var(--rosa); background: #FFF8F5; }
+
+  .dia-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 18px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .dia-header:active { background: #FDE8EC; }
+
+  .dia-check {
+    width: 28px; height: 28px; min-width: 28px;
+    border: 2px solid var(--rosa); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; transition: all 0.3s; background: white;
+    cursor: pointer; flex-shrink: 0;
+  }
+  .dia-card.concluido .dia-check {
+    background: var(--vinho-light); border-color: var(--vinho-light); color: white;
+  }
+
+  .dia-info { flex: 1; }
+  .dia-num {
+    font-size: 10px; font-weight: 800; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--vinho-light); margin-bottom: 3px;
+  }
+  .dia-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; color: var(--vinho); line-height: 1.2;
+  }
+  .dia-card.concluido .dia-titulo { color: var(--vinho-light); }
+
+  .dia-arrow { font-size: 12px; color: var(--rosa); transition: transform 0.3s; flex-shrink: 0; }
+  .dia-card.open .dia-arrow { transform: rotate(180deg); }
+
+  /* DIA BODY */
+  .dia-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+  .dia-card.open .dia-body { max-height: 1000px; }
+  .dia-content { padding: 0 18px 20px; border-top: 1px solid #FDE8EC; padding-top: 16px; }
+
+  /* VERSÍCULO */
+  .v-box {
+    background: linear-gradient(135deg, var(--vinho-deep), var(--vinho));
+    border-radius: 14px; padding: 16px; margin-bottom: 14px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .v-box::before {
+    content: '"'; font-family: 'Playfair Display', serif;
+    font-size: 80px; color: rgba(255,255,255,0.06);
+    position: absolute; top: -15px; left: 8px; line-height: 1;
+  }
+  .v-texto {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 13px; color: #F0BFBC; line-height: 1.65; margin-bottom: 8px; position: relative;
+  }
+  .v-ref {
+    font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(201,169,110,0.7);
+  }
+
+  /* MEDITAÇÃO */
+  .meditacao-titulo {
+    font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--vinho-light);
+    margin-bottom: 8px; display: block;
+  }
+  .meditacao-texto {
+    font-size: 14px; line-height: 1.75; color: var(--texto-suave);
+    margin-bottom: 16px;
+  }
+
+  /* CAMPOS DE ESCRITA */
+  .campo-titulo {
+    font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--vinho-light);
+    margin-bottom: 8px; display: block;
+  }
+  .campo-textarea {
+    width: 100%; border: 1.5px solid #FDE8EC;
+    border-radius: 10px; padding: 12px;
+    font-family: 'Nunito', sans-serif; font-size: 14px;
+    color: var(--texto); background: var(--creme);
+    outline: none; resize: none; min-height: 80px;
+    transition: border-color 0.2s; margin-bottom: 14px;
+  }
+  .campo-textarea:focus { border-color: var(--rosa); }
+
+  /* BOTÃO CONCLUIR */
+  .btn-concluir {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, var(--vinho), var(--vinho-light));
+    color: white; font-family: 'Nunito', sans-serif;
+    font-size: 14px; font-weight: 800;
+    border: none; border-radius: 50px; cursor: pointer;
+    transition: all 0.2s; margin-top: 4px;
+  }
+  .btn-concluir:active { transform: scale(0.98); }
+  .dia-card.concluido .btn-concluir {
+    background: #FDE8EC; color: var(--vinho-light);
+  }
+
+  /* DIVISOR */
+  .divisor { height: 8px; background: #FDE8EC; }
+
+  /* CONCLUSÃO */
+  .conclusao {
+    background: linear-gradient(160deg, var(--vinho-deep), var(--vinho));
+    padding: 60px 24px; text-align: center;
+  }
+  .conclusao h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; color: white; line-height: 1.2; margin-bottom: 16px;
+  }
+  .conclusao h2 em { font-style: italic; color: #F0BFBC; }
+  .conclusao p { font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 10px; }
+  .conclusao-assinatura { font-size: 16px; color: white; font-style: italic; margin-top: 20px; }
+
+  /* FADE IN */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- CAPA -->
+<section class="capa">
+  <div class="capa-badge">🎁 Bônus exclusivo — Comunidade Mulher de Valor</div>
+  <h1>Devocional<br><em>30 Dias</em></h1>
+  <div class="capa-divider"></div>
+  <p class="capa-sub">Identidade em Cristo — quem Deus diz que você é</p>
+  <span class="capa-autor">Por Alinne Vieira · @alinnevie</span>
+  <div class="scroll-hint">▼<br>comece aqui</div>
+</section>
+
+<!-- PROGRESSO -->
+<div class="prog-geral">
+  <div class="prog-titulo">Seu progresso</div>
+  <div class="prog-bar-bg"><div class="prog-bar-fill" id="progFill"></div></div>
+  <div class="prog-texto"><span id="progNum">0</span> de 30 dias concluídos 🌸</div>
+</div>
+
+<!-- INTRODUÇÃO -->
+<div class="intro fade-in">
+  <h2>✨ Antes de começar</h2>
+  <p>Durante 30 dias, você vai mergulhar na Palavra de Deus para descobrir — ou redescobrir — quem você realmente é aos olhos dEle.</p>
+  <p>Não quem o mundo diz que você é. Não quem as suas feridas dizem que você é. Mas quem o Criador do universo diz que você é.</p>
+  <p>Reserve um momento especial todo dia. Leia o versículo com calma, medite na reflexão e escreva o que Deus falar ao seu coração. 🙏</p>
+</div>
+
+<div class="divisor"></div>
+
+<!-- SEMANA 1 -->
+<div class="semana-header fade-in">
+  <div class="semana-num">Semana 01 · Dias 1 a 7</div>
+  <div class="semana-titulo">Você é<br><em>filha amada de Deus</em></div>
+</div>
+
+<div class="dia-card fade-in" id="dia1">
+  <div class="dia-header" onclick="toggleDia('dia1')">
+    <div class="dia-check" onclick="concluirDia(event,'dia1')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 01</div>
+      <div class="dia-titulo">Você é filha de Deus</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Mas a todos quantos o receberam, deu-lhes o poder de serem feitos filhos de Deus."</p>
+        <span class="v-ref">João 1:12</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Você não é filha de Deus por mérito, por comportamento ou por ser boa o suficiente. Você é filha de Deus porque O recebeu. Esse é o seu maior título — não esposa, não mãe, não profissional. Filha. Antes de qualquer outro papel que você ocupa na vida, existe esse: filha amada do Rei.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia1')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia2">
+  <div class="dia-header" onclick="toggleDia('dia2')">
+    <div class="dia-check" onclick="concluirDia(event,'dia2')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 02</div>
+      <div class="dia-titulo">Você é amada incondicionalmente</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna."</p>
+        <span class="v-ref">João 3:16</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">O amor de Deus por você não tem condições. Ele não te ama mais quando você ora bastante, nem te ama menos quando você falha. Esse amor não depende da sua performance — ele é incondicional, permanente e inabalável. Você é amada hoje, exatamente como está.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia2')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia3">
+  <div class="dia-header" onclick="toggleDia('dia3')">
+    <div class="dia-check" onclick="concluirDia(event,'dia3')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 03</div>
+      <div class="dia-titulo">Você é criada à imagem de Deus</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Criou Deus, pois, o homem à sua imagem, à imagem de Deus o criou; homem e mulher os criou."</p>
+        <span class="v-ref">Gênesis 1:27</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Você não foi criada por acidente. Cada detalhe seu foi pensado por Deus. Quando você se olha no espelho e não gosta do que vê, lembre-se: você está olhando para uma obra de arte do Criador do universo. Você carrega a imagem dEle — isso é o seu valor real.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia3')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia4">
+  <div class="dia-header" onclick="toggleDia('dia4')">
+    <div class="dia-check" onclick="concluirDia(event,'dia4')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 04</div>
+      <div class="dia-titulo">Você é conhecida por Deus</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Senhor, tu me sondas e me conheces. Tu sabes quando me sento e quando me levanto; de longe percebes os meus pensamentos."</p>
+        <span class="v-ref">Salmos 139:1-2</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Deus te conhece completamente — seus pensamentos, seus medos, suas alegrias e suas dores escondidas. Ele não te conhece e te rejeita. Ele te conhece e ainda assim te escolhe. Ser completamente vista e completamente amada — isso é o que Deus sente por você.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia4')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia5">
+  <div class="dia-header" onclick="toggleDia('dia5')">
+    <div class="dia-check" onclick="concluirDia(event,'dia5')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 05</div>
+      <div class="dia-titulo">Você é preciosa aos olhos de Deus</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Uma vez que és precioso aos meus olhos, és honrado e eu te amo."</p>
+        <span class="v-ref">Isaías 43:4</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">O próprio Deus diz que você é preciosa. Não quase preciosa. Não preciosa dependendo do dia. Preciosa — sem condições. Quando o mundo ou as pessoas ao seu redor não enxergarem seu valor, volte a essa promessa: "Você é preciosa aos meus olhos", diz o Senhor.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia5')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia6">
+  <div class="dia-header" onclick="toggleDia('dia6')">
+    <div class="dia-check" onclick="concluirDia(event,'dia6')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 06</div>
+      <div class="dia-titulo">Você é planejada por Deus</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Porque eu sei os planos que tenho a vosso respeito, diz o Senhor; planos de paz e não de mal, para vos dar um futuro e uma esperança."</p>
+        <span class="v-ref">Jeremias 29:11</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Deus tem planos para você — e eles são bons. Mesmo quando sua vida não parece boa. Mesmo quando você não consegue enxergar o próximo passo. Deus já viu o final da sua história e ele é cheio de esperança. Você não está perdida — está no caminho que Ele planejou.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia6')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia7">
+  <div class="dia-header" onclick="toggleDia('dia7')">
+    <div class="dia-check" onclick="concluirDia(event,'dia7')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 07</div>
+      <div class="dia-titulo">Você é obra de Deus</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Somos feitura dele, criados em Cristo Jesus para boas obras, as quais Deus de antemão preparou para que andássemos nelas."</p>
+        <span class="v-ref">Efésios 2:10</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Você é a obra de Deus — não um rascunho, não um erro. Uma obra finalizada, criada com propósito. E já existem boas obras preparadas especificamente para você. Sua vida não é por acaso — tem um destino, uma missão, um impacto que só você pode causar no mundo.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia7')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="divisor"></div>
+
+<!-- SEMANA 2 -->
+<div class="semana-header fade-in">
+  <div class="semana-num">Semana 02 · Dias 8 a 14</div>
+  <div class="semana-titulo">Você é<br><em>nova criatura em Cristo</em></div>
+</div>
+
+<div class="dia-card fade-in" id="dia8">
+  <div class="dia-header" onclick="toggleDia('dia8')">
+    <div class="dia-check" onclick="concluirDia(event,'dia8')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 08</div>
+      <div class="dia-titulo">Você é nova criatura</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Se alguém está em Cristo, é nova criatura. As coisas velhas já passaram; eis que se fizeram novas."</p>
+        <span class="v-ref">2 Coríntios 5:17</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Seu passado não define sua identidade. Em Cristo, você é nova — não remendada, não consertada, mas genuinamente nova. As feridas do passado, os erros cometidos, as versões antigas de você — tudo isso ficou para trás. Hoje você pode viver a partir de quem você é em Cristo, não de quem você foi.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia8')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia9">
+  <div class="dia-header" onclick="toggleDia('dia9')">
+    <div class="dia-check" onclick="concluirDia(event,'dia9')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 09</div>
+      <div class="dia-titulo">Você é perdoada e liberta</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Em quem temos a redenção pelo seu sangue, a remissão dos pecados, segundo as riquezas da sua graça."</p>
+        <span class="v-ref">Efésios 1:7</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Você não precisa mais carregar o peso da culpa. Cada erro, cada pecado, cada arrependimento — tudo foi coberto pelo sangue de Jesus. O perdão não é apenas para os erros pequenos. É total, completo e definitivo. Você é livre para viver sem a condenação do passado.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia9')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia10">
+  <div class="dia-header" onclick="toggleDia('dia10')">
+    <div class="dia-check" onclick="concluirDia(event,'dia10')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 10</div>
+      <div class="dia-titulo">Você é escolhida por Deus</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Vós não me escolhestes a mim, mas eu vos escolhi a vós."</p>
+        <span class="v-ref">João 15:16</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Você não chegou a Deus por acaso. Ele te escolheu antes de você o escolher. Em um mundo onde nos sentimos preteridas, ignoradas ou deixadas de lado, existe esse fato inabalável: o Deus do universo te olhou e disse "Eu escolho ela." Você é escolhida.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia10')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia11">
+  <div class="dia-header" onclick="toggleDia('dia11')">
+    <div class="dia-check" onclick="concluirDia(event,'dia11')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 11</div>
+      <div class="dia-titulo">Você é templo do Espírito Santo</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Não sabeis vós que sois templo de Deus e que o Espírito de Deus habita em vós?"</p>
+        <span class="v-ref">1 Coríntios 3:16</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">O Espírito Santo não mora em templos de pedra — mora em você. Você carrega a presença de Deus onde quer que vá. Isso muda tudo: como você cuida do seu corpo, como você fala, como você age. Você é um lugar sagrado — um templo vivo da presença de Deus.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia11')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia12">
+  <div class="dia-header" onclick="toggleDia('dia12')">
+    <div class="dia-check" onclick="concluirDia(event,'dia12')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 12</div>
+      <div class="dia-titulo">Você é mais do que vencedora</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Em todas estas coisas somos mais do que vencedores, por meio daquele que nos amou."</p>
+        <span class="v-ref">Romanos 8:37</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Não apenas vencedora — mais do que vencedora. Isso significa que a vitória já é sua antes mesmo da batalha terminar. As lutas que você enfrenta no casamento, na maternidade, nas finanças, na sua mente — em todas elas, você já venceu. Não por sua força, mas por meio dAquele que te amou.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia12')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia13">
+  <div class="dia-header" onclick="toggleDia('dia13')">
+    <div class="dia-check" onclick="concluirDia(event,'dia13')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 13</div>
+      <div class="dia-titulo">Você é luz do mundo</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"Vós sois a luz do mundo; não se pode esconder uma cidade edificada sobre um monte."</p>
+        <span class="v-ref">Mateus 5:14</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Jesus não disse que você deveria tentar ser luz. Ele disse que você é luz. Sua presença no seu lar, na sua família, no seu trabalho e nas redes sociais tem o poder de iluminar o que estava escuro. Não apague sua luz com insegurança ou comparação — o mundo precisa do que você carrega.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia13')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="dia-card fade-in" id="dia14">
+  <div class="dia-header" onclick="toggleDia('dia14')">
+    <div class="dia-check" onclick="concluirDia(event,'dia14')">✓</div>
+    <div class="dia-info">
+      <div class="dia-num">Dia 14</div>
+      <div class="dia-titulo">Você é herdeira do Reino</div>
+    </div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body">
+    <div class="dia-content">
+      <div class="v-box">
+        <p class="v-texto">"E, se filhos, também herdeiros; herdeiros de Deus e co-herdeiros com Cristo."</p>
+        <span class="v-ref">Romanos 8:17</span>
+      </div>
+      <span class="meditacao-titulo">📖 Meditação do dia</span>
+      <p class="meditacao-texto">Você não é apenas salva — você é herdeira. Herdeira de Deus, co-herdeira com Cristo. Tudo que pertence ao Pai pertence ao Filho, e como filha adotada, pertence a você também. Paz, provisão, graça, sabedoria, poder — tudo isso é sua herança. Viva como quem sabe disso.</p>
+      <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+      <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+      <span class="campo-titulo">🙏 Minha oração de hoje</span>
+      <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+      <button class="btn-concluir" onclick="concluirDia(event,'dia14')">✓ Marcar dia como concluído</button>
+    </div>
+  </div>
+</div>
+
+<div class="divisor"></div>
+
+<!-- SEMANA 3 -->
+<div class="semana-header fade-in">
+  <div class="semana-num">Semana 03 · Dias 15 a 21</div>
+  <div class="semana-titulo">Você tem<br><em>propósito e missão</em></div>
+</div>
+
+<div class="dia-card fade-in" id="dia15">
+  <div class="dia-header" onclick="toggleDia('dia15')">
+    <div class="dia-check" onclick="concluirDia(event,'dia15')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 15</div><div class="dia-titulo">Você tem um propósito único</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Porque dele e por ele e para ele são todas as coisas."</p><span class="v-ref">Romanos 11:36</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Você existe para Deus e por Deus. Isso significa que sua vida inteira tem propósito — até as partes que parecem sem sentido. Cada experiência, cada dor, cada alegria está sendo usada por Ele para construir a mulher que você precisa ser para cumprir sua missão única no mundo.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia15')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia16">
+  <div class="dia-header" onclick="toggleDia('dia16')">
+    <div class="dia-check" onclick="concluirDia(event,'dia16')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 16</div><div class="dia-titulo">Você é fortalecida por Deus</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Tudo posso naquele que me fortalece."</p><span class="v-ref">Filipenses 4:13</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Não é tudo o que você imagina ou planeja sozinha — é tudo aquilo que Deus chama você a fazer. E para tudo que Ele chama, Ele capacita. As tarefas impossíveis do seu dia a dia — ser mãe, esposa, mulher, trabalhadora — todas elas você pode cumprir porque Ele te fortalece.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia16')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia17">
+  <div class="dia-header" onclick="toggleDia('dia17')">
+    <div class="dia-check" onclick="concluirDia(event,'dia17')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 17</div><div class="dia-titulo">Você é guiada pelo Espírito</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Mas, quando vier o Espírito da verdade, ele vos guiará em toda a verdade."</p><span class="v-ref">João 16:13</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Você não precisa descobrir o seu propósito sozinha. O Espírito Santo está em você para guiá-la em toda a verdade — inclusive a verdade sobre quem você é e para onde você está indo. Quando se sentir perdida ou confusa sobre sua vida, lembre-se: você tem o melhor guia que existe dentro de você.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia17')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia18">
+  <div class="dia-header" onclick="toggleDia('dia18')">
+    <div class="dia-check" onclick="concluirDia(event,'dia18')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 18</div><div class="dia-titulo">Você não precisa se comparar</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Cada um examine a sua própria obra, e então terá motivo de gloriar-se em si mesmo e não em outro."</p><span class="v-ref">Gálatas 6:4</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">A comparação é um ladrão de identidade. Quando você se compara com outras mulheres — no Instagram, na igreja, na vida — você está medindo seu interior com o exterior de outra pessoa. Deus não te chama a ser como outra — Ele te chama a ser a melhor versão de você mesma, para Sua glória.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia18')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia19">
+  <div class="dia-header" onclick="toggleDia('dia19')">
+    <div class="dia-check" onclick="concluirDia(event,'dia19')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 19</div><div class="dia-titulo">Você é suficiente em Cristo</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"E a minha graça te basta, porque o meu poder se aperfeiçoa na fraqueza."</p><span class="v-ref">2 Coríntios 12:9</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Você não precisa ser mais, fazer mais ou ter mais para ser suficiente. A graça de Deus é suficiente para você — e é exatamente nas suas fraquezas que o poder dEle se manifesta. Pare de se cobrar por não ser perfeita. Você é suficiente em Cristo — isso é mais do que suficiente.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia19')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia20">
+  <div class="dia-header" onclick="toggleDia('dia20')">
+    <div class="dia-check" onclick="concluirDia(event,'dia20')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 20</div><div class="dia-titulo">Você tem a mente de Cristo</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Nós, porém, temos a mente de Cristo."</p><span class="v-ref">1 Coríntios 2:16</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Você não precisa se contentar com pensamentos de derrota, medo e insegurança. Você tem a mente de Cristo — isso significa que tem acesso à sabedoria, ao discernimento e à perspectiva de Deus sobre sua vida. Quando seus pensamentos te atacarem, lembre-se: você tem a mente de Cristo.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia20')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia21">
+  <div class="dia-header" onclick="toggleDia('dia21')">
+    <div class="dia-check" onclick="concluirDia(event,'dia21')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 21</div><div class="dia-titulo">Você é sal da terra</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Vós sois o sal da terra; e se o sal for insípido, com que se há de salgar?"</p><span class="v-ref">Mateus 5:13</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">O sal preserva, tempera e transforma tudo que toca. Você tem esse papel no mundo — em casa, no trabalho, nas redes sociais. Sua presença muda o ambiente ao seu redor. Não perca sua essência tentando se encaixar no mundo. Mantenha seu sabor — ele faz diferença.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia21')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="divisor"></div>
+
+<!-- SEMANA 4 -->
+<div class="semana-header fade-in">
+  <div class="semana-num">Semana 04 · Dias 22 a 30</div>
+  <div class="semana-titulo">Você caminha<br><em>em liberdade e graça</em></div>
+</div>
+
+<div class="dia-card fade-in" id="dia22">
+  <div class="dia-header" onclick="toggleDia('dia22')">
+    <div class="dia-check" onclick="concluirDia(event,'dia22')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 22</div><div class="dia-titulo">Você é livre em Cristo</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Para a liberdade foi que Cristo nos libertou. Permanecei, pois, firmes e não vos submetais de novo ao jugo da escravidão."</p><span class="v-ref">Gálatas 5:1</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Cristo te libertou para ser livre — não para continuar presa à culpa, ao medo, ao que os outros pensam ou aos padrões do mundo. Liberdade não é ausência de limites — é viver plenamente dentro da identidade que Deus te deu, sem correntes do passado te prendendo.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia22')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia23">
+  <div class="dia-header" onclick="toggleDia('dia23')">
+    <div class="dia-check" onclick="concluirDia(event,'dia23')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 23</div><div class="dia-titulo">Você não tem espírito de temor</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Porque Deus não nos deu espírito de covardia, mas de poder, de amor e de moderação."</p><span class="v-ref">2 Timóteo 1:7</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">O medo que você sente não vem de Deus. O espírito que Ele te deu é de poder — não de fraqueza. De amor — não de insegurança. De moderação — não de caos mental. Quando o medo bater, declare: "Isso não vem de Deus. Eu tenho espírito de poder, amor e moderação."</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia23')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia24">
+  <div class="dia-header" onclick="toggleDia('dia24')">
+    <div class="dia-check" onclick="concluirDia(event,'dia24')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 24</div><div class="dia-titulo">Você é protegida por Deus</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"O Senhor é o meu pastor e nada me faltará."</p><span class="v-ref">Salmos 23:1</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Quando Deus é seu pastor, você não precisa ter medo de nada faltar. Não faltará provisão, não faltará direção, não faltará cuidado. Você está sob o cuidado do Deus que conhece cada necessidade sua antes mesmo de você pedir. Descanse nesse cuidado hoje.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia24')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia25">
+  <div class="dia-header" onclick="toggleDia('dia25')">
+    <div class="dia-check" onclick="concluirDia(event,'dia25')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 25</div><div class="dia-titulo">Você é aceita por Deus</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Para louvor da glória da sua graça, pela qual nos fez agradáveis a si mesmo no Amado."</p><span class="v-ref">Efésios 1:6</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Você não precisa conquistar a aceitação de Deus — você já foi aceita nEle. Não há nada que você possa fazer para ser mais aceita, e nada que possa fazer para perder essa aceitação. Você é agradável a Deus — não por suas obras, mas por causa do Amado, Jesus Cristo.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia25')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia26">
+  <div class="dia-header" onclick="toggleDia('dia26')">
+    <div class="dia-check" onclick="concluirDia(event,'dia26')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 26</div><div class="dia-titulo">Você tem paz que excede o entendimento</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"E a paz de Deus, que excede todo o entendimento, guardará os vossos corações e os vossos pensamentos em Cristo Jesus."</p><span class="v-ref">Filipenses 4:7</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Existe uma paz disponível para você que vai além do que sua mente consegue compreender. Uma paz que permanece mesmo quando as circunstâncias são caóticas. Quando a ansiedade tentar roubar seu descanso, lembre-se: a paz de Deus está guardando seu coração e sua mente.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia26')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia27">
+  <div class="dia-header" onclick="toggleDia('dia27')">
+    <div class="dia-check" onclick="concluirDia(event,'dia27')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 27</div><div class="dia-titulo">Você é renovada a cada dia</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"As misericórdias do Senhor são novas cada manhã; grande é a tua fidelidade."</p><span class="v-ref">Lamentações 3:23</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Cada manhã é um recomeço. As misericórdias de Deus não se esgotam — elas se renovam toda manhã só para você. Aquele dia ruim de ontem ficou para trás. Aquele erro, aquela falha, aquela versão sua que você não gosta — a misericórdia de Deus te cobre hoje de novo.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia27')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia28">
+  <div class="dia-header" onclick="toggleDia('dia28')">
+    <div class="dia-check" onclick="concluirDia(event,'dia28')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 28</div><div class="dia-titulo">Você é transformada pela renovação da mente</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Não vos conformeis com este século, mas transformai-vos pela renovação da vossa mente."</p><span class="v-ref">Romanos 12:2</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">A transformação começa na mente. Não no comportamento, não nas circunstâncias — na mente. Quando você renova sua mente com a Palavra de Deus, sua identidade muda. Seus pensamentos mudam. Suas decisões mudam. E sua vida inteira começa a refletir quem você realmente é em Cristo.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia28')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia29">
+  <div class="dia-header" onclick="toggleDia('dia29')">
+    <div class="dia-check" onclick="concluirDia(event,'dia29')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 29</div><div class="dia-titulo">Você frutifica onde está plantada</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Bendito o homem que confia no Senhor... Será como a árvore plantada junto às águas."</p><span class="v-ref">Jeremias 17:7-8</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Uma árvore plantada perto da água não precisa procurar sustento — ela recebe naturalmente. Quando você está plantada em Deus, o fruto vem naturalmente. Você não precisa se forçar a ser boa, a ser virtuosa, a ter propósito — quando suas raízes estão em Cristo, tudo isso floresce.</p>
+    <span class="campo-titulo">✍️ O que Deus falou ao meu coração hoje</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão..."></textarea>
+    <span class="campo-titulo">🙏 Minha oração de hoje</span>
+    <textarea class="campo-textarea" placeholder="Converse com Deus sobre o que leu..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia29')">✓ Marcar dia como concluído</button>
+  </div></div>
+</div>
+
+<div class="dia-card fade-in" id="dia30">
+  <div class="dia-header" onclick="toggleDia('dia30')">
+    <div class="dia-check" onclick="concluirDia(event,'dia30')">✓</div>
+    <div class="dia-info"><div class="dia-num">Dia 30 🎉</div><div class="dia-titulo">Você é quem Deus diz que é</div></div>
+    <span class="dia-arrow">▼</span>
+  </div>
+  <div class="dia-body"><div class="dia-content">
+    <div class="v-box"><p class="v-texto">"Porque eu sei os planos que tenho a vosso respeito, diz o Senhor; planos de paz e não de mal, para vos dar um futuro e uma esperança."</p><span class="v-ref">Jeremias 29:11</span></div>
+    <span class="meditacao-titulo">📖 Meditação do dia</span>
+    <p class="meditacao-texto">Você chegou ao último dia. Nesses 30 dias, você mergulhou em quem Deus diz que você é — filha, amada, escolhida, nova criatura, livre, poderosa, com propósito. Essa é sua identidade real. Não deixe o mundo, as pessoas ou seus próprios pensamentos te convencerem do contrário. Você é quem Deus diz que é — e isso é suficiente para o resto da sua vida. 🌸</p>
+    <span class="campo-titulo">✍️ O que esses 30 dias significaram para mim</span>
+    <textarea class="campo-textarea" placeholder="Escreva aqui sua reflexão final..." style="min-height: 120px;"></textarea>
+    <span class="campo-titulo">🙏 Minha oração de gratidão</span>
+    <textarea class="campo-textarea" placeholder="Agradeça a Deus por quem você é..."></textarea>
+    <button class="btn-concluir" onclick="concluirDia(event,'dia30')">🎉 Concluir os 30 dias!</button>
+  </div></div>
+</div>
+
+<div class="divisor"></div>
+
+<!-- CONCLUSÃO -->
+<section class="conclusao fade-in">
+  <h2>Parabéns,<br><em>filha de Deus!</em> 👑</h2>
+  <p>Você completou 30 dias mergulhada em sua identidade em Cristo. Isso não é pequeno — é transformador.</p>
+  <p>Agora você sabe quem você é. E isso muda tudo.</p>
+  <p>Leve essa verdade para o seu casamento, sua maternidade, suas finanças, seus relacionamentos — para cada área da sua vida.</p>
+  <div class="conclusao-assinatura">Com muito amor,<br>Alinne Vieira 🌹</div>
+</section>
+
+<script>
+  // Progress bar de scroll
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY, t = document.body.scrollHeight - window.innerHeight;
+    document.getElementById('progressBar').style.width = (s/t*100) + '%';
+    document.getElementById('backTop').classList.toggle('visible', s > 300);
+  });
+
+  // Fade in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // Toggle dia
+  function toggleDia(id) {
+    const card = document.getElementById(id);
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.dia-card.open').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+
+  // Concluir dia
+  function concluirDia(e, id) {
+    e.stopPropagation();
+    const card = document.getElementById(id);
+    card.classList.toggle('concluido');
+    atualizarProgresso();
+    // Fechar após concluir
+    if (card.classList.contains('concluido')) {
+      setTimeout(() => card.classList.remove('open'), 500);
+    }
+  }
+
+  // Atualizar barra de progresso dos dias
+  function atualizarProgresso() {
+    const total = 30;
+    const concluidos = document.querySelectorAll('.dia-card.concluido').length;
+    const pct = (concluidos / total * 100).toFixed(0);
+    document.getElementById('progFill').style.width = pct + '%';
+    document.getElementById('progNum').textContent = concluidos;
+  }
+</script>
+</body>
+</html>
