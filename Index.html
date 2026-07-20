@@ -1,514 +1,391 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>De Sapo a Príncipe e Rei</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <title>Mulher de Valor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-```
-:root {
-  --vinho:     #5B1A2A;
-  --vinho-deep:#3A0D18;
-  --gold:      #C9A96E;
-  --gold-soft: #E8D5A3;
-  --preto:     #0D0D0D;
-  --creme:     #F9F4EE;
-  --cinza:     #9A8F8A;
-}
+    :root {
+      --rosa: #F2A4A4;
+      --vinho: #7B2D3E;
+      --vinho-light: #C4566A;
+      --vinho-deep: #3A0A18;
+      --creme: #FFF8F5;
+      --dourado: #C9A96E;
+      --texto: #3A1A20;
+      --texto-suave: #7A4A52;
+    }
 
-html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background: #FFFFFF;
-  color: #111111;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--creme);
+      color: var(--texto);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-/* ── HERO ── */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 24px 80px;
-  text-align: center;
-  overflow: hidden;
-}
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 60px 24px 80px;
+      text-align: center; overflow: hidden;
+      background: linear-gradient(160deg, var(--vinho-deep) 0%, var(--vinho) 60%, var(--vinho-light) 100%);
+    }
+    .hero::before {
+      content: '♛';
+      position: absolute; font-size: 380px;
+      color: rgba(255,255,255,0.04);
+      top: -60px; right: -60px; pointer-events: none;
+    }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(91,26,42,0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(201,169,110,0.08) 0%, transparent 60%);
-  pointer-events: none;
-}
+    .hero-inner { position: relative; z-index: 1; max-width: 560px; width: 100%; }
 
-/* Ornamento de coroa / anel sutil */
-.hero::after {
-  content: '✦';
-  position: absolute;
-  font-size: 420px;
-  color: rgba(91,26,42,0.05);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  user-select: none;
-}
+    .eyebrow {
+      display: inline-block;
+      background: rgba(201,169,110,0.2);
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 50px; padding: 6px 18px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--dourado); margin-bottom: 28px;
+    }
 
-.hero-inner { position: relative; z-index: 1; max-width: 720px; }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 9vw, 56px);
+      font-weight: 400; line-height: 1.1;
+      color: white; margin-bottom: 10px;
+    }
+    .hero h1 em { font-style: italic; color: #F0BFBC; }
 
-.eyebrow {
-  display: inline-block;
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #8B4513;
-  border: 1px solid rgba(139,69,19,0.4);
-  padding: 6px 18px;
-  border-radius: 2px;
-  margin-bottom: 32px;
-}
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(16px, 3vw, 20px);
+      font-style: italic; font-weight: 400;
+      color: #F0D8D8; margin-bottom: 24px;
+    }
 
-.hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(48px, 9vw, 88px);
-  font-weight: 300;
-  line-height: 1.05;
-  color: #111111;
-  margin-bottom: 8px;
-}
+    .divider { width: 44px; height: 1px; background: var(--dourado); margin: 0 auto 26px; opacity: 0.5; }
 
-.hero h1 em {
-  font-style: italic;
-  color: #8B4513;
-}
+    .hero-body {
+      font-size: 14.5px; line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+      max-width: 460px; margin: 0 auto 36px;
+    }
+    .hero-body strong { color: white; font-weight: 700; }
 
-.hero-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(18px, 3vw, 24px);
-  font-weight: 300;
-  font-style: italic;
-  color: #7A5A20;
-  margin-bottom: 28px;
-}
+    .areas {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center; margin-bottom: 36px;
+    }
+    .area-tag {
+      font-size: 11.5px; font-weight: 700; color: var(--dourado);
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      padding: 6px 14px; border-radius: 50px;
+    }
 
-.divider {
-  width: 48px;
-  height: 1px;
-  background: var(--gold);
-  margin: 0 auto 28px;
-  opacity: 0.5;
-}
+    /* ── FORM ── */
+    .form-box {
+      background: white;
+      border-radius: 20px;
+      padding: 30px 26px;
+      max-width: 420px;
+      margin: 0 auto;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+      text-align: left;
+    }
 
-.hero-body {
-  font-size: 16px;
-  line-height: 1.75;
-  color: #222222;
-  max-width: 560px;
-  margin: 0 auto 48px;
-}
+    .form-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 21px; font-weight: 700;
+      color: var(--vinho); margin-bottom: 6px;
+    }
 
-.hero-body strong { color: #111111; font-weight: 600; }
+    .form-box p { font-size: 13px; color: var(--texto-suave); margin-bottom: 20px; line-height: 1.5; }
+    .form-box p span { color: var(--vinho-light); font-weight: 700; }
 
-/* ── FORM ── */
-.form-box {
-  background: #F8F5F0;
-  border: 1px solid rgba(139,69,19,0.25);
-  border-radius: 4px;
-  padding: 36px 32px;
-  max-width: 460px;
-  margin: 0 auto;
-  backdrop-filter: blur(6px);
-}
+    .field { margin-bottom: 14px; }
 
-.form-box h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 400;
-  color: #7A5A20;
-  margin-bottom: 6px;
-}
+    .field input {
+      width: 100%;
+      background: var(--creme);
+      border: 1.5px solid #FDE8EC;
+      border-radius: 12px;
+      padding: 15px 16px;
+      font-size: 15px;
+      font-family: 'Nunito', sans-serif;
+      color: var(--texto);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input::placeholder { color: #C9A5AC; }
+    .field input:focus { border-color: var(--vinho-light); }
 
-.form-box p {
-  font-size: 13px;
-  color: #444444;
-  margin-bottom: 24px;
-  line-height: 1.5;
-}
+    .btn-cta {
+      width: 100%;
+      background: linear-gradient(135deg, var(--dourado), #E8C99A);
+      border: none;
+      color: var(--vinho-deep);
+      font-family: 'Nunito', sans-serif;
+      font-size: 14.5px; font-weight: 800;
+      letter-spacing: 0.3px;
+      padding: 17px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 4px;
+      box-shadow: 0 8px 22px rgba(201,169,110,0.35);
+      transition: transform 0.15s;
+    }
+    .btn-cta:active { transform: scale(0.98); }
 
-.form-box p span { color: #8B4513; }
+    .privacy { font-size: 11.5px; color: var(--texto-suave); margin-top: 14px; text-align: center; }
 
-.field { margin-bottom: 14px; }
+    /* ── MINI EBOOK DESTAQUE ── */
+    .bonus-section {
+      padding: 72px 24px;
+      text-align: center;
+      background: white;
+      border-top: 1px solid #FDE8EC;
+    }
 
-.field input {
-  width: 100%;
-  background: #F5F5F5;
-  border: 1px solid rgba(201,169,110,0.5);
-  border-radius: 3px;
-  padding: 14px 16px;
-  font-size: 15px;
-  font-family: 'Inter', sans-serif;
-  color: #111111;
-  outline: none;
-  transition: border-color 0.2s;
-}
+    .bonus-section .tag {
+      display: inline-block;
+      background: #FDE8EC;
+      color: var(--vinho-light);
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 50px;
+      margin-bottom: 24px;
+    }
 
-.field input::placeholder { color: #999999; }
+    .bonus-card {
+      max-width: 560px; margin: 0 auto;
+      background: var(--creme);
+      border: 1.5px solid #FDE8EC;
+      border-radius: 18px;
+      padding: 36px 30px;
+    }
 
-.field input:focus { border-color: #8B4513; }
+    .bonus-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 4vw, 27px);
+      font-weight: 700; color: var(--vinho);
+      line-height: 1.3; margin-bottom: 18px;
+    }
+    .bonus-card h3 em { font-style: italic; color: var(--vinho-light); }
 
-.btn-cta {
-  width: 100%;
-  background: linear-gradient(135deg, var(--vinho) 0%, #8B2340 100%);
-  border: 1px solid rgba(201,169,110,0.3);
-  color: #7A5A20;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 16px 24px;
-  border-radius: 3px;
-  cursor: pointer;
-  margin-top: 6px;
-  transition: background 0.25s, transform 0.15s;
-}
+    .bonus-card p { font-size: 14.5px; color: var(--texto-suave); line-height: 1.7; }
 
-.btn-cta:hover {
-  background: linear-gradient(135deg, #7A2035 0%, #A02B4A 100%);
-  transform: translateY(-1px);
-}
+    /* ── PARA QUEM É (360°) ── */
+    .for-section {
+      padding: 72px 24px;
+      max-width: 780px; margin: 0 auto;
+      text-align: center;
+    }
 
-.privacy {
-  font-size: 11px;
-  color: #666666;
-  margin-top: 14px;
-}
+    .for-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 5vw, 38px);
+      font-weight: 400; color: var(--vinho);
+      margin-bottom: 12px; line-height: 1.25;
+    }
+    .for-section h2 em { font-style: italic; color: var(--vinho-light); }
 
-/* ── MINI EBOOK DESTAQUE ── */
-.bonus-section {
-  padding: 80px 24px;
-  text-align: center;
-  border-top: 1px solid rgba(0,0,0,0.08);
-}
+    .for-section .lead {
+      font-size: 14.5px; color: var(--texto-suave);
+      max-width: 460px; margin: 0 auto 40px; line-height: 1.7;
+    }
 
-.bonus-section .tag {
-  display: inline-block;
-  background: var(--vinho);
-  color: #7A5A20;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 5px 14px;
-  border-radius: 2px;
-  margin-bottom: 24px;
-}
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
 
-.bonus-card {
-  max-width: 580px;
-  margin: 0 auto;
-  background: #F5EEF0;
-  border: 1px solid rgba(91,26,42,0.25);
-  border-radius: 4px;
-  padding: 40px 36px;
-}
+    .card {
+      background: white;
+      border: 1.5px solid #FDE8EC;
+      border-radius: 16px;
+      padding: 26px 22px;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(123,45,62,0.06);
+    }
 
-.bonus-card h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(22px, 4vw, 30px);
-  font-weight: 400;
-  color: #111111;
-  line-height: 1.3;
-  margin-bottom: 20px;
-}
+    .card-icon { font-size: 22px; margin-bottom: 12px; }
+    .card p { font-size: 13.5px; line-height: 1.6; color: var(--texto); }
 
-.bonus-card h3 em { font-style: italic; color: #8B4513; }
+    /* ── CTA FINAL ── */
+    .cta-final {
+      padding: 72px 24px;
+      text-align: center;
+      background: linear-gradient(160deg, var(--vinho-deep), var(--vinho));
+    }
 
-.bonus-card p {
-  font-size: 15px;
-  color: #333333;
-  line-height: 1.7;
-}
+    .cta-final h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 5vw, 40px);
+      font-weight: 400; color: white;
+      margin-bottom: 16px; line-height: 1.25;
+    }
+    .cta-final h2 em { font-style: italic; color: #F0BFBC; }
 
-.signs-list {
-  list-style: none;
-  text-align: left;
-  margin-top: 28px;
-}
+    .cta-final p { font-size: 14.5px; color: rgba(255,255,255,0.75); margin-bottom: 32px; line-height: 1.7; max-width: 440px; margin-left: auto; margin-right: auto; }
 
-.signs-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  font-size: 14px;
-  color: #222222;
-  line-height: 1.6;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-}
+    .btn-cta-final {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--dourado), #E8C99A);
+      color: var(--vinho-deep);
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800;
+      letter-spacing: 0.2px;
+      padding: 16px 36px;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 8px 22px rgba(201,169,110,0.3);
+      transition: transform 0.15s;
+    }
+    .btn-cta-final:active { transform: scale(0.98); }
 
-.signs-list li:last-child { border-bottom: none; }
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #C0A0A0;
+      background: var(--vinho-deep);
+    }
 
-.sign-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  color: #8B4513;
-  font-weight: 300;
-  min-width: 28px;
-  line-height: 1.2;
-}
+    /* ── FADE IN ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-inner > * { animation: fadeUp 0.7s ease both; }
+    .hero-inner > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero-inner > *:nth-child(2) { animation-delay: 0.2s; }
+    .hero-inner > *:nth-child(3) { animation-delay: 0.3s; }
+    .hero-inner > *:nth-child(4) { animation-delay: 0.4s; }
+    .hero-inner > *:nth-child(5) { animation-delay: 0.5s; }
+    .hero-inner > *:nth-child(6) { animation-delay: 0.6s; }
+    .hero-inner > *:nth-child(7) { animation-delay: 0.7s; }
 
-/* ── PARA QUEM É ── */
-.for-section {
-  padding: 80px 24px;
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.for-section h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(28px, 5vw, 42px);
-  font-weight: 300;
-  color: #111111;
-  margin-bottom: 40px;
-}
-
-.for-section h2 em { font-style: italic; color: #8B4513; }
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-}
-
-.card {
-  background: #F5F5F5;
-  border: 1px solid rgba(139,69,19,0.3);
-  border-radius: 4px;
-  padding: 28px 24px;
-  text-align: left;
-}
-
-.card-icon { font-size: 22px; margin-bottom: 14px; }
-
-.card p {
-  font-size: 14px;
-  line-height: 1.65;
-  color: #333333;
-}
-
-/* ── CTA FINAL ── */
-.cta-final {
-  padding: 80px 24px;
-  text-align: center;
-  background: linear-gradient(180deg, transparent 0%, rgba(91,26,42,0.06) 100%);
-  border-top: 1px solid rgba(0,0,0,0.08);
-}
-
-.cta-final h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(28px, 5vw, 46px);
-  font-weight: 300;
-  color: #111111;
-  margin-bottom: 16px;
-  line-height: 1.2;
-}
-
-.cta-final h2 em { font-style: italic; color: #8B4513; }
-
-.cta-final p {
-  font-size: 15px;
-  color: #333333;
-  margin-bottom: 36px;
-}
-
-.btn-cta-final {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--vinho) 0%, #8B2340 100%);
-  border: 1px solid rgba(201,169,110,0.3);
-  color: #7A5A20;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 16px 40px;
-  border-radius: 3px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: transform 0.15s;
-}
-
-.btn-cta-final:hover { transform: translateY(-2px); }
-
-/* ── FOOTER ── */
-footer {
-  padding: 32px 24px;
-  text-align: center;
-  font-size: 12px;
-  color: #888888;
-  border-top: 1px solid rgba(0,0,0,0.1);
-}
-
-/* ── SUCCESS ── */
-.success-msg {
-  display: none;
-  background: #F0E8EA;
-  border: 1px solid var(--gold);
-  border-radius: 4px;
-  padding: 24px;
-  text-align: center;
-}
-
-.success-msg h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  color: #7A5A20;
-  margin-bottom: 8px;
-}
-
-.success-msg p { font-size: 14px; color: #222222; }
-
-/* ── FADE IN ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.hero-inner > * {
-  animation: fadeUp 0.7s ease both;
-}
-
-.hero-inner > *:nth-child(1) { animation-delay: 0.1s; }
-.hero-inner > *:nth-child(2) { animation-delay: 0.25s; }
-.hero-inner > *:nth-child(3) { animation-delay: 0.35s; }
-.hero-inner > *:nth-child(4) { animation-delay: 0.45s; }
-.hero-inner > *:nth-child(5) { animation-delay: 0.55s; }
-.hero-inner > *:nth-child(6) { animation-delay: 0.65s; }
-
-@media (max-width: 480px) {
-  .form-box { padding: 28px 20px; }
-  .bonus-card { padding: 28px 20px; }
-}
-```
-
+    @media (max-width: 480px) {
+      .form-box { padding: 26px 20px; }
+      .bonus-card { padding: 28px 22px; }
+    }
   </style>
 </head>
 <body>
 
   <!-- ── HERO ── -->
-
   <section class="hero">
     <div class="hero-inner">
-      <span class="eyebrow">Material gratuito para você</span>
+      <span class="eyebrow">👑 Material gratuito para você</span>
 
-```
-  <h1>De Sapo a<br><em>Príncipe e Rei</em></h1>
+      <h1>Mulher<br><em>de Valor</em></h1>
 
-  <p class="hero-subtitle">Restaure e fortaleça o seu casamento com propósito</p>
+      <p class="hero-subtitle">Cresça em todas as áreas da sua vida, com propósito</p>
 
-  <div class="divider"></div>
+      <div class="divider"></div>
 
-  <p class="hero-body">
-    Antes de conhecer o ebook, receba <strong>gratuitamente</strong> o mini ebook
-    <em>"7 Sinais de que Você Está Aceitando Menos do que Deus Tem para Seus Relacionamentos"</em>
-    — e dê o primeiro passo rumo à transformação que Deus preparou para você.
-  </p>
+      <p class="hero-body">
+        Você é uma mulher inteira — e merece crescer em <strong>casamento, maternidade, finanças, autocuidado, saúde emocional e identidade</strong>, não só em uma área. Comece agora recebendo, <strong>gratuitamente</strong>, o mini ebook <em>"7 Sinais de que Você Está Aceitando Menos do que Deus Tem para Seus Relacionamentos"</em>.
+      </p>
 
-  <!-- FORM BREVO -->
-  <div class="form-box">
-    <h2>Quero receber agora</h2>
-    <p>Preencha abaixo e receba o mini ebook no seu email. <span>É gratuito.</span></p>
-
-    <form id="sib-form" method="POST" action="https://eaf3c303.sibforms.com/serve/MUIFAPQSU_FOKyFenXajJmHdXNneLCYjxBeckhYCEiZomtmDdt_cD5PObFBGCDN58Hph1EzCongNFx2FGT166v44VTIUqw8pciLR80Cq8pSOTtmknMq198vS8d97xSyPvyPocQINH6JvxEiBGU_F3OBNpLMooTgv_VPLaCXglDbRSkf2Di02Uwmgd_hqV5JOkC5n4CyWnR7fZr-bqQ==" data-type="subscription" style="text-align:left;" onsubmit="handleFormSubmit(event)">
-      <div class="field">
-        <input class="input" type="text" id="EMAIL" name="EMAIL" placeholder="Seu melhor email" autocomplete="email" data-required="true" required />
+      <div class="areas">
+        <span class="area-tag">💍 Casamento</span>
+        <span class="area-tag">🌸 Virtude</span>
+        <span class="area-tag">👶 Maternidade</span>
+        <span class="area-tag">💰 Finanças</span>
+        <span class="area-tag">💆 Autocuidado</span>
+        <span class="area-tag">🧠 Saúde emocional</span>
+        <span class="area-tag">✨ Identidade</span>
       </div>
-      <button class="btn-cta" type="submit">
-        Quero receber o mini ebook grátis →
-      </button>
-      <p class="privacy">🔒 Seus dados estão seguros. Sem spam.</p>
-      <input type="text" name="email_address_check" value="" style="display:none;">
-      <input type="hidden" name="locale" value="pt">
-    </form>
-  </div>
 
-</div>
-```
+      <!-- FORM BREVO -->
+      <div class="form-box">
+        <h2>Quero receber agora</h2>
+        <p>Preencha abaixo e receba o mini ebook no seu email. <span>É gratuito.</span></p>
 
+        <form id="sib-form" method="POST" action="https://eaf3c303.sibforms.com/serve/MUIFAPQSU_FOKyFenXajJmHdXNneLCYjxBeckhYCEiZomtmDdt_cD5PObFBGCDN58Hph1EzCongNFx2FGT166v44VTIUqw8pciLR80Cq8pSOTtmknMq198vS8d97xSyPvyPocQINH6JvxEiBGU_F3OBNpLMooTgv_VPLaCXglDbRSkf2Di02Uwmgd_hqV5JOkC5n4CyWnR7fZr-bqQ==" data-type="subscription" style="text-align:left;" onsubmit="handleFormSubmit(event)">
+          <div class="field">
+            <input class="input" type="text" id="EMAIL" name="EMAIL" placeholder="Seu melhor email" autocomplete="email" data-required="true" required />
+          </div>
+          <button class="btn-cta" type="submit">
+            🎁 Quero receber meu presente
+          </button>
+          <p class="privacy">🔒 Seus dados estão seguros. Sem spam.</p>
+          <input type="text" name="email_address_check" value="" style="display:none;">
+          <input type="hidden" name="locale" value="pt">
+        </form>
+      </div>
+
+    </div>
   </section>
 
   <!-- ── MINI EBOOK ── -->
-
   <section class="bonus-section">
-    <span class="tag">Mini ebook gratuito</span>
+    <span class="tag">📖 Mini ebook gratuito</span>
 
-```
-<div class="bonus-card">
-  <h3>"7 Sinais de que Você Está Aceitando<br><em>Menos do que Deus Tem</em><br>para Seus Relacionamentos"</h3>
-  <p>Muitas pessoas vivem relacionamentos abaixo do que Deus planejou — e nem percebem. Este mini ebook foi criado para abrir seus olhos e te ajudar a reconhecer padrões que precisam mudar.</p>
-
-
-</div>
-```
-
+    <div class="bonus-card">
+      <h3>"7 Sinais de que Você Está Aceitando<br><em>Menos do que Deus Tem</em><br>para Seus Relacionamentos"</h3>
+      <p>Muitas mulheres vivem relacionamentos e uma vida abaixo do que Deus planejou — e nem percebem. Este mini ebook foi criado para abrir seus olhos e te ajudar a reconhecer padrões que precisam mudar. É o primeiro passo de uma jornada muito maior.</p>
+    </div>
   </section>
 
-  <!-- ── PARA QUEM É ── -->
-
+  <!-- ── PARA QUEM É (360°) ── -->
   <section class="for-section">
     <h2>Este material é para <em>você</em> que…</h2>
+    <p class="lead">Não importa em qual área da sua vida você sente o maior peso hoje — esse é o primeiro passo de uma caminhada completa.</p>
 
-```
-<div class="cards-grid">
-  <div class="card">
-    <div class="card-icon">💔</div>
-    <p>Sente que o casamento esfriou e não sabe como reconectar com quem você ama</p>
-  </div>
-  <div class="card">
-    <div class="card-icon">🙏</div>
-    <p>Acredita que Deus pode restaurar o que parece perdido, mas precisa de direção</p>
-  </div>
-  <div class="card">
-    <div class="card-icon">🔑</div>
-    <p>Quer sair do papel de vítima e assumir a responsabilidade pela transformação</p>
-  </div>
-  <div class="card">
-    <div class="card-icon">👑</div>
-    <p>Sonha com um casamento que seja, de fato, reflexo do amor de Deus</p>
-  </div>
-</div>
-```
-
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">💔</div>
+        <p>Sente que o casamento esfriou e não sabe como reconectar com quem você ama</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👶</div>
+        <p>Quer ser uma mãe mais presente, paciente e intencional</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <p>Deseja organizar as finanças e prosperar com propósito</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💆</div>
+        <p>Precisa aprender a se cuidar sem culpa, no corpo e na alma</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧠</div>
+        <p>Lida com ansiedade, baixa autoestima ou feridas emocionais</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👑</div>
+        <p>Quer descobrir quem Deus diz que você é, e viver isso de verdade</p>
+      </div>
+    </div>
   </section>
 
   <!-- ── CTA FINAL ── -->
-
   <section class="cta-final">
     <h2>Dê o primeiro passo.<br><em>Deus já está te esperando.</em></h2>
-    <p>Receba o mini ebook gratuito e entre na lista para ser o primeiro a saber do lançamento.</p>
+    <p>Receba o mini ebook gratuito e comece hoje uma jornada de transformação em todas as áreas da sua vida.</p>
     <a href="#" class="btn-cta-final" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
       Quero meu mini ebook grátis →
     </a>
   </section>
 
   <footer>
-    © 2026 · De Sapo a Príncipe e Rei · Todos os direitos reservados
+    © 2026 · Comunidade Mulher de Valor · Todos os direitos reservados
   </footer>
 
   <script>
@@ -528,7 +405,7 @@ footer {
         mode: 'no-cors'
       }).finally(() => {
         // Redireciona para página de obrigado independente do resultado
-        window.location.href = '/obrigado.html';
+        window.location.href = '/Obrigado.html';
       });
     }
     window.REQUIRED_CODE_ERROR_MESSAGE = 'Escolha um código de país';
