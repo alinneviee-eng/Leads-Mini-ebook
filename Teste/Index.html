@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teste de Aptidão — Comunidade Mulher de Valor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rosa: #F2A4A4; --vinho: #7B2D3E; --vinho-light: #C4566A;
+    --vinho-deep: #3A0A18; --creme: #FFF8F5; --dourado: #C9A96E;
+    --texto: #3A1A20; --texto-suave: #7A4A52;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif; background: var(--creme); color: var(--texto);
+    max-width: 480px; margin: 0 auto; padding-bottom: 60px;
+  }
+
+  .hero {
+    background: linear-gradient(160deg, var(--vinho-deep) 0%, var(--vinho) 60%, var(--vinho-light) 100%);
+    padding: 48px 26px 40px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '♛'; position: absolute; font-size: 240px;
+    color: rgba(255,255,255,0.05); top: -50px; right: -50px; pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block; background: rgba(201,169,110,0.2);
+    border: 1px solid rgba(201,169,110,0.4); border-radius: 50px; padding: 6px 18px;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--dourado); margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(26px, 7.5vw, 34px);
+    font-weight: 400; line-height: 1.25; color: white; margin-bottom: 12px;
+  }
+  .hero h1 em { font-style: italic; color: #F0BFBC; }
+  .hero p { font-size: 13.5px; color: rgba(255,255,255,0.8); line-height: 1.7; max-width: 360px; margin: 0 auto; }
+
+  .progress-wrap { padding: 16px 20px; background: white; border-bottom: 1px solid #FDE8EC; position: sticky; top: 0; z-index: 10; }
+  .progress-label { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--vinho-light); text-align: center; margin-bottom: 8px; }
+  .progress-track { height: 6px; background: #FDE8EC; border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--vinho-light), var(--dourado)); transition: width 0.35s ease; }
+
+  .quiz { padding: 28px 20px 0; }
+
+  .question {
+    background: white; border: 1.5px solid #FDE8EC; border-radius: 18px;
+    padding: 22px 20px; margin-bottom: 16px;
+    box-shadow: 0 4px 16px rgba(123,45,62,0.06);
+  }
+  .q-num {
+    display: inline-block; font-size: 11px; font-weight: 800; color: var(--dourado);
+    background: var(--vinho-deep); padding: 3px 11px; border-radius: 50px;
+    letter-spacing: 0.06em; margin-bottom: 12px;
+  }
+  .q-text {
+    font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+    color: var(--vinho); line-height: 1.35; margin-bottom: 16px;
+  }
+
+  .option {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 14px; border-radius: 12px; border: 1.5px solid #F5DEE3;
+    margin-bottom: 9px; cursor: pointer; transition: all 0.15s;
+    background: var(--creme);
+  }
+  .option:last-child { margin-bottom: 0; }
+  .option input { display: none; }
+  .option .dot {
+    width: 18px; height: 18px; border-radius: 50%; border: 2px solid #E0B8C0;
+    flex-shrink: 0; position: relative; transition: all 0.15s;
+  }
+  .option input:checked ~ .dot { border-color: var(--vinho); background: var(--vinho); }
+  .option input:checked ~ .dot::after {
+    content: ''; position: absolute; top: 3px; left: 3px; width: 8px; height: 8px;
+    border-radius: 50%; background: white;
+  }
+  .option:has(input:checked) {
+    border-color: var(--vinho-light); background: #FDF0F2;
+  }
+  .option span.txt { font-size: 14px; line-height: 1.45; color: var(--texto); }
+
+  .btn-result {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--dourado), #E8C99A);
+    color: var(--vinho-deep); font-family: 'Nunito', sans-serif;
+    font-size: 15px; font-weight: 800; letter-spacing: 0.3px;
+    padding: 18px 24px; border-radius: 50px; border: none; cursor: pointer;
+    margin: 26px 20px 0; box-shadow: 0 8px 24px rgba(201,169,110,0.3);
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .btn-result:active { transform: scale(0.98); }
+  .btn-result:disabled { opacity: 0.45; pointer-events: none; }
+
+  .hint { text-align: center; font-size: 12px; color: var(--texto-suave); margin: 12px 20px 0; }
+
+  /* RESULTADO */
+  .result {
+    display: none; padding: 40px 22px 20px;
+  }
+  .result.show { display: block; animation: fadeIn 0.5s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(16px);} to { opacity: 1; transform: translateY(0);} }
+
+  .result-badge {
+    text-align: center; font-size: 11px; font-weight: 800; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--vinho-light); margin-bottom: 10px;
+  }
+  .result-card {
+    background: linear-gradient(160deg, var(--vinho-deep), var(--vinho));
+    border-radius: 22px; padding: 34px 26px; text-align: center; color: white;
+    box-shadow: 0 12px 32px rgba(123,45,62,0.25);
+  }
+  .result-icon { font-size: 48px; margin-bottom: 14px; }
+  .result-card h2 {
+    font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
+    margin-bottom: 6px; line-height: 1.3;
+  }
+  .result-card .subtitle { font-size: 13px; color: var(--dourado); font-weight: 700; letter-spacing: 0.04em; margin-bottom: 18px; text-transform: uppercase;}
+  .result-card p.desc { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,0.85); margin-bottom: 22px; }
+
+  .paths { text-align: left; background: rgba(255,255,255,0.08); border-radius: 14px; padding: 18px 18px; }
+  .paths-title { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dourado); margin-bottom: 12px; }
+  .paths ul { list-style: none; }
+  .paths li {
+    display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px;
+    color: rgba(255,255,255,0.9); padding: 7px 0; line-height: 1.5;
+  }
+  .paths li::before { content: '✦'; color: var(--dourado); flex-shrink: 0; margin-top: 1px; }
+
+  .retry {
+    display: block; text-align: center; margin-top: 22px;
+    font-size: 13px; color: var(--vinho-light); font-weight: 700;
+    text-decoration: underline; cursor: pointer; background: none; border: none;
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-badge">✨ Descubra seus dons</div>
+    <h1>Teste de <em>Aptidão</em></h1>
+    <p>Responda com sinceridade — não existe resposta certa ou errada. No final, você vai descobrir qual área combina mais com os dons que Deus já colocou em você.</p>
+  </section>
+
+  <div class="progress-wrap">
+    <div class="progress-label" id="progressLabel">0 de 10 respondidas</div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <form class="quiz" id="quizForm"></form>
+
+  <button class="btn-result" id="btnResult" disabled>✨ Ver meu resultado</button>
+  <p class="hint" id="hintText">Responda todas as perguntas para desbloquear</p>
+
+  <div class="result" id="resultSection">
+    <div class="result-badge">Seu resultado</div>
+    <div class="result-card">
+      <div class="result-icon" id="resultIcon">🎨</div>
+      <h2 id="resultTitle">—</h2>
+      <div class="subtitle" id="resultSubtitle">—</div>
+      <p class="desc" id="resultDesc">—</p>
+      <div class="paths">
+        <div class="paths-title">Caminhos possíveis pra você</div>
+        <ul id="resultPaths"></ul>
+      </div>
+    </div>
+    <button class="retry" id="btnRetry">↺ Refazer o teste</button>
+  </div>
+
+<script>
+const QUESTIONS = [
+  {
+    q: "Quando alguém te pede ajuda, geralmente é pra...",
+    options: [
+      { t: "Aprender algo novo que você sabe fazer", p: "criativa" },
+      { t: "Colocar ordem em algo bagunçado", p: "organizadora" },
+      { t: "Desabafar e ser ouvida", p: "cuidadora" },
+      { t: "Fazer algo com as mãos", p: "pratica" },
+      { t: "Resolver contas ou números", p: "tecnica" },
+    ]
+  },
+  {
+    q: "No seu tempo livre, você prefere...",
+    options: [
+      { t: "Arrumar uma gaveta, montar uma lista, planejar algo", p: "organizadora" },
+      { t: "Postar algo criativo, escrever, gravar um vídeo", p: "criativa" },
+      { t: "Mexer numa planilha ou estudar algo técnico", p: "tecnica" },
+      { t: "Conversar com uma amiga, orar por alguém", p: "cuidadora" },
+      { t: "Fazer uma receita nova, costurar, um artesanato", p: "pratica" },
+    ]
+  },
+  {
+    q: "O que te dá mais orgulho quando termina uma tarefa?",
+    options: [
+      { t: "Alguém que você ajudou a se sentir melhor", p: "cuidadora" },
+      { t: "Algo que você criou do zero", p: "criativa" },
+      { t: "Um problema lógico que você resolveu", p: "tecnica" },
+      { t: "Algo que você deixou bem organizado", p: "organizadora" },
+      { t: "Algo que você fez com as próprias mãos", p: "pratica" },
+    ]
+  },
+  {
+    q: "Suas amigas costumam dizer que você é a mais...",
+    options: [
+      { t: "Habilidosa — faz tudo com as mãos", p: "pratica" },
+      { t: "Acolhedora do grupo", p: "cuidadora" },
+      { t: "Organizada do grupo", p: "organizadora" },
+      { t: "Cabeça-fria com números e lógica", p: "tecnica" },
+      { t: "Criativa do grupo", p: "criativa" },
+    ]
+  },
+  {
+    q: "Se tivesse que dar uma aula surpresa amanhã, sobre o que seria mais fácil?",
+    options: [
+      { t: "Matemática, finanças, algo técnico", p: "tecnica" },
+      { t: "Redes sociais, escrita, algo criativo", p: "criativa" },
+      { t: "Uma habilidade manual (culinária, beleza, artesanato)", p: "pratica" },
+      { t: "Organização e produtividade", p: "organizadora" },
+      { t: "Relacionamentos e escuta emocional", p: "cuidadora" },
+    ]
+  },
+  {
+    q: "Qual dessas tarefas você faria de graça, só por gostar?",
+    options: [
+      { t: "Ajudar alguém a entender as contas do mês", p: "tecnica" },
+      { t: "Organizar o closet ou a agenda de alguém", p: "organizadora" },
+      { t: "Criar um post bonito ou escrever algo", p: "criativa" },
+      { t: "Ouvir uma amiga desabafando por horas", p: "cuidadora" },
+      { t: "Fazer um docinho, bordado ou decoração pra alguém", p: "pratica" },
+    ]
+  },
+  {
+    q: "Numa reunião de família, qual papel você naturalmente assume?",
+    options: [
+      { t: "Quem coloca a mão na massa (cozinha, decoração)", p: "pratica" },
+      { t: "Quem sugere as ideias divertidas e criativas", p: "criativa" },
+      { t: "Quem cuida pra todo mundo se sentir bem", p: "cuidadora" },
+      { t: "Quem calcula a conta e divide certinho", p: "tecnica" },
+      { t: "Quem organiza horário, lista e tarefas", p: "organizadora" },
+    ]
+  },
+  {
+    q: "O que mais te frustra no dia a dia?",
+    options: [
+      { t: "Decisões tomadas sem dados ou lógica", p: "tecnica" },
+      { t: "Fazer sempre a mesma coisa, sem espaço pra criar", p: "criativa" },
+      { t: "Bagunça e falta de planejamento", p: "organizadora" },
+      { t: "Trabalho só na teoria, sem fazer nada com as mãos", p: "pratica" },
+      { t: "Ver alguém sofrendo sozinho, sem apoio", p: "cuidadora" },
+    ]
+  },
+  {
+    q: "Se pudesse aprender algo novo agora, escolheria...",
+    options: [
+      { t: "Uma nova técnica manual (culinária, corte, costura)", p: "pratica" },
+      { t: "Excel avançado, um idioma, programação", p: "tecnica" },
+      { t: "Edição de vídeo, escrita, fotografia", p: "criativa" },
+      { t: "Aconselhamento e escuta ativa", p: "cuidadora" },
+      { t: "Gestão de tempo e planejamento financeiro", p: "organizadora" },
+    ]
+  },
+  {
+    q: "O que mais acende seu coração ao imaginar ganhar dinheiro com isso?",
+    options: [
+      { t: "Cuidar e apoiar outras mulheres de perto", p: "cuidadora" },
+      { t: "Vender algo que você fez com suas mãos", p: "pratica" },
+      { t: "Compartilhar suas ideias e criações com o mundo", p: "criativa" },
+      { t: "Ensinar algo técnico que você domina", p: "tecnica" },
+      { t: "Ajudar outras mulheres a se organizarem", p: "organizadora" },
+    ]
+  },
+];
+
+const PROFILES = {
+  criativa: {
+    icon: "🎨",
+    title: "Criativa & Comunicadora",
+    subtitle: "Seu dom é se expressar e inspirar",
+    desc: "Você tem facilidade pra criar, comunicar e tocar pessoas através de palavras, imagens ou ideias. Esse é um dom que gera conexão — e pode gerar renda também.",
+    paths: [
+      "Criar conteúdo e redes sociais para você ou pra outras mulheres/negócios",
+      "Ser afiliada de produtos que você acredita, divulgando com sua voz",
+      "Dar aulas ou mentorias sobre o que você já sabe fazer bem",
+      "Escrever — ebooks, devocionais, legendas, roteiros"
+    ]
+  },
+  organizadora: {
+    icon: "📋",
+    title: "Organizadora & Estrategista",
+    subtitle: "Seu dom é trazer ordem e clareza",
+    desc: "Você enxerga estrutura onde outras veem caos. Esse dom é raro e muito valorizado — muita gente pagaria por alguém que organiza a vida dela.",
+    paths: [
+      "Assessoria de organização (casa, agenda, finanças pessoais)",
+      "Assistência virtual para outras empreendedoras",
+      "Planejamento de eventos ou rotinas familiares",
+      "Consultoria de produtividade para mulheres do lar"
+    ]
+  },
+  cuidadora: {
+    icon: "🤍",
+    title: "Cuidadora & Relacional",
+    subtitle: "Seu dom é acolher e apoiar",
+    desc: "Você tem um coração que enxerga o outro. As pessoas se sentem seguras perto de você — e isso é um chamado, não só uma característica.",
+    paths: [
+      "Mentoria ou aconselhamento para outras mulheres",
+      "Cuidado com crianças, idosos ou pessoas em recuperação",
+      "Ministério, grupos de apoio ou discipulado",
+      "Terapias complementares (com formação adequada)"
+    ]
+  },
+  pratica: {
+    icon: "✋",
+    title: "Prática & Manual",
+    subtitle: "Seu dom é criar com as mãos",
+    desc: "Você transforma ideias em algo palpável e bonito. Esse tipo de dom sempre encontra mercado, porque nem todo mundo sabe (ou quer aprender) a fazer.",
+    paths: [
+      "Serviços de beleza (unhas, cabelo, maquiagem)",
+      "Culinária, doces ou marmitas por encomenda",
+      "Artesanato, costura ou decoração",
+      "Venda de produtos feitos por você"
+    ]
+  },
+  tecnica: {
+    icon: "🔢",
+    title: "Técnica & Analítica",
+    subtitle: "Seu dom é resolver com lógica",
+    desc: "Você pensa com clareza onde outras se perdem em números e detalhes. Esse dom é extremamente valorizado no mundo profissional — e pode virar renda estável.",
+    paths: [
+      "Aulas particulares (idiomas, matemática, informática)",
+      "Organização financeira para outras famílias",
+      "Planilhas e controles para pequenos negócios",
+      "Consultoria técnica na sua área de formação"
+    ]
+  },
+};
+
+const form = document.getElementById('quizForm');
+const progressFill = document.getElementById('progressFill');
+const progressLabel = document.getElementById('progressLabel');
+const btnResult = document.getElementById('btnResult');
+const hintText = document.getElementById('hintText');
+const resultSection = document.getElementById('resultSection');
+
+QUESTIONS.forEach((item, qi) => {
+  const block = document.createElement('div');
+  block.className = 'question';
+  block.innerHTML = `
+    <span class="q-num">PERGUNTA ${qi+1} DE ${QUESTIONS.length}</span>
+    <div class="q-text">${item.q}</div>
+    ${item.options.map((opt, oi) => `
+      <label class="option">
+        <input type="radio" name="q${qi}" value="${opt.p}">
+        <span class="dot"></span>
+        <span class="txt">${opt.t}</span>
+      </label>
+    `).join('')}
+  `;
+  form.appendChild(block);
+});
+
+form.addEventListener('change', () => {
+  const answered = QUESTIONS.filter((_, qi) => form.querySelector(`input[name="q${qi}"]:checked`)).length;
+  const pct = (answered / QUESTIONS.length) * 100;
+  progressFill.style.width = pct + '%';
+  progressLabel.textContent = `${answered} de ${QUESTIONS.length} respondidas`;
+  if (answered === QUESTIONS.length) {
+    btnResult.disabled = false;
+    hintText.textContent = 'Tudo pronto! Toque no botão acima ✨';
+  } else {
+    btnResult.disabled = true;
+    hintText.textContent = 'Responda todas as perguntas para desbloquear';
+  }
+});
+
+btnResult.addEventListener('click', () => {
+  const scores = { criativa: 0, organizadora: 0, cuidadora: 0, pratica: 0, tecnica: 0 };
+  QUESTIONS.forEach((_, qi) => {
+    const checked = form.querySelector(`input[name="q${qi}"]:checked`);
+    if (checked) scores[checked.value]++;
+  });
+  const winner = Object.entries(scores).sort((a,b) => b[1]-a[1])[0][0];
+  const profile = PROFILES[winner];
+
+  document.getElementById('resultIcon').textContent = profile.icon;
+  document.getElementById('resultTitle').textContent = profile.title;
+  document.getElementById('resultSubtitle').textContent = profile.subtitle;
+  document.getElementById('resultDesc').textContent = profile.desc;
+  document.getElementById('resultPaths').innerHTML = profile.paths.map(p => `<li>${p}</li>`).join('');
+
+  resultSection.classList.add('show');
+  resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+document.getElementById('btnRetry').addEventListener('click', () => {
+  form.reset();
+  resultSection.classList.remove('show');
+  progressFill.style.width = '0%';
+  progressLabel.textContent = `0 de ${QUESTIONS.length} respondidas`;
+  btnResult.disabled = true;
+  hintText.textContent = 'Responda todas as perguntas para desbloquear';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>
