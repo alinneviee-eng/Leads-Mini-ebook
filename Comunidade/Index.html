@@ -51,7 +51,7 @@
     bottom: -100px; left: -80px; pointer-events: none;
   }
   .hero-logo {
-    width: 92px; height: auto; margin-bottom: 18px;
+    width: 132px; height: auto; margin-bottom: 18px;
     filter: drop-shadow(0 6px 18px rgba(0,0,0,0.25));
   }
   .hero-badge {
@@ -120,6 +120,12 @@
     background: radial-gradient(circle, rgba(242,164,164,0.15) 0%, transparent 70%);
     top: -80px; right: -80px; pointer-events: none;
   }
+  .para-quem::after {
+    content: '♛';
+    position: absolute; font-size: 240px; line-height: 1;
+    color: rgba(123,45,62,0.045);
+    bottom: -60px; left: -50px; pointer-events: none;
+  }
   .sec-badge {
     display: inline-block; background: #FDE8EC;
     color: var(--vinho-light); font-size: 10px; font-weight: 800;
@@ -150,6 +156,12 @@
     position: absolute; width: 260px; height: 260px; border-radius: 50%;
     background: radial-gradient(circle, rgba(123,45,62,0.06) 0%, transparent 70%);
     bottom: -100px; left: -100px; pointer-events: none;
+  }
+  .recebe::before {
+    content: '♛';
+    position: absolute; font-size: 260px; line-height: 1;
+    color: rgba(123,45,62,0.04);
+    top: -50px; right: -60px; pointer-events: none;
   }
   .recebe-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; position: relative; z-index: 1; }
   .recebe-card {
@@ -186,7 +198,14 @@
   }
 
   /* PLANOS */
-  .planos { padding: 40px 20px; background: white; }
+  .planos { padding: 40px 20px; background: white; position: relative; overflow: hidden; }
+  .planos::before {
+    content: '♛';
+    position: absolute; font-size: 260px; line-height: 1;
+    color: rgba(123,45,62,0.035);
+    bottom: -70px; right: -60px; pointer-events: none;
+  }
+  .planos-grid, .planos > .sec-badge, .planos > .sec-titulo { position: relative; z-index: 1; }
   .planos-grid { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
   .plano-card {
     border-radius: 20px; overflow: hidden;
@@ -255,6 +274,12 @@
     background: radial-gradient(circle, rgba(201,169,110,0.14) 0%, transparent 70%);
     top: -60px; right: -100px; pointer-events: none;
   }
+  .alinne::after {
+    content: '♛';
+    position: absolute; font-size: 240px; line-height: 1;
+    color: rgba(123,45,62,0.04);
+    bottom: -60px; left: -50px; pointer-events: none;
+  }
   .alinne-card {
     background: white; border-radius: 20px;
     overflow: hidden;
@@ -274,7 +299,7 @@
     top: -60px; left: -60px; pointer-events: none;
   }
   .alinne-photo {
-    width: 108px; height: 108px; border-radius: 50%;
+    width: 148px; height: 148px; border-radius: 50%;
     object-fit: cover; object-position: top center;
     border: 3px solid var(--dourado);
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
@@ -293,7 +318,14 @@
   }
 
   /* FAQ */
-  .faq { padding: 40px 20px; background: white; }
+  .faq { padding: 40px 20px; background: white; position: relative; overflow: hidden; }
+  .faq::before {
+    content: '♛';
+    position: absolute; font-size: 240px; line-height: 1;
+    color: rgba(123,45,62,0.035);
+    top: -55px; right: -55px; pointer-events: none;
+  }
+  .faq > .sec-badge, .faq > .sec-titulo, .faq-item { position: relative; z-index: 1; }
   .faq-item {
     background: var(--creme); border-radius: 14px;
     margin-bottom: 10px; overflow: hidden;
@@ -320,7 +352,15 @@
   .cta-final {
     background: linear-gradient(160deg, var(--vinho-deep), var(--vinho));
     padding: 48px 24px; text-align: center;
+    position: relative; overflow: hidden;
   }
+  .cta-final::before {
+    content: '♛';
+    position: absolute; font-size: 280px; line-height: 1;
+    color: rgba(255,255,255,0.045);
+    bottom: -70px; right: -60px; pointer-events: none;
+  }
+  .cta-final h2, .cta-final p, .cta-final a { position: relative; z-index: 1; }
   .cta-final h2 {
     font-family: 'Playfair Display', serif;
     font-size: 30px; color: white; line-height: 1.2; margin-bottom: 16px;
@@ -439,16 +479,9 @@
       </div>
     </div>
     <div class="recebe-card">
-      <div class="recebe-icon">📱</div>
-      <div class="recebe-content">
-        <h3>Módulo Mundo Digital</h3>
-        <p>Como usar as redes sociais com sabedoria, vício em celular e proteção dos filhos online.</p>
-      </div>
-    </div>
-    <div class="recebe-card">
       <div class="recebe-icon">💬</div>
       <div class="recebe-content">
-        <h3>Grupo exclusivo no Telegram</h3>
+        <h3>Grupo exclusivo no WhatsApp</h3>
         <p>Comunidade de mulheres cristãs que entendem o que você está vivendo. Apoio, oração e troca diária.</p>
       </div>
     </div>
@@ -477,11 +510,14 @@
       </div>
       <div class="plano-body">
         <div class="plano-item"><span class="plano-check">✓</span> 2 encontros ao vivo por mês</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Grupo exclusivo no Telegram</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Grupo exclusivo no WhatsApp</div>
         <div class="plano-item"><span class="plano-check">✓</span> Conteúdo gravado toda semana</div>
         <div class="plano-item"><span class="plano-check">✓</span> Devocional mensal exclusivo</div>
         <div class="plano-item"><span class="plano-check">✓</span> Bônus de entrada (2 ebooks)</div>
-        <a href="https://pay.kiwify.com.br/HgMPcGh" class="btn-plano mensal">Assinar por R$47/mês</a>
+        <a href="https://pay.kiwify.com.br/0g17Nkq" class="btn-plano mensal">Assinar por R$47/mês</a>
+        <p style="font-size: 11px; color: var(--texto-suave); text-align: center; margin-top: 10px;">
+          💳 Pagamento recorrente automático no cartão — sem se preocupar em renovar todo mês
+        </p>
       </div>
     </div>
 
@@ -534,7 +570,7 @@
 
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-pergunta">Quando acontecem os encontros ao vivo? <span class="faq-arrow">▼</span></div>
-    <div class="faq-resposta"><div class="faq-content">Os encontros acontecem duas vezes por mês, quinzenalmente. As datas são anunciadas com antecedência no grupo do Telegram. Todas as lives ficam gravadas para você assistir quando quiser.</div></div>
+    <div class="faq-resposta"><div class="faq-content">Os encontros acontecem duas vezes por mês, quinzenalmente. As datas são anunciadas com antecedência no grupo do WhatsApp. Todas as lives ficam gravadas para você assistir quando quiser.</div></div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-pergunta">Posso cancelar quando quiser? <span class="faq-arrow">▼</span></div>
@@ -550,7 +586,11 @@
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-pergunta">Como acesso o conteúdo? <span class="faq-arrow">▼</span></div>
-    <div class="faq-resposta"><div class="faq-content">Após a compra você recebe acesso à área de membros com todos os conteúdos gravados, e também é adicionada ao grupo exclusivo no Telegram.</div></div>
+    <div class="faq-resposta"><div class="faq-content">Após a compra você recebe acesso à área de membros com todos os conteúdos gravados, e também é adicionada ao grupo exclusivo no WhatsApp.</div></div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">Posso pagar com Pix? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">Sim! Você pode escolher Pix ou cartão de crédito. No cartão, a renovação mensal acontece automaticamente. No Pix, como não é possível debitar automaticamente, você recebe um aviso 3 dias antes e renova manualmente todo mês.</div></div>
   </div>
 </section>
 
