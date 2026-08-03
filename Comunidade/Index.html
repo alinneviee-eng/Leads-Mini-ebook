@@ -43,7 +43,6 @@
     color: rgba(255,255,255,0.04);
     top: -60px; right: -60px; pointer-events: none;
   }
-  /* elementos decorativos extras */
   .hero::after {
     content: '';
     position: absolute; width: 280px; height: 280px; border-radius: 50%;
@@ -243,6 +242,11 @@
     background: var(--dourado); color: white;
     font-size: 10px; font-weight: 800; padding: 2px 8px;
     border-radius: 50px; margin-left: 6px;
+  }
+  .plano-bonus-titulo {
+    font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--dourado);
+    margin: 14px 0 8px;
   }
   .btn-plano {
     display: block; width: 100%;
@@ -509,11 +513,16 @@
         <div class="plano-info">Cancele quando quiser</div>
       </div>
       <div class="plano-body">
+        <div class="plano-item"><span class="plano-check">✓</span> Acesso às aulas na área de membros</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Grupo exclusivo de acompanhamento — conversas, dúvidas e testemunhos</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Acompanhamento diário feito pela Alinne</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Devocionais digitais mensais</div>
         <div class="plano-item"><span class="plano-check">✓</span> 2 encontros ao vivo por mês</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Grupo exclusivo no WhatsApp</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Conteúdo gravado toda semana</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Devocional mensal exclusivo</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Bônus de entrada (2 ebooks)</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Novos conteúdos ao longo da jornada</div>
+
+        <div class="plano-bonus-titulo">🎁 Bônus exclusivo</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Desafio de 7 dias — Voltando para o Centro <span class="plano-badge-destaque">BÔNUS</span></div>
+
         <a href="https://pay.kiwify.com.br/0g17Nkq" class="btn-plano mensal">Assinar por R$47/mês</a>
         <p style="font-size: 11px; color: var(--texto-suave); text-align: center; margin-top: 10px;">
           💳 Cartão ou Pix Automático — cobrança automática, sem se preocupar em renovar todo mês
@@ -530,11 +539,17 @@
       </div>
       <div class="plano-body">
         <div class="plano-item"><span class="plano-check">✓</span> Tudo do plano mensal</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Acesso a cursos extras exclusivos <span class="plano-badge-destaque">BÔNUS</span></div>
-        <div class="plano-item"><span class="plano-check">✓</span> Checklist & Planner imprimível <span class="plano-badge-destaque">BÔNUS</span></div>
-        <div class="plano-item"><span class="plano-check">✓</span> Prioridade nas lives e perguntas</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Pagamento via PIX ou cartão em até 12x</div>
+
+        <div class="plano-bonus-titulo">🎁 Bônus exclusivos do plano anual</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Desafio de 7 dias — Voltando para o Centro <span class="plano-badge-destaque">BÔNUS</span></div>
+        <div class="plano-item"><span class="plano-check">✓</span> Encontro fechado de direcionamento com a Alinne <span class="plano-badge-destaque">BÔNUS</span></div>
+        <div class="plano-item"><span class="plano-check">✓</span> Acesso a todos os ebooks da Alinne <span class="plano-badge-destaque">BÔNUS</span></div>
+        <div class="plano-item"><span class="plano-check">✓</span> Prioridade no envio de perguntas para os encontros ao vivo <span class="plano-badge-destaque">BÔNUS</span></div>
+
         <a href="https://pay.kiwify.com.br/Ukf3qy6" class="btn-plano anual">👑 Assinar plano anual</a>
+        <p style="font-size: 11px; color: var(--texto-suave); text-align: center; margin-top: 10px;">
+          💳 Pagamento via PIX ou cartão em até 12x
+        </p>
       </div>
     </div>
 
@@ -583,6 +598,10 @@
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-pergunta">É só para mulheres com casamento em crise? <span class="faq-arrow">▼</span></div>
     <div class="faq-resposta"><div class="faq-content">Não! A comunidade é para toda mulher cristã que quer crescer — seja para fortalecer o casamento, desenvolver a virtude, aprofundar a vida espiritual ou simplesmente não caminhar sozinha.</div></div>
+  </div>
+  <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-pergunta">Qual a diferença entre os bônus do plano mensal e anual? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">O plano mensal já inclui o Desafio de 7 dias — Voltando para o Centro. O plano anual inclui esse mesmo desafio, além de um encontro fechado de direcionamento comigo, acesso a todos os meus ebooks e prioridade no envio de perguntas para os encontros ao vivo.</div></div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-pergunta">Como acesso o conteúdo? <span class="faq-arrow">▼</span></div>
