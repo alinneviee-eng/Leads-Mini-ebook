@@ -63,13 +63,17 @@
   }
   .hero h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 44px; color: white; line-height: 1.1;
+    font-size: 36px; color: white; line-height: 1.25;
     margin-bottom: 8px;
   }
-  .hero h1 em { font-style: italic; color: #F0BFBC; display: block; }
+  .hero h1 em { font-style: italic; color: #F0BFBC; }
   .hero-sub {
     font-size: 14px; color: rgba(255,255,255,0.75);
-    margin: 16px 0 28px; line-height: 1.7;
+    margin: 16px 0 20px; line-height: 1.7;
+  }
+  .hero-inclui {
+    font-size: 12.5px; color: rgba(255,255,255,0.65);
+    line-height: 1.9; margin-bottom: 24px;
   }
   .hero-divider {
     width: 40px; height: 1px;
@@ -82,17 +86,22 @@
     border-radius: 20px; padding: 24px 28px;
     margin-bottom: 20px;
   }
-  .preco-de {
-    font-size: 12px; color: rgba(255,255,255,0.5);
-    text-decoration: line-through; margin-bottom: 4px;
-  }
-  .preco-por { font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+  .preco-por { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 6px; }
   .preco-valor {
     font-size: 48px; font-weight: 800; color: white;
     line-height: 1;
   }
   .preco-valor span { font-size: 20px; font-weight: 400; }
-  .preco-info { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 6px; }
+  .preco-garantias {
+    display: flex; justify-content: center; gap: 8px;
+    flex-wrap: wrap; margin-top: 12px;
+  }
+  .preco-garantia-tag {
+    font-size: 11px; color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 4px 12px; border-radius: 50px;
+  }
   .btn-hero {
     display: block; width: 100%;
     background: linear-gradient(135deg, var(--dourado), #E8C99A);
@@ -105,7 +114,29 @@
     transition: transform 0.2s;
   }
   .btn-hero:active { transform: scale(0.98); }
-  .hero-garantia { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .hero-fidelidade {
+    font-size: 12px; color: rgba(255,255,255,0.55);
+    line-height: 1.6; margin-top: 4px;
+  }
+  .hero-assinatura-nota {
+    font-size: 11.5px; color: rgba(255,255,255,0.45);
+    line-height: 1.6; margin-top: 10px; max-width: 320px;
+  }
+
+  /* SECOES GERAIS */
+  .sec-badge {
+    display: inline-block; background: #FDE8EC;
+    color: var(--vinho-light); font-size: 10px; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 50px; margin-bottom: 12px;
+    position: relative; z-index: 1;
+  }
+  .sec-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--vinho); line-height: 1.2; margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+  .sec-titulo em { font-style: italic; color: var(--vinho-light); }
 
   /* PARA QUEM É */
   .para-quem {
@@ -125,61 +156,128 @@
     color: rgba(123,45,62,0.045);
     bottom: -60px; left: -50px; pointer-events: none;
   }
-  .sec-badge {
-    display: inline-block; background: #FDE8EC;
-    color: var(--vinho-light); font-size: 10px; font-weight: 800;
-    letter-spacing: 2px; text-transform: uppercase;
-    padding: 4px 14px; border-radius: 50px; margin-bottom: 12px;
-    position: relative; z-index: 1;
-  }
-  .sec-titulo {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px; color: var(--vinho); line-height: 1.2; margin-bottom: 20px;
-    position: relative; z-index: 1;
-  }
-  .sec-titulo em { font-style: italic; color: var(--vinho-light); }
-
   .para-item {
     display: flex; gap: 12px; align-items: flex-start;
-    padding: 12px 0; border-bottom: 1px solid #FDE8EC;
+    padding: 16px 0; border-bottom: 1px solid #FDE8EC;
     position: relative; z-index: 1;
   }
   .para-item:last-child { border-bottom: none; }
-  .para-icon { font-size: 20px; flex-shrink: 0; }
-  .para-item p { font-size: 14px; line-height: 1.6; color: var(--texto); }
+  .para-icon { font-size: 22px; flex-shrink: 0; }
+  .para-item p { font-size: 15px; line-height: 1.6; color: var(--texto); font-weight: 600; }
 
-  /* O QUE VOCÊ RECEBE */
-  .recebe { padding: 40px 20px; background: var(--creme); position: relative; overflow: hidden; }
-  .recebe::after {
-    content: '';
-    position: absolute; width: 260px; height: 260px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(123,45,62,0.06) 0%, transparent 70%);
-    bottom: -100px; left: -100px; pointer-events: none;
+  /* SUA HISTÓRIA (ALINNE) */
+  .alinne {
+    padding: 40px 20px;
+    background: var(--creme);
+    position: relative; overflow: hidden;
   }
-  .recebe::before {
+  .alinne::before {
+    content: '';
+    position: absolute; width: 240px; height: 240px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.14) 0%, transparent 70%);
+    top: -60px; right: -100px; pointer-events: none;
+  }
+  .alinne::after {
+    content: '♛';
+    position: absolute; font-size: 240px; line-height: 1;
+    color: rgba(123,45,62,0.04);
+    bottom: -60px; left: -50px; pointer-events: none;
+  }
+  .alinne-card {
+    background: white; border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(123,45,62,0.1);
+    border: 2px solid #FDE8EC;
+    position: relative; z-index: 1;
+  }
+  .alinne-header {
+    background: linear-gradient(135deg, var(--vinho-deep), var(--vinho));
+    padding: 32px 24px 24px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .alinne-header::before {
+    content: '';
+    position: absolute; width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,169,110,0.2) 0%, transparent 70%);
+    top: -60px; left: -60px; pointer-events: none;
+  }
+  .alinne-photo {
+    width: 148px; height: 148px; border-radius: 50%;
+    object-fit: cover; object-position: top center;
+    border: 3px solid var(--dourado);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    margin-bottom: 16px; position: relative; z-index: 1;
+  }
+  .alinne-header h3 {
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 22px; font-weight: 400;
+    position: relative; z-index: 1;
+  }
+  .alinne-header p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; position: relative; z-index: 1; }
+  .alinne-body { padding: 20px; }
+  .alinne-body p {
+    font-size: 14px; line-height: 1.8;
+    color: var(--texto-suave); margin-bottom: 12px;
+  }
+
+  /* ACOMPANHAMENTO DIÁRIO - DIFERENCIAL */
+  .diferencial {
+    padding: 44px 24px;
+    background: linear-gradient(160deg, var(--vinho-deep), var(--vinho));
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .diferencial::before {
     content: '♛';
     position: absolute; font-size: 260px; line-height: 1;
-    color: rgba(123,45,62,0.04);
-    top: -50px; right: -60px; pointer-events: none;
+    color: rgba(255,255,255,0.04);
+    top: -60px; left: -60px; pointer-events: none;
   }
-  .recebe-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; position: relative; z-index: 1; }
-  .recebe-card {
-    background: white; border-radius: 16px;
-    padding: 20px; display: flex; gap: 16px;
-    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
-    border: 1.5px solid #FDE8EC;
+  .diferencial-icon { font-size: 38px; margin-bottom: 14px; position: relative; z-index: 1; }
+  .diferencial h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; color: white; line-height: 1.4;
+    margin-bottom: 16px; position: relative; z-index: 1;
   }
-  .recebe-icon {
-    font-size: 32px; flex-shrink: 0;
-    width: 56px; height: 56px;
-    background: #FDE8EC; border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
+  .diferencial h2 em { font-style: italic; color: #F0BFBC; }
+  .diferencial p {
+    font-size: 14.5px; color: rgba(255,255,255,0.8);
+    line-height: 1.8; position: relative; z-index: 1;
   }
-  .recebe-content h3 {
-    font-size: 15px; font-weight: 800;
-    color: var(--vinho); margin-bottom: 4px;
+
+  /* PROVA SOCIAL */
+  .prova-social {
+    padding: 40px 20px; background: white;
+    position: relative; overflow: hidden;
   }
-  .recebe-content p { font-size: 13px; color: var(--texto-suave); line-height: 1.5; }
+  .prova-social::before {
+    content: '♛';
+    position: absolute; font-size: 240px; line-height: 1;
+    color: rgba(123,45,62,0.035);
+    top: -55px; right: -55px; pointer-events: none;
+  }
+  .prova-grid {
+    display: flex; flex-direction: column; gap: 14px;
+    margin-top: 20px; position: relative; z-index: 1;
+  }
+  .prova-card {
+    background: var(--creme); border-radius: 16px;
+    overflow: hidden; border: 1.5px solid #FDE8EC;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.06);
+  }
+  .prova-print {
+    width: 100%; display: block;
+    background: #FDE8EC;
+  }
+  .prova-print-placeholder {
+    width: 100%; padding: 40px 16px;
+    text-align: center; color: var(--vinho-light);
+    font-size: 12.5px; line-height: 1.6;
+    background: repeating-linear-gradient(45deg, #FDE8EC, #FDE8EC 10px, #FCE0E5 10px, #FCE0E5 20px);
+  }
+  .prova-legenda {
+    padding: 12px 16px; font-size: 12.5px;
+    color: var(--texto-suave); font-style: italic;
+  }
 
   /* VERSICULO */
   .versiculo {
@@ -197,15 +295,14 @@
   }
 
   /* PLANOS */
-  .planos { padding: 40px 20px; background: white; position: relative; overflow: hidden; }
+  .planos { padding: 40px 20px; background: var(--creme); position: relative; overflow: hidden; }
   .planos::before {
     content: '♛';
     position: absolute; font-size: 260px; line-height: 1;
     color: rgba(123,45,62,0.035);
     bottom: -70px; right: -60px; pointer-events: none;
   }
-  .planos-grid, .planos > .sec-badge, .planos > .sec-titulo { position: relative; z-index: 1; }
-  .planos-grid { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+  .planos-grid { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; position: relative; z-index: 1; }
   .plano-card {
     border-radius: 20px; overflow: hidden;
     box-shadow: 0 4px 20px rgba(123,45,62,0.12);
@@ -265,64 +362,46 @@
     color: var(--vinho-deep);
     box-shadow: 0 4px 16px rgba(201,169,110,0.3);
   }
+  .plano-assinatura-nota {
+    font-size: 11px; color: var(--texto-suave);
+    text-align: center; margin-top: 10px; line-height: 1.6;
+  }
 
-  /* ALINNE */
-  .alinne {
-    padding: 40px 20px;
-    background: var(--creme);
-    position: relative; overflow: hidden;
-  }
-  .alinne::before {
+  /* O QUE VOCÊ RECEBE */
+  .recebe { padding: 40px 20px; background: white; position: relative; overflow: hidden; }
+  .recebe::after {
     content: '';
-    position: absolute; width: 240px; height: 240px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,169,110,0.14) 0%, transparent 70%);
-    top: -60px; right: -100px; pointer-events: none;
+    position: absolute; width: 260px; height: 260px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,45,62,0.06) 0%, transparent 70%);
+    bottom: -100px; left: -100px; pointer-events: none;
   }
-  .alinne::after {
+  .recebe::before {
     content: '♛';
-    position: absolute; font-size: 240px; line-height: 1;
+    position: absolute; font-size: 260px; line-height: 1;
     color: rgba(123,45,62,0.04);
-    bottom: -60px; left: -50px; pointer-events: none;
+    top: -50px; right: -60px; pointer-events: none;
   }
-  .alinne-card {
-    background: white; border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(123,45,62,0.1);
-    border: 2px solid #FDE8EC;
-    position: relative; z-index: 1;
+  .recebe-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; position: relative; z-index: 1; }
+  .recebe-card {
+    background: var(--creme); border-radius: 16px;
+    padding: 20px; display: flex; gap: 16px;
+    box-shadow: 0 2px 12px rgba(123,45,62,0.08);
+    border: 1.5px solid #FDE8EC;
   }
-  .alinne-header {
-    background: linear-gradient(135deg, var(--vinho-deep), var(--vinho));
-    padding: 32px 24px 24px; text-align: center;
-    position: relative; overflow: hidden;
+  .recebe-icon {
+    font-size: 32px; flex-shrink: 0;
+    width: 56px; height: 56px;
+    background: #FDE8EC; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
   }
-  .alinne-header::before {
-    content: '';
-    position: absolute; width: 180px; height: 180px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,169,110,0.2) 0%, transparent 70%);
-    top: -60px; left: -60px; pointer-events: none;
+  .recebe-content h3 {
+    font-size: 15px; font-weight: 800;
+    color: var(--vinho); margin-bottom: 4px;
   }
-  .alinne-photo {
-    width: 148px; height: 148px; border-radius: 50%;
-    object-fit: cover; object-position: top center;
-    border: 3px solid var(--dourado);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    margin-bottom: 16px; position: relative; z-index: 1;
-  }
-  .alinne-header h3 {
-    font-family: 'Playfair Display', serif;
-    color: white; font-size: 22px; font-weight: 400;
-    position: relative; z-index: 1;
-  }
-  .alinne-header p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; position: relative; z-index: 1; }
-  .alinne-body { padding: 20px; }
-  .alinne-body p {
-    font-size: 14px; line-height: 1.8;
-    color: var(--texto-suave); margin-bottom: 12px;
-  }
+  .recebe-content p { font-size: 13px; color: var(--texto-suave); line-height: 1.5; }
 
   /* FAQ */
-  .faq { padding: 40px 20px; background: white; position: relative; overflow: hidden; }
+  .faq { padding: 40px 20px; background: var(--creme); position: relative; overflow: hidden; }
   .faq::before {
     content: '♛';
     position: absolute; font-size: 240px; line-height: 1;
@@ -331,7 +410,7 @@
   }
   .faq > .sec-badge, .faq > .sec-titulo, .faq-item { position: relative; z-index: 1; }
   .faq-item {
-    background: var(--creme); border-radius: 14px;
+    background: white; border-radius: 14px;
     margin-bottom: 10px; overflow: hidden;
     border: 1.5px solid #FDE8EC;
   }
@@ -386,36 +465,147 @@
 <section class="hero">
   <img src="/assets/332aa0c8-64e0-4d01-b6e3-2cd728ed84ae.png" alt="Comunidade Mulher de Valor" class="hero-logo">
   <div class="hero-badge">👑 Comunidade exclusiva</div>
-  <h1>Mulher<br><em>de Valor</em></h1>
-  <div class="hero-divider"></div>
-  <p class="hero-sub">A comunidade 360° para mulheres cristãs que querem crescer em todas as áreas da vida — casamento, maternidade, saúde mental, finanças, identidade, autocuidado e muito mais.</p>
+  <h1>Você não precisa continuar tentando<br><em>dar conta de tudo sozinha</em></h1>
+  <p class="hero-sub">Uma comunidade para mulheres cristãs que querem fortalecer sua identidade, vida com Deus, família e propósito — com direção, acompanhamento e mulheres caminhando ao seu lado.</p>
+  <p class="hero-inclui">🎥 2 encontros ao vivo por mês · 💬 acompanhamento diário<br>📚 aulas e materiais · 👑 grupo exclusivo</p>
 
   <div class="preco-box">
-    <div class="preco-de">De R$97/mês</div>
-    <div class="preco-por">por apenas</div>
+    <div class="preco-por">Faça parte por apenas</div>
     <div class="preco-valor"><span>R$</span>47<span>/mês</span></div>
-    <div class="preco-info">ou R$397/ano — economize R$167</div>
+    <div class="preco-garantias">
+      <span class="preco-garantia-tag">🔒 7 dias de garantia</span>
+      <span class="preco-garantia-tag">✓ Cancele quando quiser</span>
+    </div>
   </div>
 
-  <a href="#planos" class="btn-hero">👑 Quero fazer parte agora</a>
-  <p class="hero-garantia">🔒 7 dias de garantia · Cancele quando quiser</p>
+  <a href="#planos" class="btn-hero">👑 Quero começar minha transformação</a>
+  <p class="hero-fidelidade">Sem fidelidade. Você pode cancelar quando quiser.</p>
+  <p class="hero-assinatura-nota">O plano mensal funciona como uma assinatura: R$47 por mês enquanto você quiser permanecer.</p>
 </section>
 
 <div class="divisor"></div>
 
 <!-- PARA QUEM É -->
 <section class="para-quem fade-in">
-  <div class="sec-badge">Para quem é</div>
-  <h2 class="sec-titulo">Esta comunidade<br>é para <em>você</em> que…</h2>
+  <div class="sec-badge">Isso é pra você</div>
+  <h2 class="sec-titulo">Você se identifica<br>com <em>alguma dessas?</em></h2>
 
-  <div class="para-item"><span class="para-icon">💔</span><p>Está passando por uma crise no casamento e não quer lutar sozinha</p></div>
-  <div class="para-item"><span class="para-icon">😰</span><p>Lida com ansiedade, baixa autoestima ou feridas emocionais do passado</p></div>
-  <div class="para-item"><span class="para-icon">👶</span><p>Quer ser uma mãe mais paciente, presente e intencional</p></div>
-  <div class="para-item"><span class="para-icon">💰</span><p>Deseja organizar as finanças, sair das dívidas e prosperar com propósito</p></div>
-  <div class="para-item"><span class="para-icon">🌱</span><p>Ainda não descobriu seus dons e quer encontrar sua missão de vida</p></div>
-  <div class="para-item"><span class="para-icon">📱</span><p>Sente que as redes sociais estão consumindo seu tempo e sua paz</p></div>
-  <div class="para-item"><span class="para-icon">👑</span><p>Quer construir uma rotina virtuosa com equilíbrio, fé e propósito</p></div>
-  <div class="para-item"><span class="para-icon">🙏</span><p>Deseja crescer espiritualmente e se tornar a mulher que Deus planejou</p></div>
+  <div class="para-item"><span class="para-icon">💛</span><p>Você cuida de todos, mas se deixou para depois.</p></div>
+  <div class="para-item"><span class="para-icon">🙏</span><p>Ama a Deus, mas perdeu constância e direção.</p></div>
+  <div class="para-item"><span class="para-icon">👨‍👩‍👧</span><p>Quer fortalecer sua família sem se anular.</p></div>
+  <div class="para-item"><span class="para-icon">✨</span><p>Sabe que existe mais para viver, mas não sabe por onde começar.</p></div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- SUA HISTÓRIA -->
+<section class="alinne fade-in">
+  <div class="sec-badge">Quem é Alinne</div>
+  <div class="alinne-card">
+    <div class="alinne-header">
+      <img src="/assets/facetune_23-07-2026-13-23-03.jpeg" alt="Alinne Vieira" class="alinne-photo">
+      <h3>Alinne Vieira</h3>
+      <p>@alinnevie · Esposa, mãe e empreendedora</p>
+    </div>
+    <div class="alinne-body">
+      <p>Sou esposa, mãe e uma mulher que acredita profundamente no poder de Deus para restaurar casamentos e transformar vidas.</p>
+      <p>Passei por um processo real de restauração no meu casamento — com dor, fé, erros e muita graça. E foi exatamente essa jornada que me deu autoridade para falar sobre o assunto.</p>
+      <p>Hoje, quero caminhar ao lado de mulheres como você, oferecendo suporte, direção e uma comunidade que entende o que você está vivendo.</p>
+      <p>A Comunidade Mulher de Valor nasceu desse desejo: que nenhuma mulher precise lutar sozinha. 🌸</p>
+    </div>
+  </div>
+</section>
+
+<!-- ACOMPANHAMENTO DIÁRIO - DIFERENCIAL -->
+<section class="diferencial fade-in">
+  <div class="diferencial-icon">💛</div>
+  <h2>Não é só um <em>curso gravado</em></h2>
+  <p>Você não estará apenas comprando aulas. Eu estarei presente no grupo, acompanhando essa caminhada com vocês — todos os dias.</p>
+</section>
+
+<!-- PROVA SOCIAL -->
+<section class="prova-social fade-in">
+  <div class="sec-badge">Quem já caminha comigo</div>
+  <h2 class="sec-titulo">Mulheres que já<br>estão <em>nessa jornada</em></h2>
+
+  <div class="prova-grid">
+    <div class="prova-card">
+      <img src="/assets/IMG_5754.jpeg" class="prova-print" alt="Testemunho">
+      <div class="prova-legenda">"..." — depoimento real</div>
+    </div>
+    <div class="prova-card">
+      <img src="/assets/IMG_5755.jpeg" class="prova-print" alt="Testemunho">
+      <div class="prova-legenda">"..." — depoimento real</div>
+    </div>
+    <div class="prova-card">
+      <img src="/assets/IMG_5757.jpeg" class="prova-print" alt="Testemunho">
+      <div class="prova-legenda">"..." — depoimento real</div>
+    </div>
+  </div>
+</section>
+
+<!-- VERSÍCULO -->
+<div class="versiculo fade-in">
+  <p>"Mulher virtuosa, quem a achará? O seu valor muito excede ao de rubis."</p>
+  <span>Provérbios 31:10</span>
+</div>
+
+<!-- PLANOS -->
+<section id="planos" class="planos fade-in">
+  <div class="sec-badge">Escolha seu plano</div>
+  <h2 class="sec-titulo">Entre para a<br><em>Mulher de Valor</em></h2>
+
+  <div class="planos-grid">
+
+    <!-- PLANO MENSAL -->
+    <div class="plano-card">
+      <div class="plano-header mensal">
+        <div class="plano-nome">Plano Mensal</div>
+        <div class="plano-preco"><span>R$</span>47<span>/mês</span></div>
+        <div class="plano-info">Cancele quando quiser</div>
+      </div>
+      <div class="plano-body">
+        <div class="plano-item"><span class="plano-check">✓</span> Acesso às aulas na área de membros</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Grupo exclusivo de acompanhamento — conversas, dúvidas e testemunhos</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Acompanhamento diário feito pela Alinne</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Devocionais digitais mensais</div>
+        <div class="plano-item"><span class="plano-check">✓</span> 2 encontros ao vivo por mês</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Novos conteúdos ao longo da jornada</div>
+
+        <div class="plano-bonus-titulo">🎁 Bônus exclusivo</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Desafio de 7 dias — Voltando para o Centro <span class="plano-badge-destaque">BÔNUS</span></div>
+
+        <a href="https://pay.kiwify.com.br/0g17Nkq" class="btn-plano mensal">Quero começar minha transformação</a>
+        <p class="plano-assinatura-nota">
+          💳 Cartão ou Pix Automático — funciona como uma assinatura, R$47 por mês enquanto você quiser permanecer. Sem fidelidade.
+        </p>
+      </div>
+    </div>
+
+    <!-- PLANO ANUAL -->
+    <div class="plano-card">
+      <div class="plano-header anual">
+        <div class="plano-nome">Plano Anual ⭐ Mais popular</div>
+        <div class="plano-preco"><span>R$</span>397<span>/ano</span></div>
+        <div class="plano-info">Equivale a R$33/mês — economize R$167</div>
+      </div>
+      <div class="plano-body">
+        <div class="plano-item"><span class="plano-check">✓</span> Tudo do plano mensal</div>
+
+        <div class="plano-bonus-titulo">🎁 Bônus exclusivos do plano anual</div>
+        <div class="plano-item"><span class="plano-check">✓</span> Desafio de 7 dias — Voltando para o Centro <span class="plano-badge-destaque">BÔNUS</span></div>
+        <div class="plano-item"><span class="plano-check">✓</span> Encontro fechado de direcionamento com a Alinne <span class="plano-badge-destaque">BÔNUS</span></div>
+        <div class="plano-item"><span class="plano-check">✓</span> Acesso a todos os ebooks da Alinne <span class="plano-badge-destaque">BÔNUS</span></div>
+        <div class="plano-item"><span class="plano-check">✓</span> Prioridade no envio de perguntas para os encontros ao vivo <span class="plano-badge-destaque">BÔNUS</span></div>
+
+        <a href="https://pay.kiwify.com.br/Ukf3qy6" class="btn-plano anual">👑 Quero começar minha transformação</a>
+        <p class="plano-assinatura-nota">
+          💳 Pagamento via PIX ou cartão em até 12x
+        </p>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <div class="divisor"></div>
@@ -423,7 +613,7 @@
 <!-- O QUE VOCÊ RECEBE -->
 <section class="recebe fade-in">
   <div class="sec-badge">Conteúdo completo</div>
-  <h2 class="sec-titulo">Uma comunidade<br><em>360°</em> para você</h2>
+  <h2 class="sec-titulo">O que te espera<br>dentro da <em>comunidade</em></h2>
 
   <div class="recebe-grid">
     <div class="recebe-card">
@@ -492,90 +682,6 @@
   </div>
 </section>
 
-<!-- VERSÍCULO -->
-<div class="versiculo fade-in">
-  <p>"Mulher virtuosa, quem a achará? O seu valor muito excede ao de rubis."</p>
-  <span>Provérbios 31:10</span>
-</div>
-
-<!-- PLANOS -->
-<section id="planos" class="planos fade-in">
-  <div class="sec-badge">Escolha seu plano</div>
-  <h2 class="sec-titulo">Entre para a<br><em>Mulher de Valor</em></h2>
-
-  <div class="planos-grid">
-
-    <!-- PLANO MENSAL -->
-    <div class="plano-card">
-      <div class="plano-header mensal">
-        <div class="plano-nome">Plano Mensal</div>
-        <div class="plano-preco"><span>R$</span>47<span>/mês</span></div>
-        <div class="plano-info">Cancele quando quiser</div>
-      </div>
-      <div class="plano-body">
-        <div class="plano-item"><span class="plano-check">✓</span> Acesso às aulas na área de membros</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Grupo exclusivo de acompanhamento — conversas, dúvidas e testemunhos</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Acompanhamento diário feito pela Alinne</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Devocionais digitais mensais</div>
-        <div class="plano-item"><span class="plano-check">✓</span> 2 encontros ao vivo por mês</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Novos conteúdos ao longo da jornada</div>
-
-        <div class="plano-bonus-titulo">🎁 Bônus exclusivo</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Desafio de 7 dias — Voltando para o Centro <span class="plano-badge-destaque">BÔNUS</span></div>
-
-        <a href="https://pay.kiwify.com.br/0g17Nkq" class="btn-plano mensal">Assinar por R$47/mês</a>
-        <p style="font-size: 11px; color: var(--texto-suave); text-align: center; margin-top: 10px;">
-          💳 Cartão ou Pix Automático — cobrança automática, sem se preocupar em renovar todo mês
-        </p>
-      </div>
-    </div>
-
-    <!-- PLANO ANUAL -->
-    <div class="plano-card">
-      <div class="plano-header anual">
-        <div class="plano-nome">Plano Anual ⭐ Mais popular</div>
-        <div class="plano-preco"><span>R$</span>397<span>/ano</span></div>
-        <div class="plano-info">Equivale a R$33/mês — economize R$167</div>
-      </div>
-      <div class="plano-body">
-        <div class="plano-item"><span class="plano-check">✓</span> Tudo do plano mensal</div>
-
-        <div class="plano-bonus-titulo">🎁 Bônus exclusivos do plano anual</div>
-        <div class="plano-item"><span class="plano-check">✓</span> Desafio de 7 dias — Voltando para o Centro <span class="plano-badge-destaque">BÔNUS</span></div>
-        <div class="plano-item"><span class="plano-check">✓</span> Encontro fechado de direcionamento com a Alinne <span class="plano-badge-destaque">BÔNUS</span></div>
-        <div class="plano-item"><span class="plano-check">✓</span> Acesso a todos os ebooks da Alinne <span class="plano-badge-destaque">BÔNUS</span></div>
-        <div class="plano-item"><span class="plano-check">✓</span> Prioridade no envio de perguntas para os encontros ao vivo <span class="plano-badge-destaque">BÔNUS</span></div>
-
-        <a href="https://pay.kiwify.com.br/Ukf3qy6" class="btn-plano anual">👑 Assinar plano anual</a>
-        <p style="font-size: 11px; color: var(--texto-suave); text-align: center; margin-top: 10px;">
-          💳 Pagamento via PIX ou cartão em até 12x
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divisor"></div>
-
-<!-- SOBRE A ALINNE -->
-<section class="alinne fade-in">
-  <div class="sec-badge">Quem é Alinne</div>
-  <div class="alinne-card">
-    <div class="alinne-header">
-      <img src="/assets/facetune_23-07-2026-13-23-03.jpeg" alt="Alinne Vieira" class="alinne-photo">
-      <h3>Alinne Vieira</h3>
-      <p>@alinnevie · Esposa, mãe e empreendedora</p>
-    </div>
-    <div class="alinne-body">
-      <p>Sou esposa, mãe e uma mulher que acredita profundamente no poder de Deus para restaurar casamentos e transformar vidas.</p>
-      <p>Passei por um processo real de restauração no meu casamento — com dor, fé, erros e muita graça. E foi exatamente essa jornada que me deu autoridade para falar sobre o assunto.</p>
-      <p>Hoje, quero caminhar ao lado de mulheres como você, oferecendo suporte, direção e uma comunidade que entende o que você está vivendo.</p>
-      <p>A Comunidade Mulher de Valor nasceu desse desejo: que nenhuma mulher precise lutar sozinha. 🌸</p>
-    </div>
-  </div>
-</section>
-
 <div class="divisor"></div>
 
 <!-- FAQ -->
@@ -585,19 +691,15 @@
 
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-pergunta">Quando acontecem os encontros ao vivo? <span class="faq-arrow">▼</span></div>
-    <div class="faq-resposta"><div class="faq-content">Os encontros acontecem duas vezes por mês, quinzenalmente. As datas são anunciadas com antecedência no grupo do WhatsApp. Todas as lives ficam gravadas para você assistir quando quiser.</div></div>
+    <div class="faq-resposta"><div class="faq-content">Os encontros acontecem duas vezes por mês, quinzenalmente. As datas são anunciadas com antecedência no grupo. Todas as lives ficam gravadas para você assistir quando quiser.</div></div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-pergunta">Posso cancelar quando quiser? <span class="faq-arrow">▼</span></div>
-    <div class="faq-resposta"><div class="faq-content">Sim! No plano mensal você cancela quando quiser, sem fidelidade. No plano anual, você cancela a renovação automática e mantém o acesso até o final do período pago.</div></div>
+    <div class="faq-pergunta">Como funciona a cobrança do plano mensal? <span class="faq-arrow">▼</span></div>
+    <div class="faq-resposta"><div class="faq-content">O plano mensal funciona como uma assinatura: R$47 são cobrados todo mês, automaticamente, enquanto você quiser permanecer. Não existe fidelidade — você pode cancelar quando quiser, sem burocracia.</div></div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-pergunta">Tem garantia? <span class="faq-arrow">▼</span></div>
     <div class="faq-resposta"><div class="faq-content">Sim! Você tem 7 dias de garantia. Se não se sentir bem com o conteúdo ou a metodologia, devolvemos 100% do seu dinheiro sem perguntas.</div></div>
-  </div>
-  <div class="faq-item" onclick="toggleFaq(this)">
-    <div class="faq-pergunta">É só para mulheres com casamento em crise? <span class="faq-arrow">▼</span></div>
-    <div class="faq-resposta"><div class="faq-content">Não! A comunidade é para toda mulher cristã que quer crescer — seja para fortalecer o casamento, desenvolver a virtude, aprofundar a vida espiritual ou simplesmente não caminhar sozinha.</div></div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-pergunta">Qual a diferença entre os bônus do plano mensal e anual? <span class="faq-arrow">▼</span></div>
@@ -605,7 +707,7 @@
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-pergunta">Como acesso o conteúdo? <span class="faq-arrow">▼</span></div>
-    <div class="faq-resposta"><div class="faq-content">Após a compra você recebe acesso à área de membros com todos os conteúdos gravados, e também é adicionada ao grupo exclusivo no WhatsApp.</div></div>
+    <div class="faq-resposta"><div class="faq-content">Após a compra você recebe acesso à área de membros com todos os conteúdos gravados, e também é adicionada ao grupo exclusivo de acompanhamento.</div></div>
   </div>
   <div class="faq-item" onclick="toggleFaq(this)">
     <div class="faq-pergunta">Posso pagar com Pix? <span class="faq-arrow">▼</span></div>
@@ -617,7 +719,7 @@
 <section class="cta-final fade-in">
   <h2>Você não precisa<br>caminhar <em>sozinha</em> 🌸</h2>
   <p>Junte-se à Comunidade Mulher de Valor e tenha ao seu lado uma irmã que entende o que você está vivendo — e sabe o caminho para a transformação.</p>
-  <a href="#planos" class="btn-hero" style="max-width: 320px; margin: 0 auto 12px; display: block;">👑 Quero entrar agora</a>
+  <a href="#planos" class="btn-hero" style="max-width: 320px; margin: 0 auto 12px; display: block;">👑 Quero começar minha transformação</a>
   <p style="font-size: 12px; color: rgba(255,255,255,0.4);">7 dias de garantia · Cancele quando quiser</p>
 </section>
 
